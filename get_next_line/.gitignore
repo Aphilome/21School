@@ -1,0 +1,13 @@
+gnlTester
+
+*.out
+.DS_Store
+
+# main.c
+# test.txt
+*.txt
+.idea
+*.gch
+cmake-build-debug
+
+*.pdf
