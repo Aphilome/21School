@@ -5,7 +5,5 @@ main.c
 .idea
 *.gch
 cmake-build-debug
-gnlTester
 *.pdf
-1gnlTester
 .vscode
