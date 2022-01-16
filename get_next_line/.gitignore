@@ -1,13 +1,11 @@
-gnlTester
-
 *.out
 .DS_Store
-
-# main.c
-# test.txt
+main.c
 *.txt
 .idea
 *.gch
 cmake-build-debug
-
+gnlTester
 *.pdf
+1gnlTester
+.vscode
