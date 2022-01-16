@@ -81,6 +81,18 @@
 		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/main.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/parser.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/parser.h">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/utils/utils.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/utils/utils.h">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

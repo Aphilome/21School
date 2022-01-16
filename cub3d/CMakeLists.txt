@@ -3,7 +3,7 @@ project(cub3d C)
 
 set(CMAKE_C_STANDARD 99)
 
-add_executable(cub3d main.c)
+add_executable(cub3d main.c parser/parser.c parser/parser.h utils/utils.c utils/utils.h)
 
 #add_library(cub3d minilibx_opengl/libmlx.a)
 

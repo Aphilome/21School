@@ -1,5 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/cub3d.dir/main.c.o"
+  "CMakeFiles/cub3d.dir/parser/parser.c.o"
+  "CMakeFiles/cub3d.dir/utils/utils.c.o"
   "cub3d"
   "cub3d.pdb"
 )

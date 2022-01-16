@@ -153,6 +153,54 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/main.c.s
 .PHONY : main.c.s
 
+parser/parser.o: parser/parser.c.o
+.PHONY : parser/parser.o
+
+# target to build an object file
+parser/parser.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/parser.c.o
+.PHONY : parser/parser.c.o
+
+parser/parser.i: parser/parser.c.i
+.PHONY : parser/parser.i
+
+# target to preprocess a source file
+parser/parser.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/parser.c.i
+.PHONY : parser/parser.c.i
+
+parser/parser.s: parser/parser.c.s
+.PHONY : parser/parser.s
+
+# target to generate assembly for a file
+parser/parser.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/parser.c.s
+.PHONY : parser/parser.c.s
+
+utils/utils.o: utils/utils.c.o
+.PHONY : utils/utils.o
+
+# target to build an object file
+utils/utils.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/utils/utils.c.o
+.PHONY : utils/utils.c.o
+
+utils/utils.i: utils/utils.c.i
+.PHONY : utils/utils.i
+
+# target to preprocess a source file
+utils/utils.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/utils/utils.c.i
+.PHONY : utils/utils.c.i
+
+utils/utils.s: utils/utils.c.s
+.PHONY : utils/utils.s
+
+# target to generate assembly for a file
+utils/utils.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/utils/utils.c.s
+.PHONY : utils/utils.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -165,6 +213,12 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... parser/parser.o"
+	@echo "... parser/parser.i"
+	@echo "... parser/parser.s"
+	@echo "... utils/utils.o"
+	@echo "... utils/utils.i"
+	@echo "... utils/utils.s"
 .PHONY : help
 
 

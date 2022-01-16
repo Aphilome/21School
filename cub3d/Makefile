@@ -1,10 +1,10 @@
 NAME = cub3d
 
-SRCS =	./main.c
+SRCS =	./main.c parser/parser.c utils/utils.c
 
 MLX	 = 	libmlx.a
 
-HDRS =
+HDRS = utils/utils.h parser/parser.h
 
 OBJS = $(SRCS:.c=.o)
 
