@@ -1,0 +1,12 @@
+*.out
+cmake-build-debug
+*.txt
+*.pdf
+.idea
+.DS_Store
+*.o
+
+easyfind
+ex01
+mutantstack
+

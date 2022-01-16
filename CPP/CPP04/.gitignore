@@ -1,0 +1,10 @@
+*.out
+cmake-build-debug
+*.txt
+*.pdf
+.idea
+.DS_Store
+*.o
+
+animal
+materia

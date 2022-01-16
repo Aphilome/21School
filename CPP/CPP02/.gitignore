@@ -1,0 +1,9 @@
+*.out
+cmake-build-debug
+*.txt
+.idea
+.DS_Store
+*.o
+fixed
+*.pdf
+bsp

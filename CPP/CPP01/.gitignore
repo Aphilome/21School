@@ -1,0 +1,12 @@
+*.out
+cmake-build-debug
+*.txt
+.idea
+.DS_Store
+*.o
+Zombie
+fight
+replace
+karen
+karenFilter
+*.pdf
