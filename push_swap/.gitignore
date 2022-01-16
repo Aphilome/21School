@@ -1,0 +1,12 @@
+.idea
+.DS_Store
+cmake-build-debug
+*.txt
+rotate.c
+a.out
+*.gch
+checker_Mac
+push_swap
+*.o
+checker
+*.sh
