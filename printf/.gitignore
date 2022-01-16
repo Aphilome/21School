@@ -1,0 +1,12 @@
+# main.c
+*.out
+.DS_Store
+*.txt
+.idea
+cmake-build-debug
+*.gch
+*.o
+*.a
+# pft_2019
+# pft
+tripouilletest
