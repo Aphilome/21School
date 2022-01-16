@@ -10,7 +10,7 @@ OBJS = $(SRCS:.c=.o)
 
 FLAGS = -O3 -Wall -Wextra -Werror
 
-MLX_FLAGS = -Lminilibx_opengl -lminilibx_opengl -framework OpenGL -framework AppKit -lm
+MLX_FLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit -lm
 
 .c.o:
 			gcc $(FLAGS) -I minilibx_opengl -I . -c $< -o $@
@@ -21,13 +21,17 @@ $(NAME):	$(MLX) $(OBJS) $(HDRS)
 			gcc $(FLAGS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 
 $(MLX):
-			$(MAKE) -sC minilibx_opengl
+			@echo "mlx start..."
+			@$(MAKE) -sC minilibx_opengl 2>/dev/null
+			@echo "mlx end..."
 			mv minilibx_opengl/libmlx.a .
 
 clean:
+			$(MAKE) -C minilibx_opengl clean
 			rm -f $(OBJS)
 
 fclean:		clean
+			rm -f $(MLX)
 			rm -f $(NAME)
 
 re:			fclean all
