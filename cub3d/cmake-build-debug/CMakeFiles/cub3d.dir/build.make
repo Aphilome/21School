@@ -105,11 +105,53 @@ CMakeFiles/cub3d.dir/utils/utils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/utils/utils.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tbirdper/Documents/AphilomeGit/cub3d/utils/utils.c -o CMakeFiles/cub3d.dir/utils/utils.c.s
 
+CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o: ../get_next_line/get_next_line.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o -c /Users/tbirdper/Documents/AphilomeGit/cub3d/get_next_line/get_next_line.c
+
+CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tbirdper/Documents/AphilomeGit/cub3d/get_next_line/get_next_line.c > CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.i
+
+CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tbirdper/Documents/AphilomeGit/cub3d/get_next_line/get_next_line.c -o CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.s
+
+CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o: ../get_next_line/get_next_line_utils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o -c /Users/tbirdper/Documents/AphilomeGit/cub3d/get_next_line/get_next_line_utils.c
+
+CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tbirdper/Documents/AphilomeGit/cub3d/get_next_line/get_next_line_utils.c > CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.i
+
+CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tbirdper/Documents/AphilomeGit/cub3d/get_next_line/get_next_line_utils.c -o CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.s
+
+CMakeFiles/cub3d.dir/list/list.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/list/list.c.o: ../list/list.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/cub3d.dir/list/list.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/list/list.c.o -c /Users/tbirdper/Documents/AphilomeGit/cub3d/list/list.c
+
+CMakeFiles/cub3d.dir/list/list.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/list/list.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tbirdper/Documents/AphilomeGit/cub3d/list/list.c > CMakeFiles/cub3d.dir/list/list.c.i
+
+CMakeFiles/cub3d.dir/list/list.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/list/list.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tbirdper/Documents/AphilomeGit/cub3d/list/list.c -o CMakeFiles/cub3d.dir/list/list.c.s
+
 # Object files for target cub3d
 cub3d_OBJECTS = \
 "CMakeFiles/cub3d.dir/main.c.o" \
 "CMakeFiles/cub3d.dir/parser/parser.c.o" \
-"CMakeFiles/cub3d.dir/utils/utils.c.o"
+"CMakeFiles/cub3d.dir/utils/utils.c.o" \
+"CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o" \
+"CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o" \
+"CMakeFiles/cub3d.dir/list/list.c.o"
 
 # External object files for target cub3d
 cub3d_EXTERNAL_OBJECTS =
@@ -117,9 +159,12 @@ cub3d_EXTERNAL_OBJECTS =
 cub3d: CMakeFiles/cub3d.dir/main.c.o
 cub3d: CMakeFiles/cub3d.dir/parser/parser.c.o
 cub3d: CMakeFiles/cub3d.dir/utils/utils.c.o
+cub3d: CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o
+cub3d: CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o
+cub3d: CMakeFiles/cub3d.dir/list/list.c.o
 cub3d: CMakeFiles/cub3d.dir/build.make
 cub3d: CMakeFiles/cub3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable cub3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable cub3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cub3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -1,4 +1,7 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o"
+  "CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o"
+  "CMakeFiles/cub3d.dir/list/list.c.o"
   "CMakeFiles/cub3d.dir/main.c.o"
   "CMakeFiles/cub3d.dir/parser/parser.c.o"
   "CMakeFiles/cub3d.dir/utils/utils.c.o"
