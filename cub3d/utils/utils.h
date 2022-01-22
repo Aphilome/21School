@@ -8,6 +8,7 @@
 #define ERROR_MALLOC "Memory allocation"
 #define ERROR_MAP "Map parsing"
 #define ERROR_ARGC "Arguments count"
+#define ERROR_SETTINGS "Settings parse error"
 
 typedef enum e_bool
 {
@@ -32,6 +33,10 @@ typedef struct s_map
 
 int ft_strlen(char *msg);
 void error_exit(char *msg);
+void print_strl(char *msg);
 void print_str(char *msg);
+int start_with(char *str, char *sub_str);
+char	*trim(char *str);
+char	*ft_strdup(char *src);
 
 #endif

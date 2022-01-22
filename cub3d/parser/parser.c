@@ -29,13 +29,13 @@ char **map_parser_tmp(char *file_name)
 
 void print_file(t_list *head)
 {
+	print_strl("=======================");
 	while (head != NULL)
 	{
-		print_str("|");
-		print_str(head->content);
-		print_str("|");
-		head = head ->next;
+		print_strl(head->content);
+		head = head->next;
 	}
+	print_strl("=======================");
 }
 
 t_list *read_all_file(char *file_name)
@@ -50,7 +50,7 @@ t_list *read_all_file(char *file_name)
 	head = NULL;
 	fd = open(file_name, O_RDONLY);
 	code = get_next_line(fd, &line);
-	while (code == code_readline)
+	while (code == code_readline || (code == code_eof && line != NULL))
 	{
 		lst_element = ft_lstnew(line);
 		if (lst_element == NULL)
@@ -59,6 +59,8 @@ t_list *read_all_file(char *file_name)
 			error_exit(ERROR_MALLOC);
 		}
 		ft_lstadd_back(&head, lst_element);
+		if (code == code_eof)
+			break;
 		code = get_next_line(fd, &line);
 	}
 	if (code == code_error)
@@ -66,8 +68,6 @@ t_list *read_all_file(char *file_name)
 		close(fd);
 		error_exit(ERROR_MALLOC);
 	}
-	if (code == code_eof)
-		ft_lstadd_back(&head, lst_element);
 	if (close(fd) == -1)
 		error_exit(ERROR_SYSTEM);
 	return (head);
@@ -146,6 +146,59 @@ t_bool is_empty_line(char *str)
 	return (false);
 }
 
+char *try_get_value(char *key, char *str)
+{
+	int i;
+	char *tmp;
+	char *value;
+
+	tmp = trim(str);
+	if (ft_strlen(tmp) < 4)
+		error_exit(ERROR_SETTINGS);
+	i = start_with(tmp, key);
+	if (i == -1 || tmp[i] != ' ')
+		error_exit(ERROR_SETTINGS);
+	while (tmp[i] == ' ')
+		i++;
+	value = ft_strdup(&(tmp[i]));
+	free(tmp);
+	return (value);
+}
+
+void parse_settings(t_map *map, char *str)
+{
+	int i;
+	char *tmp;
+	char *value;
+
+	value = try_get_value("NO", str);
+	if (value != NULL)
+	{
+		map->north_texture_path = value;
+		return;
+	}
+	value = try_get_value("SO", str);
+	if (value != NULL)
+	{
+		map->south_texture_path = value;
+		return;
+	}
+	value = try_get_value("WE", str);
+	if (value != NULL)
+	{
+		map->west_texture_path = value;
+		return;
+	}
+	value = try_get_value("EA", str);
+	if (value != NULL)
+	{
+		map->east_texture_path = value;
+		return;
+	}
+
+
+}
+
 t_list *get_map_start(t_list *head)
 {
 	t_bool settings_state;
@@ -176,6 +229,11 @@ t_list *get_map_start(t_list *head)
 			head = head->next;
 			continue;
 		}
+		if (head->next == NULL && is_empty_line(head->content))
+		{
+			head = head->next;
+			continue;
+		}
 		else
 			error_exit(ERROR_MAP);
 	}
@@ -183,37 +241,7 @@ t_list *get_map_start(t_list *head)
 	return (map_start);
 }
 
-void init_settings(t_list *head)
-{
-	(void)head;
-//	while (head != NULL)
-//	{
-//		if (settings_state && is_empty_line(head->content))
-//		{
-//			head = head->next;
-//			continue;
-//		}
-//		if (settings_state && is_settings_info(head->content))
-//		{
-//			head = head->next;
-//			continue;
-//		}
-//		if (settings_state && is_map_info(head->content))
-//		{
-//			settings_state = false;
-//			map_start = head;
-//			head = head->next;
-//			continue;
-//		}
-//		if (!settings_state && is_map_info(head->content))
-//		{
-//			head = head->next;
-//			continue;
-//		}
-//		else
-//			error_exit(ERROR_MAP);
-//	}
-}
+
 
 t_map *map_parser(char *file_name)
 {
@@ -227,7 +255,6 @@ t_map *map_parser(char *file_name)
 	if (ft_lstsize(head) < 9)
 		error_exit(ERROR_MAP);
 	map_start = get_map_start(head);
-
 
 	return (map);
 }
