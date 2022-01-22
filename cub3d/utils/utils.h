@@ -7,6 +7,7 @@
 #define ERROR_SYSTEM "System"
 #define ERROR_MALLOC "Memory allocation"
 #define ERROR_MAP "Map parsing"
+#define ERROR_ARGC "Arguments count"
 
 typedef enum e_bool
 {

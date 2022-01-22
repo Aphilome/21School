@@ -27,6 +27,16 @@ char **map_parser_tmp(char *file_name)
 	return (map); // null, если ошибка какая-то
 }
 
+void print_file(t_list *head)
+{
+	while (head != NULL)
+	{
+		print_str("|");
+		print_str(head->content);
+		print_str("|");
+		head = head ->next;
+	}
+}
 
 t_list *read_all_file(char *file_name)
 {
@@ -131,37 +141,93 @@ t_bool is_empty_line(char *str)
 	i = 0;
 	while (str[i] == ' ')
 		i++;
-	if (str[i] == 0 || str[i] == '\n' && str[i + 1] == 0)
+	if (str[i] == 0 || (str[i] == '\n' && str[i + 1] == 0))
 		return (true);
 	return (false);
 }
 
-void check_file_struct(t_list *head)
+t_list *get_map_start(t_list *head)
 {
 	t_bool settings_state;
+	t_list *map_start;
 
 	settings_state = true;
+	while (head != NULL)
+	{
+		if (settings_state && is_empty_line(head->content))
+		{
+			head = head->next;
+			continue;
+		}
+		if (settings_state && is_settings_info(head->content))
+		{
+			head = head->next;
+			continue;
+		}
+		if (settings_state && is_map_info(head->content))
+		{
+			settings_state = false;
+			map_start = head;
+			head = head->next;
+			continue;
+		}
+		if (!settings_state && is_map_info(head->content))
+		{
+			head = head->next;
+			continue;
+		}
+		else
+			error_exit(ERROR_MAP);
+	}
 
+	return (map_start);
+}
 
+void init_settings(t_list *head)
+{
+	(void)head;
+//	while (head != NULL)
+//	{
+//		if (settings_state && is_empty_line(head->content))
+//		{
+//			head = head->next;
+//			continue;
+//		}
+//		if (settings_state && is_settings_info(head->content))
+//		{
+//			head = head->next;
+//			continue;
+//		}
+//		if (settings_state && is_map_info(head->content))
+//		{
+//			settings_state = false;
+//			map_start = head;
+//			head = head->next;
+//			continue;
+//		}
+//		if (!settings_state && is_map_info(head->content))
+//		{
+//			head = head->next;
+//			continue;
+//		}
+//		else
+//			error_exit(ERROR_MAP);
+//	}
 }
 
 t_map *map_parser(char *file_name)
 {
 	t_list	*head;
-	t_list	*p;
+	t_list	*map_start;
 	t_map	*map;
-	int		size;
 
 	map = get_empty_map();
 	head = read_all_file(file_name);
-	size = ft_lstsize(head);
-	if (size < 9)
+	print_file(head);
+	if (ft_lstsize(head) < 9)
 		error_exit(ERROR_MAP);
-	p = head;
-	while (p != NULL)
-	{
+	map_start = get_map_start(head);
 
-		p = p->next;
-	}
 
+	return (map);
 }

@@ -3,9 +3,15 @@
 #include "parser/parser.h"
 
 
-int main()
+int main(int argc, char **argv)
 {
+	if (argc != 2)
+		error_exit(ERROR_ARGC);
+
 	printf("Start\n");
+	t_map *map_orig = map_parser(argv[1]);
+	(void)map_orig;
+
 	char **map = map_parser_tmp("test");
 	if (map == NULL)
 	{

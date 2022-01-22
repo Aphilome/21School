@@ -1,10 +1,13 @@
 NAME = cub3d
 
-SRCS =	./main.c parser/parser.c utils/utils.c
+SRCS =	main.c \
+		parser/parser.c  \
+		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+		list/list.c utils/utils.c
 
 MLX	 = 	libmlx.a
 
-HDRS = utils/utils.h parser/parser.h
+HDRS = utils/utils.h parser/parser.h get_next_line/get_next_line.h list/list.h
 
 OBJS = $(SRCS:.c=.o)
 
