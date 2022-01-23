@@ -1,7 +1,7 @@
 NAME = cub3d
 
 SRCS =	main.c \
-		parser/parser.c parser/cardinal_direction_setters.c parser/file_reader.c parser/line_checkers.c \
+		parser/parser.c parser/cardinal_direction_setters.c parser/file_reader.c parser/line_checkers.c parser/settings_func.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		list/list.c utils/utils.c
 
