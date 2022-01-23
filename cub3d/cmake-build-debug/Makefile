@@ -225,6 +225,78 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/main.c.s
 .PHONY : main.c.s
 
+parser/cardinal_direction_setters.o: parser/cardinal_direction_setters.c.o
+.PHONY : parser/cardinal_direction_setters.o
+
+# target to build an object file
+parser/cardinal_direction_setters.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o
+.PHONY : parser/cardinal_direction_setters.c.o
+
+parser/cardinal_direction_setters.i: parser/cardinal_direction_setters.c.i
+.PHONY : parser/cardinal_direction_setters.i
+
+# target to preprocess a source file
+parser/cardinal_direction_setters.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.i
+.PHONY : parser/cardinal_direction_setters.c.i
+
+parser/cardinal_direction_setters.s: parser/cardinal_direction_setters.c.s
+.PHONY : parser/cardinal_direction_setters.s
+
+# target to generate assembly for a file
+parser/cardinal_direction_setters.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.s
+.PHONY : parser/cardinal_direction_setters.c.s
+
+parser/file_reader.o: parser/file_reader.c.o
+.PHONY : parser/file_reader.o
+
+# target to build an object file
+parser/file_reader.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/file_reader.c.o
+.PHONY : parser/file_reader.c.o
+
+parser/file_reader.i: parser/file_reader.c.i
+.PHONY : parser/file_reader.i
+
+# target to preprocess a source file
+parser/file_reader.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/file_reader.c.i
+.PHONY : parser/file_reader.c.i
+
+parser/file_reader.s: parser/file_reader.c.s
+.PHONY : parser/file_reader.s
+
+# target to generate assembly for a file
+parser/file_reader.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/file_reader.c.s
+.PHONY : parser/file_reader.c.s
+
+parser/line_checkers.o: parser/line_checkers.c.o
+.PHONY : parser/line_checkers.o
+
+# target to build an object file
+parser/line_checkers.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/line_checkers.c.o
+.PHONY : parser/line_checkers.c.o
+
+parser/line_checkers.i: parser/line_checkers.c.i
+.PHONY : parser/line_checkers.i
+
+# target to preprocess a source file
+parser/line_checkers.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/line_checkers.c.i
+.PHONY : parser/line_checkers.c.i
+
+parser/line_checkers.s: parser/line_checkers.c.s
+.PHONY : parser/line_checkers.s
+
+# target to generate assembly for a file
+parser/line_checkers.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/line_checkers.c.s
+.PHONY : parser/line_checkers.c.s
+
 parser/parser.o: parser/parser.c.o
 .PHONY : parser/parser.o
 
@@ -294,6 +366,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... parser/cardinal_direction_setters.o"
+	@echo "... parser/cardinal_direction_setters.i"
+	@echo "... parser/cardinal_direction_setters.s"
+	@echo "... parser/file_reader.o"
+	@echo "... parser/file_reader.i"
+	@echo "... parser/file_reader.s"
+	@echo "... parser/line_checkers.o"
+	@echo "... parser/line_checkers.i"
+	@echo "... parser/line_checkers.s"
 	@echo "... parser/parser.o"
 	@echo "... parser/parser.i"
 	@echo "... parser/parser.s"

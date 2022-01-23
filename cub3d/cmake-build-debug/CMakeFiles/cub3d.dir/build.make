@@ -144,6 +144,45 @@ CMakeFiles/cub3d.dir/list/list.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/list/list.c.s"
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tbirdper/Documents/AphilomeGit/cub3d/list/list.c -o CMakeFiles/cub3d.dir/list/list.c.s
 
+CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o: ../parser/cardinal_direction_setters.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o -c /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/cardinal_direction_setters.c
+
+CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/cardinal_direction_setters.c > CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.i
+
+CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/cardinal_direction_setters.c -o CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.s
+
+CMakeFiles/cub3d.dir/parser/file_reader.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/parser/file_reader.c.o: ../parser/file_reader.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/cub3d.dir/parser/file_reader.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/parser/file_reader.c.o -c /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/file_reader.c
+
+CMakeFiles/cub3d.dir/parser/file_reader.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/parser/file_reader.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/file_reader.c > CMakeFiles/cub3d.dir/parser/file_reader.c.i
+
+CMakeFiles/cub3d.dir/parser/file_reader.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/parser/file_reader.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/file_reader.c -o CMakeFiles/cub3d.dir/parser/file_reader.c.s
+
+CMakeFiles/cub3d.dir/parser/line_checkers.c.o: CMakeFiles/cub3d.dir/flags.make
+CMakeFiles/cub3d.dir/parser/line_checkers.c.o: ../parser/line_checkers.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/cub3d.dir/parser/line_checkers.c.o"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/cub3d.dir/parser/line_checkers.c.o -c /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/line_checkers.c
+
+CMakeFiles/cub3d.dir/parser/line_checkers.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/cub3d.dir/parser/line_checkers.c.i"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/line_checkers.c > CMakeFiles/cub3d.dir/parser/line_checkers.c.i
+
+CMakeFiles/cub3d.dir/parser/line_checkers.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/cub3d.dir/parser/line_checkers.c.s"
+	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/tbirdper/Documents/AphilomeGit/cub3d/parser/line_checkers.c -o CMakeFiles/cub3d.dir/parser/line_checkers.c.s
+
 # Object files for target cub3d
 cub3d_OBJECTS = \
 "CMakeFiles/cub3d.dir/main.c.o" \
@@ -151,7 +190,10 @@ cub3d_OBJECTS = \
 "CMakeFiles/cub3d.dir/utils/utils.c.o" \
 "CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o" \
 "CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o" \
-"CMakeFiles/cub3d.dir/list/list.c.o"
+"CMakeFiles/cub3d.dir/list/list.c.o" \
+"CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o" \
+"CMakeFiles/cub3d.dir/parser/file_reader.c.o" \
+"CMakeFiles/cub3d.dir/parser/line_checkers.c.o"
 
 # External object files for target cub3d
 cub3d_EXTERNAL_OBJECTS =
@@ -162,9 +204,12 @@ cub3d: CMakeFiles/cub3d.dir/utils/utils.c.o
 cub3d: CMakeFiles/cub3d.dir/get_next_line/get_next_line.c.o
 cub3d: CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o
 cub3d: CMakeFiles/cub3d.dir/list/list.c.o
+cub3d: CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o
+cub3d: CMakeFiles/cub3d.dir/parser/file_reader.c.o
+cub3d: CMakeFiles/cub3d.dir/parser/line_checkers.c.o
 cub3d: CMakeFiles/cub3d.dir/build.make
 cub3d: CMakeFiles/cub3d.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable cub3d"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking C executable cub3d"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/cub3d.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

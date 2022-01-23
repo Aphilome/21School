@@ -84,7 +84,7 @@ int start_with(char *str, char *sub_str)
 		return (-1);
 	while (sub_str[i] != 0 && str[i] == sub_str[i])
 		i++;
-	if (i - 1 != ft_strlen(sub_str))
+	if (sub_str[i] != 0)
 		return (-1);
 	return (i);
 }
