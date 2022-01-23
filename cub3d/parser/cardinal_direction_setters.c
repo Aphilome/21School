@@ -19,3 +19,9 @@ void 	ea_settings_setter(t_map *map, char *value)
 {
 	map->east_texture_path = value;
 }
+
+t_bool	undefined_settings(void)
+{
+	error_exit(ERROR_UNDEFINED);
+	return (true);
+}

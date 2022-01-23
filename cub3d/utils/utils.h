@@ -9,6 +9,7 @@
 #define ERROR_MAP "Map parsing"
 #define ERROR_ARGC "Arguments count"
 #define ERROR_SETTINGS "Settings parse error"
+#define ERROR_UNDEFINED "Undefined settings error"
 
 typedef enum e_bool
 {

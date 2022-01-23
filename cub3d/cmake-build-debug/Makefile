@@ -321,6 +321,30 @@ parser/parser.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/parser.c.s
 .PHONY : parser/parser.c.s
 
+parser/settings_func.o: parser/settings_func.c.o
+.PHONY : parser/settings_func.o
+
+# target to build an object file
+parser/settings_func.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/settings_func.c.o
+.PHONY : parser/settings_func.c.o
+
+parser/settings_func.i: parser/settings_func.c.i
+.PHONY : parser/settings_func.i
+
+# target to preprocess a source file
+parser/settings_func.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/settings_func.c.i
+.PHONY : parser/settings_func.c.i
+
+parser/settings_func.s: parser/settings_func.c.s
+.PHONY : parser/settings_func.s
+
+# target to generate assembly for a file
+parser/settings_func.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/settings_func.c.s
+.PHONY : parser/settings_func.c.s
+
 utils/utils.o: utils/utils.c.o
 .PHONY : utils/utils.o
 
@@ -378,6 +402,9 @@ help:
 	@echo "... parser/parser.o"
 	@echo "... parser/parser.i"
 	@echo "... parser/parser.s"
+	@echo "... parser/settings_func.o"
+	@echo "... parser/settings_func.i"
+	@echo "... parser/settings_func.s"
 	@echo "... utils/utils.o"
 	@echo "... utils/utils.i"
 	@echo "... utils/utils.s"

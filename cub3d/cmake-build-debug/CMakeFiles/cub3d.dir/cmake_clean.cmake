@@ -7,6 +7,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/cub3d.dir/parser/file_reader.c.o"
   "CMakeFiles/cub3d.dir/parser/line_checkers.c.o"
   "CMakeFiles/cub3d.dir/parser/parser.c.o"
+  "CMakeFiles/cub3d.dir/parser/settings_func.c.o"
   "CMakeFiles/cub3d.dir/utils/utils.c.o"
   "cub3d"
   "cub3d.pdb"
