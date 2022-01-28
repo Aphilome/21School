@@ -1,7 +1,7 @@
 NAME = cub3d
 
 SRCS =	main.c \
-		parser/parser.c parser/cardinal_direction_setters.c parser/file_reader.c parser/line_checkers.c parser/settings_func.c \
+		parser/parser.c parser/cardinal_direction_setters.c parser/file_reader.c parser/line_checkers.c parser/settings_func.c parser/color_setters.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		list/list.c utils/utils.c
 
@@ -15,27 +15,41 @@ FLAGS = -O3 -Wall -Wextra -Werror
 
 MLX_FLAGS = -Lminilibx_opengl -lmlx -framework OpenGL -framework AppKit -lm
 
+# COLORS
+WHITE	=	\033[0m
+BLACK	=	\033[0;30m
+RED		=	\033[0;31m
+GREEN	=	\033[0;32m
+YELLOW	=	\033[0;33m
+BLUE	=	\033[0;34m
+MAGENTA	=	\033[0;35m
+CYAN	=	\033[0;36m
+
 .c.o:
-			gcc $(FLAGS) -I minilibx_opengl -I . -c $< -o $@
+			@gcc $(FLAGS) -I minilibx_opengl -I . -c $< -o $@
+			@echo "$(GREEN).$(WHITE)\c"
 
 all:		$(NAME)
+			@echo " "
 
 $(NAME):	$(MLX) $(OBJS) $(HDRS)
-			gcc $(FLAGS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
+			@gcc $(FLAGS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
+			@echo "$(BLUE).$(WHITE)\c"
 
 $(MLX):
-			@echo "mlx start..."
+			@echo "$(GREEN)mlx making...\n$(WHITE)"
 			@$(MAKE) -sC minilibx_opengl 2>/dev/null
-			@echo "mlx end..."
-			mv minilibx_opengl/libmlx.a .
+			@mv minilibx_opengl/libmlx.a .
 
 clean:
-			$(MAKE) -C minilibx_opengl clean
-			rm -f $(OBJS)
+			@$(MAKE) -C minilibx_opengl clean
+			@rm -f $(OBJS)
+			@echo "$(MAGENTA).$(WHITE)"
 
 fclean:		clean
-			rm -f $(MLX)
-			rm -f $(NAME)
+			@rm -f $(MLX)
+			@rm -f $(NAME)
+			@echo "$(RED).$(WHITE)"
 
 re:			fclean all
 

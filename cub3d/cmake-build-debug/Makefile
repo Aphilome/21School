@@ -249,6 +249,30 @@ parser/cardinal_direction_setters.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.s
 .PHONY : parser/cardinal_direction_setters.c.s
 
+parser/color_setters.o: parser/color_setters.c.o
+.PHONY : parser/color_setters.o
+
+# target to build an object file
+parser/color_setters.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/color_setters.c.o
+.PHONY : parser/color_setters.c.o
+
+parser/color_setters.i: parser/color_setters.c.i
+.PHONY : parser/color_setters.i
+
+# target to preprocess a source file
+parser/color_setters.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/color_setters.c.i
+.PHONY : parser/color_setters.c.i
+
+parser/color_setters.s: parser/color_setters.c.s
+.PHONY : parser/color_setters.s
+
+# target to generate assembly for a file
+parser/color_setters.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/parser/color_setters.c.s
+.PHONY : parser/color_setters.c.s
+
 parser/file_reader.o: parser/file_reader.c.o
 .PHONY : parser/file_reader.o
 
@@ -393,6 +417,9 @@ help:
 	@echo "... parser/cardinal_direction_setters.o"
 	@echo "... parser/cardinal_direction_setters.i"
 	@echo "... parser/cardinal_direction_setters.s"
+	@echo "... parser/color_setters.o"
+	@echo "... parser/color_setters.i"
+	@echo "... parser/color_setters.s"
 	@echo "... parser/file_reader.o"
 	@echo "... parser/file_reader.i"
 	@echo "... parser/file_reader.s"

@@ -21,6 +21,8 @@ void	no_settings_setter(t_map *map, char *value);
 void	so_settings_setter(t_map *map, char *value);
 void	we_settings_setter(t_map *map, char *value);
 void	ea_settings_setter(t_map *map, char *value);
+void	f_settings_setter(t_map *map, char *value);
+void	c_settings_setter(t_map *map, char *value);
 
 t_list	*read_all_file(char *file_name);
 

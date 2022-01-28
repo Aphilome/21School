@@ -72,7 +72,9 @@ void	parse_settings(t_map *map, char *str)
 		|| settings_setter(str, map, "SO", so_settings_setter)
 		|| settings_setter(str, map, "WE", we_settings_setter)
 		|| settings_setter(str, map, "EA", ea_settings_setter)
-		|| undefined_settings();)
+		|| settings_setter(str, map, "F", f_settings_setter)
+		|| settings_setter(str, map, "C", c_settings_setter)
+		|| undefined_settings())
 		;
 }
 
