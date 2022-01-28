@@ -1,7 +1,20 @@
-#ifndef CUB3D_LIST_H
-#define CUB3D_LIST_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/28 22:40:47 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/01/28 22:41:01 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <stdlib.h>
+#ifndef LIST_H
+# define LIST_H
+
+# include <stdlib.h>
+# include "../utils/utils.h"
 
 typedef struct s_list
 {

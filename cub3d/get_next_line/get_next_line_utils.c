@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/28 22:40:33 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/01/28 22:40:34 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char		*ft_get_sn(const char *s);
@@ -38,7 +50,7 @@ char	*ft_strdup_sn(const char *src)
 	len = ft_strlen_sn(src);
 	dst = malloc(sizeof(char) * (len + 1));
 	if (dst == NULL)
-		return (NULL);
+		error_exit(ERROR_MALLOC);
 	while (i < len)
 	{
 		dst[i] = src[i];
@@ -94,7 +106,7 @@ char	*ft_strjoin_sn(char const *res, char const *buf)
 		return (ft_strdup_sn(res));
 	base = malloc(ft_strlen_sn(res) + ft_strlen_sn(buf) + 1);
 	if (base == NULL)
-		return (NULL);
+		error_exit(ERROR_MALLOC);;
 	i_src = 0;
 	while (!(res[i_src] == 0 || res[i_src] == '\n'))
 		base[i_dst++] = res[i_src++];

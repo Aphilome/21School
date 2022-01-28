@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   settings_func.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/28 22:39:11 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/01/28 22:40:18 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser_private.h"
 
-char *try_get_value(char *key, char *str)
+char	*try_get_value(char *key, char *str)
 {
-	int i;
-	char *tmp;
-	char *value;
+	int		i;
+	char	*tmp;
+	char	*value;
 
 	tmp = trim(str);
 	if (ft_strlen(tmp) < 4)
@@ -25,9 +37,9 @@ char *try_get_value(char *key, char *str)
 }
 
 t_bool	settings_setter(char *str, t_map *map, char *key,
-						  void (*setter)(t_map *, char *))
+						void (*setter)(t_map *, char *))
 {
-	char *value;
+	char	*value;
 
 	value = try_get_value(key, str);
 	if (value != NULL)
@@ -38,17 +50,18 @@ t_bool	settings_setter(char *str, t_map *map, char *key,
 	return (false);
 }
 
-void map_start_handle(t_list **head, t_list **map_start, t_bool *settings_state)
+void	map_start_handle(t_list **head, t_list **map_start,
+	t_bool *settings_state)
 {
 	*settings_state = false;
 	*map_start = *head;
 	*head = (*head)->next;
 }
 
-t_list *init_settings(t_list *head, t_map *map)
+t_list	*init_settings(t_list *head, t_map *map)
 {
-	t_bool settings_state;
-	t_list *map_start;
+	t_bool	settings_state;
+	t_list	*map_start;
 
 	settings_state = true;
 	while (head != NULL)
@@ -65,7 +78,7 @@ t_list *init_settings(t_list *head, t_map *map)
 		else if (!settings_state && is_map_info_line(head->content))
 			head = head->next;
 		else if (head->next == NULL && is_empty_line(head->content))
-			break;
+			break ;
 		else
 			error_exit(ERROR_MAP);
 	}

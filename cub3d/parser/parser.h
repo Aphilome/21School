@@ -1,12 +1,24 @@
-#ifndef CUB3D_PARSER_H
-#define CUB3D_PARSER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/28 22:39:02 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/01/28 22:39:03 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "../utils/utils.h"
-#include "../get_next_line/get_next_line.h"
-#include "../list/list.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-char **map_parser_tmp(char *file_name);
+# include "../utils/utils.h"
+# include "../get_next_line/get_next_line.h"
+# include "../list/list.h"
 
-t_map *map_parser(char *file_name);
+char	**map_parser_tmp(char *file_name);
+
+t_map	*map_parser(char *file_name);
 
 #endif

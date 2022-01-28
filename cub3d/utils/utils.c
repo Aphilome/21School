@@ -42,7 +42,7 @@ char	*ft_substr(char *s, size_t start, size_t len)
 	s_len = ft_strlen(s);
 	str = malloc(sizeof(char) * (len + 1));
 	if (str == NULL)
-		error_exit(ERROR_SYSTEM);
+		error_exit(ERROR_MALLOC);
 	if (s_len < len || s_len < start)
 		return (NULL);
 	while (i < len)
@@ -101,7 +101,7 @@ char	*ft_strdup(char *src)
 	len = ft_strlen(src);
 	dst = malloc(sizeof(char) * (len + 1));
 	if (dst == NULL)
-		error_exit(ERROR_SYSTEM);
+		error_exit(ERROR_MALLOC);
 	while (i < len)
 	{
 		dst[i] = src[i];

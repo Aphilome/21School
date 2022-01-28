@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_checkers.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/01/28 22:30:26 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/01/28 22:31:29 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser_private.h"
 
 t_bool	is_settings_info_line(char *str)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (str[i] == ' ')
@@ -26,22 +38,22 @@ t_bool	is_settings_info_line(char *str)
 	return (true);
 }
 
-t_bool is_map_info_line(char *str)
+t_bool	is_map_info_line(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (str[i] == ' ' || str[i] == '0' || str[i] == '1' ||
-		   str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
+	while (str[i] == ' ' || str[i] == '0' || str[i] == '1'
+		|| str[i] == 'N' || str[i] == 'S' || str[i] == 'E' || str[i] == 'W')
 		i++;
 	if (i == 0 || str[i] != 0)
 		return (false);
 	return (true);
 }
 
-t_bool is_empty_line(char *str)
+t_bool	is_empty_line(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] == ' ')
