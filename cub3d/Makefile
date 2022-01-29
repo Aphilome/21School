@@ -23,33 +23,35 @@ GREEN	=	\033[0;32m
 YELLOW	=	\033[0;33m
 BLUE	=	\033[0;34m
 MAGENTA	=	\033[0;35m
-CYAN	=	\033[0;36m
 
 .c.o:
 			@gcc $(FLAGS) -I minilibx_opengl -I . -c $< -o $@
-			@echo "$(GREEN).$(WHITE)\c"
+			@echo "$(GREEN)#$(WHITE)\c"
 
 all:		$(NAME)
 			@echo " "
 
 $(NAME):	$(MLX) $(OBJS) $(HDRS)
 			@gcc $(FLAGS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
-			@echo "$(BLUE).$(WHITE)\c"
+			@echo "$(BLUE)#$(WHITE)\c"
 
 $(MLX):
-			@echo "$(GREEN)mlx making...\n$(WHITE)"
+			@echo "$(YELLOW)#$(WHITE)\c"
 			@$(MAKE) -sC minilibx_opengl 2>/dev/null
 			@mv minilibx_opengl/libmlx.a .
+			@echo "$(YELLOW)#$(WHITE)\c"
 
 clean:
-			@$(MAKE) -C minilibx_opengl clean
+			@$(MAKE) -C minilibx_opengl clean >/dev/null
+			@echo "$(MAGENTA)#$(WHITE)\c"
 			@rm -f $(OBJS)
-			@echo "$(MAGENTA).$(WHITE)"
+			@echo "$(MAGENTA)#$(WHITE)"
 
 fclean:		clean
 			@rm -f $(MLX)
+			@echo "$(RED)#$(WHITE)\c"
 			@rm -f $(NAME)
-			@echo "$(RED).$(WHITE)"
+			@echo "$(RED)#$(WHITE)"
 
 re:			fclean all
 
