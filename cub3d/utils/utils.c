@@ -54,6 +54,21 @@ char	*ft_substr(char *s, size_t start, size_t len)
 	return (str);
 }
 
+int	ft_simple_atoi(char *str)
+{
+	size_t	i;
+	int		res;
+
+	i = 0;
+	res = 0;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		res = res * 10 + (str[i] - '0');
+		i++;
+	}
+	return (res);
+}
+
 char	*trim(char *str)
 {
 	char	*res;

@@ -24,8 +24,8 @@ typedef struct s_map
 	char *west_texture_path;
 	char *east_texture_path;
 
-	char floor_color[3];
-	char ceiling_color[3];
+	int floor_color[3];
+	int ceiling_color[3];
 
 	char **map;
 	int map_lines;
@@ -39,5 +39,6 @@ void print_str(char *msg);
 int start_with(char *str, char *sub_str);
 char	*trim(char *str);
 char	*ft_strdup(char *src);
+int	ft_simple_atoi(char *str);
 
 #endif
