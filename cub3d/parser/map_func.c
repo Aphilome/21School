@@ -7,6 +7,7 @@ t_map_cell	**map_creator(int width, int height)
 	(void)map;
 	if (width < 3 || height < 3)
 		error_exit(ERROR_MAP_SIZE);
-	//map = malloc(sizeof(t_map_cell	*) * ())
+	map = malloc(sizeof(t_map_cell *) * height);
+
 	return (NULL);
 }
