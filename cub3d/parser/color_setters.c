@@ -52,7 +52,7 @@ void	validator_color(char *value)
 	i = 0;
 	while (value[i] != 0)
 	{
-		if (value[i] == ',' && value[i + 1] != ',' )
+		if (value[i] == ',' && value[i + 1] != ',')
 			comma++;
 		else if (value[i] < '0' || value[i] > '9')
 			error_exit(ERROR_SETTINGS);
