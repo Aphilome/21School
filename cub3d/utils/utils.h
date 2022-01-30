@@ -7,6 +7,7 @@
 #define ERROR_SYSTEM		"System"
 #define ERROR_MALLOC		"Memory allocation"
 #define ERROR_MAP		"Map parsing"
+#define ERROR_MAP_SIZE	"Map size"
 #define ERROR_ARGC		"Arguments count"
 #define ERROR_SETTINGS	"Settings parse error"
 #define ERROR_UNDEFINED	"Undefined settings error"
@@ -36,7 +37,7 @@ typedef struct s_map
 
 	int map_width;
 	int map_height;
-	char **map;
+	t_map_cell **map;
 }	t_map;
 
 int		ft_strlen(char *msg);

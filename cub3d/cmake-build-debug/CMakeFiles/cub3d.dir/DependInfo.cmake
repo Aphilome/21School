@@ -16,6 +16,7 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/color_setters.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/parser/color_setters.c.o"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/file_reader.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/parser/file_reader.c.o"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/line_checkers.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/parser/line_checkers.c.o"
+  "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/map_func.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/parser/map_func.c.o"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/parser.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/parser/parser.c.o"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/settings_func.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/parser/settings_func.c.o"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/utils/utils.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/utils/utils.c.o"

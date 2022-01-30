@@ -108,6 +108,9 @@
 		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/line_checkers.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/map_func.c">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/parser.c">
 			<Option target="cub3d"/>
 		</Unit>
