@@ -150,7 +150,7 @@ t_map	*map_parser(char *file_name)
 	if (ft_lstsize(head) < 9)
 		error_exit(ERROR_MAP);
 	map_start = init_settings(head, map);
-
+	map_init(map, map_start);
 
 	texture_filler_tmp(map);
 
