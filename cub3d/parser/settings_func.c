@@ -50,12 +50,23 @@ t_bool	settings_setter(char *str, t_map *map, char *key,
 	return (false);
 }
 
+void	map_line_handler(t_list **head, t_map *map)
+{
+	int width;
+
+	map->map_height++;
+	width = ft_strlen((*head)->content);
+	if (width > map->map_width)
+		map->map_width = width;
+	*head = (*head)->next;
+}
+
 void	map_start_handle(t_list **head, t_list **map_start,
-	t_bool *settings_state)
+	t_bool *settings_state, t_map *map)
 {
 	*settings_state = false;
 	*map_start = *head;
-	*head = (*head)->next;
+	map_line_handler(head, map);
 }
 
 t_list	*init_settings(t_list *head, t_map *map)
@@ -74,9 +85,9 @@ t_list	*init_settings(t_list *head, t_map *map)
 			head = head->next;
 		}
 		else if (settings_state && is_map_info_line(head->content))
-			map_start_handle(&head, &map_start, &settings_state);
+			map_start_handle(&head, &map_start, &settings_state, map);
 		else if (!settings_state && is_map_info_line(head->content))
-			head = head->next;
+			map_line_handler(&head, map);
 		else if (head->next == NULL && is_empty_line(head->content))
 			break ;
 		else

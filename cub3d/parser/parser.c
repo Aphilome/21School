@@ -66,7 +66,13 @@ void	print_map(t_map *map)
 	print_color(map->ceiling_color);
 	print_str("F: ");
 	print_color(map->floor_color);
-	// map
+	print_strl("");
+	print_nbr(map->map_height);
+	print_str("x");
+	print_nbr(map->map_width);
+	print_strl(" (h x w)");
+
+
 	print_strl("#######################");
 }
 
@@ -78,7 +84,6 @@ t_map	*get_empty_map(void)
 	if (map == NULL)
 		error_exit(ERROR_MALLOC);
 	map->map = NULL;
-	map->map_lines = 0;
 	map->east_texture_path = NULL;
 	map->north_texture_path = NULL;
 	map->west_texture_path = NULL;
@@ -89,6 +94,8 @@ t_map	*get_empty_map(void)
 	map->floor_color[0] = -1;
 	map->floor_color[1] = -1;
 	map->floor_color[2] = -1;
+	map->map_width = 0;
+	map->map_height = 0;
 	return (map);
 }
 
@@ -116,6 +123,10 @@ t_map	*map_parser(char *file_name)
 	if (ft_lstsize(head) < 9)
 		error_exit(ERROR_MAP);
 	map_start = init_settings(head, map);
+
+
+
+
 	print_map(map);
 	return (map);
 }
