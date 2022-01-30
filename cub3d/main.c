@@ -56,15 +56,24 @@ int main()
 //		texture[i].resize(texWidth * texHeight);
 
 //	(void) screen;
-	for(int x = 0; x < w; x++)
+	for(int x = 0; x < mapWidth; x++)
 	{
 		//calculate ray position and direction
-		double cameraX = 2 * x / (double)w - 1; //x-coordinate in camera space
-		double rayDirX = dirX + planeX*cameraX;
-		double rayDirY = dirY + planeY*cameraX;
+		double cameraX =
+				2 * x / (double) mapWidth - 1; //x-coordinate in camera space
+		double rayDirX = dirX + planeX * cameraX;
+		double rayDirY = dirY + planeY * cameraX;
 
+		(void)rayDirX;
+		(void)rayDirY;
 
+	}
 
+	(void)time;
+	(void)screen;
+	(void)posX;
+	(void)posY;
+	(void)oldTime;
 
 	mlx_loop(mlx);
 	return 0;
