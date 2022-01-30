@@ -1,6 +1,10 @@
 .DS_Store
+.idea
+cmake-build-debug
+minilibx_opengl.tgz
 *.a
 *.o
+*.md
 cub3d
 .DS_Store
 cub3d
