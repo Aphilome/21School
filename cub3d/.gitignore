@@ -1,4 +1,8 @@
 .DS_Store
+*.a
+*.o
+cub3d
+.DS_Store
 cub3d
 libmlx.a
 *.o

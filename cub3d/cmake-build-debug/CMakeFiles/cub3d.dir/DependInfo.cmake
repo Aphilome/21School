@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/tbirdper/Documents/AphilomeGit/cub3d/main.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/main.c.o"
-  "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/parser.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/parser/parser.c.o"
-  "/Users/tbirdper/Documents/AphilomeGit/cub3d/utils/utils.c" "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/utils/utils.c.o"
+  "/Users/aphilome/Documents/21School/cub3d/main.c" "/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/main.c.o"
+  "/Users/aphilome/Documents/21School/cub3d/parser/parser.c" "/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/parser/parser.c.o"
+  "/Users/aphilome/Documents/21School/cub3d/utils/utils.c" "/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/CMakeFiles/cub3d.dir/utils/utils.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

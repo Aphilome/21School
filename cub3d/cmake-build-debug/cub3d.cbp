@@ -8,38 +8,38 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug"/>
+				<Option working_dir="/Users/aphilome/Documents/21School/cub3d/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug"/>
+				<Option working_dir="/Users/aphilome/Documents/21School/cub3d/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="edit_cache">
-				<Option working_dir="/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug"/>
+				<Option working_dir="/Users/aphilome/Documents/21School/cub3d/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="cub3d">
-				<Option output="/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/cub3d" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug"/>
+				<Option output="/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/cub3d" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/aphilome/Documents/21School/cub3d/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -51,15 +51,15 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 cub3d"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 cub3d"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="cub3d/fast">
-				<Option output="/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/cub3d" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug"/>
+				<Option output="/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/cub3d" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/aphilome/Documents/21School/cub3d/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
 				<Option compiler="gcc"/>
@@ -71,29 +71,29 @@
 					<Add directory="/Library/Frameworks"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 cub3d/fast"/>
-					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 cub3d/fast"/>
+					<CompileFile command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j6 -f &quot;/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/main.c">
+		<Unit filename="/Users/aphilome/Documents/21School/cub3d/main.c">
 			<Option target="cub3d"/>
 		</Unit>
-		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/parser.c">
+		<Unit filename="/Users/aphilome/Documents/21School/cub3d/parser/parser.c">
 			<Option target="cub3d"/>
 		</Unit>
-		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/parser.h">
+		<Unit filename="/Users/aphilome/Documents/21School/cub3d/parser/parser.h">
 			<Option target="cub3d"/>
 		</Unit>
-		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/utils/utils.c">
+		<Unit filename="/Users/aphilome/Documents/21School/cub3d/utils/utils.c">
 			<Option target="cub3d"/>
 		</Unit>
-		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/utils/utils.h">
+		<Unit filename="/Users/aphilome/Documents/21School/cub3d/utils/utils.h">
 			<Option target="cub3d"/>
 		</Unit>
-		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/CMakeLists.txt">
+		<Unit filename="/Users/aphilome/Documents/21School/cub3d/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
