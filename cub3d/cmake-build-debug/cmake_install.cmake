@@ -1,4 +1,4 @@
-# Install script for directory: /Users/aphilome/Documents/21School/cub3d
+# Install script for directory: /Users/tbirdper/Documents/AphilomeGit/cub3d
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/aphilome/Documents/21School/cub3d/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/tbirdper/Documents/AphilomeGit/cub3d/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
