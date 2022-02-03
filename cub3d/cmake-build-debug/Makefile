@@ -225,6 +225,30 @@ main.c.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/main.c.s
 .PHONY : main.c.s
 
+mlx_adapter/mlx_adapter.o: mlx_adapter/mlx_adapter.c.o
+.PHONY : mlx_adapter/mlx_adapter.o
+
+# target to build an object file
+mlx_adapter/mlx_adapter.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/mlx_adapter/mlx_adapter.c.o
+.PHONY : mlx_adapter/mlx_adapter.c.o
+
+mlx_adapter/mlx_adapter.i: mlx_adapter/mlx_adapter.c.i
+.PHONY : mlx_adapter/mlx_adapter.i
+
+# target to preprocess a source file
+mlx_adapter/mlx_adapter.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/mlx_adapter/mlx_adapter.c.i
+.PHONY : mlx_adapter/mlx_adapter.c.i
+
+mlx_adapter/mlx_adapter.s: mlx_adapter/mlx_adapter.c.s
+.PHONY : mlx_adapter/mlx_adapter.s
+
+# target to generate assembly for a file
+mlx_adapter/mlx_adapter.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cub3d.dir/build.make CMakeFiles/cub3d.dir/mlx_adapter/mlx_adapter.c.s
+.PHONY : mlx_adapter/mlx_adapter.c.s
+
 parser/cardinal_direction_setters.o: parser/cardinal_direction_setters.c.o
 .PHONY : parser/cardinal_direction_setters.o
 
@@ -438,6 +462,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... mlx_adapter/mlx_adapter.o"
+	@echo "... mlx_adapter/mlx_adapter.i"
+	@echo "... mlx_adapter/mlx_adapter.s"
 	@echo "... parser/cardinal_direction_setters.o"
 	@echo "... parser/cardinal_direction_setters.i"
 	@echo "... parser/cardinal_direction_setters.s"

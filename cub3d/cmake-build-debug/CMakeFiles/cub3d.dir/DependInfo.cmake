@@ -12,6 +12,7 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/get_next_line/get_next_line_utils.c" "CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o" "gcc" "CMakeFiles/cub3d.dir/get_next_line/get_next_line_utils.c.o.d"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/list/list.c" "CMakeFiles/cub3d.dir/list/list.c.o" "gcc" "CMakeFiles/cub3d.dir/list/list.c.o.d"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/main.c" "CMakeFiles/cub3d.dir/main.c.o" "gcc" "CMakeFiles/cub3d.dir/main.c.o.d"
+  "/Users/tbirdper/Documents/AphilomeGit/cub3d/mlx_adapter/mlx_adapter.c" "CMakeFiles/cub3d.dir/mlx_adapter/mlx_adapter.c.o" "gcc" "CMakeFiles/cub3d.dir/mlx_adapter/mlx_adapter.c.o.d"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/cardinal_direction_setters.c" "CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o" "gcc" "CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o.d"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/color_setters.c" "CMakeFiles/cub3d.dir/parser/color_setters.c.o" "gcc" "CMakeFiles/cub3d.dir/parser/color_setters.c.o.d"
   "/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/file_reader.c" "CMakeFiles/cub3d.dir/parser/file_reader.c.o" "gcc" "CMakeFiles/cub3d.dir/parser/file_reader.c.o.d"

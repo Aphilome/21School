@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include "minilibx_opengl/mlx.h"
+
+#include "mlx_adapter/mlx_adapter.h"
+
 #include "parser/parser.h"
 
 #include <math.h>
@@ -84,6 +87,7 @@ void verLine(int x, int drawStart, int drawEnd, ColorRGB color, char
 
 int main()
 {
+	/*
 	void *mlx = mlx_init();
 	if (mlx == NULL)
 		error_exit(ERROR_MLX);
@@ -93,7 +97,8 @@ int main()
 	void *mlx_img = mlx_new_image(mlx, screenWidth, screenHeight);
 	if (mlx_img == NULL)
 		error_exit(ERROR_MLX);
-
+*/
+	mlx_adapter_init(screenWidth, screenHeight);
 
 
 	int bytes_per_pixel;

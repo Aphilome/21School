@@ -96,6 +96,12 @@
 		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/main.c">
 			<Option target="cub3d"/>
 		</Unit>
+		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/mlx_adapter/mlx_adapter.c">
+			<Option target="cub3d"/>
+		</Unit>
+		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/mlx_adapter/mlx_adapter.h">
+			<Option target="cub3d"/>
+		</Unit>
 		<Unit filename="/Users/tbirdper/Documents/AphilomeGit/cub3d/parser/cardinal_direction_setters.c">
 			<Option target="cub3d"/>
 		</Unit>

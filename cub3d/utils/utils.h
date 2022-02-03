@@ -4,6 +4,8 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#define PROJECT_NAME		"Raycaster"
+
 #define ERROR_SYSTEM		"System"
 #define ERROR_MALLOC		"Memory allocation"
 #define ERROR_MAP		"Map parsing"
@@ -27,6 +29,13 @@ typedef enum e_ColorRGB // DEL
 	RGB_White,
 	RGB_Yellow
 } ColorRGB;
+
+typedef struct s_mlx
+{
+	void *mlx;
+	void *window;
+	void *image;
+}	t_mlx;
 
 typedef enum e_map_cell
 {

@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/cub3d.dir/list/list.c.o.d"
   "CMakeFiles/cub3d.dir/main.c.o"
   "CMakeFiles/cub3d.dir/main.c.o.d"
+  "CMakeFiles/cub3d.dir/mlx_adapter/mlx_adapter.c.o"
+  "CMakeFiles/cub3d.dir/mlx_adapter/mlx_adapter.c.o.d"
   "CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o"
   "CMakeFiles/cub3d.dir/parser/cardinal_direction_setters.c.o.d"
   "CMakeFiles/cub3d.dir/parser/color_setters.c.o"
