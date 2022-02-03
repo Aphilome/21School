@@ -2,6 +2,9 @@
 #include "minilibx_opengl/mlx.h"
 #include "parser/parser.h"
 
+#include <math.h>
+#include <sys/time.h> // DEL
+
 #define mapWidth 24
 #define mapHeight 24
 #define screenWidth 640
@@ -39,11 +42,70 @@ int worldMap[mapWidth][mapHeight]=
 
 unsigned int buffer[screenHeight][screenWidth];
 
+double	get_timestamp_ms(void)
+{
+	struct timeval	now;
+	int				res;
+
+	res = gettimeofday(&now, NULL);
+	if (res != 0)
+		return (0);
+	return (double)(now.tv_sec * 1000 + now.tv_usec / 1000);
+}
+
+
+void	put_pixel(char *mlx_addr, int line_length, int bytes_per_pixel, int x,
+				  int y, int color)
+{
+	unsigned int	*dst;
+
+	dst = (unsigned int *)(mlx_addr
+						   + (y * line_length + x * bytes_per_pixel));
+	*dst = color;
+}
+
+
+void verLine(int x, int drawStart, int drawEnd, ColorRGB color, char
+*mlx_addr, int line_length, int bytes_per_pixel)
+{
+	// x - vertival?
+	for (int y = drawStart; y < drawEnd; y++)
+	{
+		int c = 76567;
+
+		c *= (int)color+1;
+
+
+		put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, c);
+	}
+
+
+}
 
 int main()
 {
 	void *mlx = mlx_init();
-	void *screen = mlx_new_window(mlx, screenWidth, screenHeight, "Raycaster");
+	if (mlx == NULL)
+		error_exit(ERROR_MLX);
+	void *mlx_win = mlx_new_window(mlx, screenWidth, screenHeight, "Raycaster");
+	if (mlx_win == NULL)
+		error_exit(ERROR_MLX);
+	void *mlx_img = mlx_new_image(mlx, screenWidth, screenHeight);
+	if (mlx_img == NULL)
+		error_exit(ERROR_MLX);
+
+
+
+	int bytes_per_pixel;
+	int line_length;
+	int endian;
+	char *mlx_addr = mlx_get_data_addr(
+			mlx_img, &bytes_per_pixel,
+			&line_length, &endian);
+	bytes_per_pixel /= 8;
+
+
+
 
 	double posX = 22.0, posY = 11.5;  //x and y start position
 	double dirX = -1.0, dirY = 0.0; //initial direction vector
@@ -57,25 +119,29 @@ int main()
 //		texture[i].resize(texWidth * texHeight);
 
 //	(void) screen;
-	for(int x = 0; x < screenWidth; x++)
+
+
+	int w = screenWidth;
+	int h = screenHeight;
+	for(int x = 0; x < w; x++)
 	{
 		//calculate ray position and direction
 		double cameraX =
-				2 * x / (double) screenWidth - 1; //x-coordinate in camera space
+				2 * x / (double) w - 1; //x-coordinate in camera space
 		double rayDirX = dirX + planeX * cameraX;
 		double rayDirY = dirY + planeY * cameraX;
 
         //which box of the map we're in
-        int mapX = int(posX);
-        int mapY = int(posY);
+        int mapX = (int)(posX);
+        int mapY = (int)(posY);
 
 
         //length of ray from current position to next x or y-side
         double sideDistX;
         double sideDistY;
 
-        double deltaDistX = (rayDirX == 0) ? 1e30 : std::abs(1 / rayDirX);
-        double deltaDistY = (rayDirY == 0) ? 1e30 : std::abs(1 / rayDirY);
+        double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
+        double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
 
         double perpWallDist;
 
@@ -174,15 +240,15 @@ int main()
         if(side == 1) {color = color / 2;}
 
         //draw the pixels of the stripe as a vertical line
-        verLine(x, drawStart, drawEnd, color);
+        verLine(x, drawStart, drawEnd, color, mlx_addr, line_length, bytes_per_pixel);
 
     }
 
     //timing for input and FPS counter
     oldTime = time;
-    time = getTicks();
+    time = get_timestamp_ms();
     double frameTime = (time - oldTime) / 1000.0; //frameTime is the time this frame has taken, in seconds
-    print(1.0 / frameTime); //FPS counter
+    printf("= fps: %f\n", 1.0 / frameTime); //FPS counter
 
     //redraw();
     //cls();
@@ -190,13 +256,18 @@ int main()
     double moveSpeed = frameTime * 5.0; //the constant value is in squares/second
     double rotSpeed = frameTime * 3.0; //the constant value is in radians/second
 
+	(void)moveSpeed;
+	(void)rotSpeed;
+
+	mlx_put_image_to_window(mlx, mlx_win, mlx_img, 0, 0);
+
 
 	mlx_loop(mlx);
 
 	return 0;
 }
 
-
+/*
 void keys()
 {
     readKeys();
@@ -235,3 +306,4 @@ void keys()
         planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
     }
 }
+ */

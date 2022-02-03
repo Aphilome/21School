@@ -11,12 +11,22 @@
 #define ERROR_ARGC		"Arguments count"
 #define ERROR_SETTINGS	"Settings parse error"
 #define ERROR_UNDEFINED	"Undefined settings error"
+#define ERROR_MLX		"MLX creating"
 
 typedef enum e_bool
 {
 	false = 0,
 	true = 1
 }	t_bool;
+
+typedef enum e_ColorRGB // DEL
+{
+	RGB_Red,
+	RGB_Green,
+	RGB_Blue,
+	RGB_White,
+	RGB_Yellow
+} ColorRGB;
 
 typedef enum e_map_cell
 {
