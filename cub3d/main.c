@@ -12,7 +12,7 @@
 #define mapHeight 24
 #define screenWidth 640
 #define screenHeight 480
-
+/*
 int worldMap[mapWidth][mapHeight]=
 		{
 				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -39,6 +39,34 @@ int worldMap[mapWidth][mapHeight]=
 				{1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+		};
+*/
+int worldMap[mapWidth][mapHeight]=
+		{
+				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		};
 
 unsigned int buffer[screenHeight][screenWidth];
@@ -78,11 +106,15 @@ void verLine(int x, int drawStart, int drawEnd, int side, char
 			int c;
 
 			if (side == 0)
-				c = 123;
+				c = 0x0000ff00; // green
 			else if (side == 1)
-				c = 77531;
+				c = 0x00ff0000; // red
+			else if (side == 2)
+				c = 0x000000ff;	// blue
+			else if (side == 3)
+				c = 0x00ffff00;	// yellow
 			else
-				c = 7465993;
+				c = 0x00ffffff; // white
 
 			put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, c);
 		}
@@ -171,6 +203,7 @@ void	redraw(t_game *game)
 			if(worldMap[mapX][mapY] > 0) hit = 1;
 		}
 
+
 		//perform DDA
 		while(hit == 0)
 		{
@@ -203,19 +236,38 @@ void	redraw(t_game *game)
 		int drawEnd = lineHeight / 2 + h / 2;
 		if(drawEnd >= h) drawEnd = h - 1;
 
-//		//choose wall color
-//		ColorRGB color;
-//		switch(worldMap[mapX][mapY])
-//		{
-//			case 1:  color = RGB_Red;    break; //red
-//			case 2:  color = RGB_Green;  break; //green
-//			case 3:  color = RGB_Blue;   break; //blue
-//			case 4:  color = RGB_White;  break; //white
-//			default: color = RGB_Yellow; break; //yellow
-//		}
-//
-//		//give x and y sides different brightness
-//		if (side == 1) {color = color / 2;}
+		if (game->map_tmp->player_pos_y >= mapY &&
+			game->map_tmp->player_pos_x >= mapX)
+		{
+			if (side == 0)
+				side = 3;
+			else
+				side = 2;
+		}
+		if (game->map_tmp->player_pos_y <= mapY&& game->map_tmp->player_pos_x >= mapX)
+		{
+			if (side == 0)
+				side = 3;
+			else
+				side = 0;
+		}
+		if (game->map_tmp->player_pos_y <= mapY&& game->map_tmp->player_pos_x <= mapX)
+		{
+			if (side == 0)
+				side = 1;
+			else
+				side = 0;
+		}
+		if (game->map_tmp->player_pos_y >= mapY && game->map_tmp->player_pos_x <= mapX)
+		{
+			if (side == 0)
+				side = 1;
+			else
+				side = 2;
+		}
+
+		//if (side == 4)
+		//side %= 4;
 
 		//draw the pixels of the stripe as a vertical line
 		verLine(x, drawStart, drawEnd, side, game->mlx->mlx_addr,
@@ -229,7 +281,8 @@ void	redraw(t_game *game)
 	//timing for input and FPS counter
 	game->map_tmp->oldTime = game->map_tmp->time;
 	game->map_tmp->time = get_timestamp_ms();
-	double frameTime = (game->map_tmp->time - game->map_tmp->oldTime) / 1000.0;
+	double frameTime = (game->map_tmp->time - game->map_tmp->oldTime) /
+	 1000.0;
 	//frameTime is the time this frame has taken, in seconds
 	printf("= frameTime: %.2f ms\n", frameTime); //frameTime counter
 	printf("= fps: %f.2\n", 1.0 / (frameTime / 1000)); //FPS counter
@@ -322,15 +375,43 @@ int main()
 
 	t_map_tmp map_tmp;
 
-	map_tmp.player_pos_x = 22.0;
-	map_tmp.player_pos_y = 11.5;
-	map_tmp.direction_x = -1.0;
-	map_tmp.direction_y = 0.0;
-	map_tmp.plane_x = 0.0;
-	map_tmp.plane_y = 0.66;
+	map_tmp.player_pos_x = 22;
+	map_tmp.player_pos_y = 15;
+
+	map_tmp.direction_x = 0.0;
+	map_tmp.direction_y = 1.0;
 
 	map_tmp.moveSpeed = 0.8;
 	map_tmp.rotSpeed = 0.2;
+
+	if (map_tmp.direction_x == 1 && map_tmp.direction_y == 0)
+	{
+		map_tmp.plane_y = -0.66;
+		map_tmp.plane_x = 0.0;
+	}
+	if (map_tmp.direction_x == -1 && map_tmp.direction_y == 0)
+	{
+		map_tmp.plane_y = 0.66;
+		map_tmp.plane_x = 0.0;
+	}
+	if (map_tmp.direction_x == 0 && map_tmp.direction_y == -1)
+	{
+		map_tmp.plane_y = 0.00;
+		map_tmp.plane_x = -0.66;
+	}
+	if (map_tmp.direction_x == 0 && map_tmp.direction_y == 1)
+	{
+		map_tmp.plane_y = 0.00;
+		map_tmp.plane_x = 0.66;
+	}
+
+
+
+
+	map_tmp.player_pos_x += 0.00000001;
+	map_tmp.player_pos_y += 0.00000001;
+
+
 
 
 	for(int x = 0; x < TEXTURE_WIDTH; x++)
