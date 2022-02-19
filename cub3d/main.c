@@ -12,8 +12,6 @@
 #define mapHeight 24
 #define screenWidth 640
 #define screenHeight 480
-#define texWidth 64
-#define texHeight 64
 
 int worldMap[mapWidth][mapHeight]=
 		{
@@ -68,29 +66,24 @@ void	put_pixel(char *mlx_addr, int line_length, int bytes_per_pixel, int x,
 }
 
 
-void verLine(int x, int drawStart, int drawEnd, ColorRGB color, char
+void verLine(int x, int drawStart, int drawEnd, int side, char
 *mlx_addr, int line_length, int bytes_per_pixel)
 {
-	/*
-	printf("x: %i y: %i-%i\n", x, drawStart, drawEnd);
-	// x - vertival?
-	for (int y = drawStart; y < drawEnd; y++)
-	{
-		int c = 76567;
-
-		c *= (int)color+1;
-
-
-		put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, c);
-	}
-*/
-
 	for (int y = 0; y < screenHeight; y++)
 	{
 		if (y >= drawStart && y < drawEnd)
 		{
-			int c = 76567;
-			c *= (int)color+1;
+//			int c = 76567;
+//			c *= (int)color+1;
+			int c;
+
+			if (side == 0)
+				c = 123;
+			else if (side == 1)
+				c = 77531;
+			else
+				c = 7465993;
+
 			put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, c);
 		}
 		else
@@ -210,22 +203,23 @@ void	redraw(t_game *game)
 		int drawEnd = lineHeight / 2 + h / 2;
 		if(drawEnd >= h) drawEnd = h - 1;
 
-		//choose wall color
-		ColorRGB color;
-		switch(worldMap[mapX][mapY])
-		{
-			case 1:  color = RGB_Red;    break; //red
-			case 2:  color = RGB_Green;  break; //green
-			case 3:  color = RGB_Blue;   break; //blue
-			case 4:  color = RGB_White;  break; //white
-			default: color = RGB_Yellow; break; //yellow
-		}
-
-		//give x and y sides different brightness
-		if(side == 1) {color = color / 2;}
+//		//choose wall color
+//		ColorRGB color;
+//		switch(worldMap[mapX][mapY])
+//		{
+//			case 1:  color = RGB_Red;    break; //red
+//			case 2:  color = RGB_Green;  break; //green
+//			case 3:  color = RGB_Blue;   break; //blue
+//			case 4:  color = RGB_White;  break; //white
+//			default: color = RGB_Yellow; break; //yellow
+//		}
+//
+//		//give x and y sides different brightness
+//		if (side == 1) {color = color / 2;}
 
 		//draw the pixels of the stripe as a vertical line
-		verLine(x, drawStart, drawEnd, color, game->mlx->mlx_addr, game->mlx->line_length,
+		verLine(x, drawStart, drawEnd, side, game->mlx->mlx_addr,
+				game->mlx->line_length,
 				game->mlx->bytes_per_pixel);
 
 	}
@@ -338,25 +332,19 @@ int main()
 	map_tmp.moveSpeed = 0.8;
 	map_tmp.rotSpeed = 0.2;
 
-	ft_lstnew()
 
-	for(int x = 0; x < texWidth; x++)
-		for(int y = 0; y < texHeight; y++)
+	for(int x = 0; x < TEXTURE_WIDTH; x++)
+		for(int y = 0; y < TEXTURE_HEIGHT; y++)
 		{
-			int xorcolor = (x * 256 / texWidth) ^ (y * 256 / texHeight);
+			int xorcolor = (x * 256 / TEXTURE_WIDTH) ^ (y * 256 / TEXTURE_HEIGHT);
 			//int xcolor = x * 256 / texWidth;
-			int ycolor = y * 256 / texHeight;
-			int xycolor = y * 128 / texHeight + x * 128 / texWidth;
-			texture[0][texWidth * y + x] = 65536 * 254 * (x != y && x != texWidth - y); //flat red texture with black cross
-			texture[1][texWidth * y + x] = xycolor + 256 * xycolor + 65536 * xycolor; //sloped greyscale
-			texture[2][texWidth * y + x] = 256 * xycolor + 65536 * xycolor; //sloped yellow gradient
-			texture[3][texWidth * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
-			texture[4][texWidth * y + x] = 256 * xorcolor; //xor green
-			texture[5][texWidth * y + x] = 65536 * 192 * (x % 16 && y % 16); //red bricks
-			texture[6][texWidth * y + x] = 65536 * ycolor; //red gradient
-			texture[7][texWidth * y + x] = 128 + 256 * 128 + 65536 * 128; //flat grey texture
+			//int ycolor = y * 256 / TEXTURE_HEIGHT;
+			int xycolor = y * 128 / TEXTURE_HEIGHT + x * 128 / TEXTURE_WIDTH;
+			map_tmp.texture1[TEXTURE_WIDTH * y + x] = 65536 * 254 * (x != y && x != TEXTURE_WIDTH - y); //flat red texture with black cross
+			map_tmp.texture2[TEXTURE_WIDTH * y + x] = xycolor + 256 * xycolor+ 65536 * xycolor; //sloped greyscale
+			map_tmp.texture3[TEXTURE_WIDTH * y + x] = 256 * xycolor + 65536 *xycolor; //sloped yellow gradient
+			map_tmp.texture4[TEXTURE_WIDTH * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
 		}
-
 
 
 	t_game game;

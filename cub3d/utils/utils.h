@@ -6,6 +6,9 @@
 #include "../list/list.h"
 
 #define PROJECT_NAME		"Raycaster"
+#define TEXTURE_WIDTH	64
+#define TEXTURE_HEIGHT	64
+#define TEXTURE_SIZE		TEXTURE_WIDTH * TEXTURE_HEIGHT
 
 #define ERROR_SYSTEM		"System"
 #define ERROR_MALLOC		"Memory allocation"
@@ -83,10 +86,10 @@ typedef struct s_map_tmp
 	double moveSpeed;
 	double rotSpeed;
 
-	t_list *texture1;
-	t_list *texture2;
-	t_list *texture3;
-	t_list *texture4;
+	unsigned int texture1[TEXTURE_SIZE];
+	unsigned int texture2[TEXTURE_SIZE];
+	unsigned int texture3[TEXTURE_SIZE];
+	unsigned int texture4[TEXTURE_SIZE];
 
 }	t_map_tmp;
 
