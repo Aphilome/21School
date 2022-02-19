@@ -96,6 +96,14 @@ t_map	*get_empty_map(void)
 	map->floor_color[2] = -1;
 	map->map_width = 0;
 	map->map_height = 0;
+
+//	map->player_pos_x = 22.0;
+//	map->player_pos_y = 11.5;//x and y start position
+//
+//	map->direction_x = -1.0;
+//	map->direction_y = 0.0;
+
+
 	return (map);
 }
 

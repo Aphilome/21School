@@ -1,13 +1,14 @@
 NAME = cub3d
 
 SRCS =	main.c \
+		mlx_adapter/mlx_adapter.c \
 		parser/parser.c parser/cardinal_direction_setters.c parser/file_reader.c parser/line_checkers.c parser/settings_func.c parser/color_setters.c parser/map_func.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		list/list.c utils/utils.c
 
 MLX	 = 	libmlx.a
 
-HDRS = utils/utils.h parser/parser.h parser/parser_private.h get_next_line/get_next_line.h list/list.h
+HDRS = utils/utils.h parser/parser.h parser/parser_private.h get_next_line/get_next_line.h list/list.h mlx_adapter/mlx_adapter.h \
 
 OBJS = $(SRCS:.c=.o)
 

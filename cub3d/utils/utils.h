@@ -3,6 +3,7 @@
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "../list/list.h"
 
 #define PROJECT_NAME		"Raycaster"
 
@@ -35,6 +36,9 @@ typedef struct s_mlx
 	void *mlx;
 	void *window;
 	void *image;
+	int bytes_per_pixel;
+	int line_length;
+	char *mlx_addr;
 }	t_mlx;
 
 typedef enum e_map_cell
@@ -56,8 +60,54 @@ typedef struct s_map
 
 	int map_width;
 	int map_height;
+
+
+
 	t_map_cell **map;
 }	t_map;
+
+typedef struct s_map_tmp
+{
+	double player_pos_x;
+	double player_pos_y;
+
+	double direction_x;
+	double direction_y;
+
+	double plane_x;
+	double plane_y;
+
+	double time;
+	double oldTime;
+
+	double moveSpeed;
+	double rotSpeed;
+
+	t_list *texture1;
+	t_list *texture2;
+	t_list *texture3;
+	t_list *texture4;
+
+}	t_map_tmp;
+
+typedef struct s_game
+{
+	t_map_tmp *map_tmp;
+	t_mlx		*mlx;
+}	t_game;
+
+typedef enum e_key_code
+{
+	key_scroll_down = 4,
+	key_scroll_up = 5,
+	key_esc = 53,
+	key_plus = 69,
+	key_minus = 78,
+	key_arrow_left = 123,
+	key_arrow_right = 124,
+	key_arrow_down = 125,
+	key_arrow_up = 126,
+}	t_key_code;
 
 int		ft_strlen(char *msg);
 void	error_exit(char *msg);
