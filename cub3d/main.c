@@ -384,29 +384,34 @@ int main()
 	map_tmp.moveSpeed = 0.8;
 	map_tmp.rotSpeed = 0.2;
 
-	if (map_tmp.direction_x == 1 && map_tmp.direction_y == 0)
-	{
-		map_tmp.plane_y = -0.66;
-		map_tmp.plane_x = 0.0;
-	}
-	if (map_tmp.direction_x == -1 && map_tmp.direction_y == 0)
-	{
-		map_tmp.plane_y = 0.66;
-		map_tmp.plane_x = 0.0;
-	}
-	if (map_tmp.direction_x == 0 && map_tmp.direction_y == -1)
-	{
-		map_tmp.plane_y = 0.00;
-		map_tmp.plane_x = -0.66;
-	}
-	if (map_tmp.direction_x == 0 && map_tmp.direction_y == 1)
-	{
-		map_tmp.plane_y = 0.00;
-		map_tmp.plane_x = 0.66;
-	}
+//	if (map_tmp.direction_x == 1 && map_tmp.direction_y == 0)
+//	{
+//		map_tmp.plane_y = -0.66;
+//		map_tmp.plane_x = 0.0;
+//	}
+//	if (map_tmp.direction_x == -1 && map_tmp.direction_y == 0)
+//	{
+//		map_tmp.plane_y = 0.66;
+//		map_tmp.plane_x = 0.0;
+//	}
+//	if (map_tmp.direction_x == 0 && map_tmp.direction_y == -1)
+//	{
+//		map_tmp.plane_y = 0.00;
+//		map_tmp.plane_x = -0.66;
+//	}
+//	if (map_tmp.direction_x == 0 && map_tmp.direction_y == 1)
+//	{
+//		map_tmp.plane_y = 0.00;
+//		map_tmp.plane_x = 0.66;
+//	}
 
 
-
+	map_tmp.plane_y = 0.0;
+	map_tmp.plane_x = 0.0;
+	if (map_tmp.direction_y == 0)
+		map_tmp.plane_y += 0.66 * map_tmp.direction_x * -1;
+	if (map_tmp.direction_x == 0)
+		map_tmp.plane_x += 0.66 * map_tmp.direction_y;
 
 	map_tmp.player_pos_x += 0.00000001;
 	map_tmp.player_pos_y += 0.00000001;
