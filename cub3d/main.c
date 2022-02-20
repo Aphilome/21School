@@ -101,10 +101,7 @@ void verLine(int x, int drawStart, int drawEnd, int side, char
 	{
 		if (y >= drawStart && y < drawEnd)
 		{
-//			int c = 76567;
-//			c *= (int)color+1;
 			int c;
-
 			if (side == 0)
 				c = 0x0000ff00; // green
 			else if (side == 1)
@@ -230,50 +227,92 @@ void	redraw(t_game *game)
 		//Calculate height of line to draw on screen
 		int lineHeight = (int)(h / perpWallDist);
 
+		int pitch = 100;
+
 		//calculate lowest and highest pixel to fill in current stripe
-		int drawStart = -lineHeight / 2 + h / 2;
+		int drawStart = -lineHeight / 2 + h / 2 + pitch;
 		if(drawStart < 0) drawStart = 0;
-		int drawEnd = lineHeight / 2 + h / 2;
+		int drawEnd = lineHeight / 2 + h / 2 + pitch;
 		if(drawEnd >= h) drawEnd = h - 1;
+
+
+		t_cardinal_directions cd = side;
 
 		if (game->map_tmp->player_pos_y >= mapY &&
 			game->map_tmp->player_pos_x >= mapX)
 		{
-			if (side == 0)
-				side = 3;
-			else
-				side = 2;
+			/*
+			 * 0 3
+			 * 1 2
+			 * */
+//			if (side == 0)
+//				side = 3;
+//			else
+//				side = 2;
+
+			cd = -(side - 3);
 		}
 		if (game->map_tmp->player_pos_y <= mapY&& game->map_tmp->player_pos_x >= mapX)
 		{
 			if (side == 0)
-				side = 3;
+				cd = 3;
 			else
-				side = 0;
+				cd = 0;
 		}
 		if (game->map_tmp->player_pos_y <= mapY&& game->map_tmp->player_pos_x <= mapX)
 		{
 			if (side == 0)
-				side = 1;
+				cd = 1;
 			else
-				side = 0;
+				cd = 0;
 		}
 		if (game->map_tmp->player_pos_y >= mapY && game->map_tmp->player_pos_x <= mapX)
 		{
 			if (side == 0)
-				side = 1;
+				cd = 1;
 			else
-				side = 2;
+				cd = 2;
 		}
 
-		//if (side == 4)
-		//side %= 4;
 
-		//draw the pixels of the stripe as a vertical line
-		verLine(x, drawStart, drawEnd, side, game->mlx->mlx_addr,
-				game->mlx->line_length,
-				game->mlx->bytes_per_pixel);
+		//calculate value of wallX
+		double wallX; //where exactly the wall was hit
+		if(side == 0) wallX = game->map_tmp->player_pos_y + perpWallDist * rayDirY;
+		else          wallX = game->map_tmp->player_pos_x + perpWallDist *
+				rayDirX;
+		wallX -= floor((wallX));
 
+		//x coordinate on the texture
+		int texX = (int)(wallX * (double)TEXTURE_WIDTH);
+		if(side == 0 && rayDirX > 0) texX = TEXTURE_WIDTH - texX - 1;
+		if(side == 1 && rayDirY < 0) texX = TEXTURE_WIDTH - texX - 1;
+
+
+		// TODO: an integer-only bresenham or DDA like algorithm could make the texture coordinate stepping faster
+		// How much to increase the texture coordinate per screen pixel
+		double step = 1.0 * TEXTURE_HEIGHT / lineHeight;
+		// Starting texture coordinate
+		double texPos = (drawStart - pitch - h / 2.0 + lineHeight / 2.0) * step;
+		for(int y = 0; y < screenHeight; y++)
+		{
+			if (y >= drawStart && y < drawEnd)
+			{
+
+				// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
+				int texY = (int)texPos & (TEXTURE_HEIGHT - 1);
+				texPos += step;
+				unsigned int color = game->map_tmp->textures[cd][TEXTURE_HEIGHT* texY + texX];
+				//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+				if(side == 1) color = (color >> 1) & 8355711;
+
+
+				put_pixel(game->mlx->mlx_addr, game->mlx->line_length, game->mlx->bytes_per_pixel, x, y, color);
+			}
+			else
+			{
+				put_pixel(game->mlx->mlx_addr, game->mlx->line_length, game->mlx->bytes_per_pixel, x, y, 0);
+			}
+		}
 	}
 
 	mlx_put_image_to_window(game->mlx, game->mlx->window, game->mlx->image, 0, 0);
@@ -286,15 +325,6 @@ void	redraw(t_game *game)
 	//frameTime is the time this frame has taken, in seconds
 	printf("= frameTime: %.2f ms\n", frameTime); //frameTime counter
 	printf("= fps: %f.2\n", 1.0 / (frameTime / 1000)); //FPS counter
-
-	//redraw();
-	//cls();
-	//speed modifiers
-	//game->map_tmp->moveSpeed = frameTime * 5.0; //the constant value is in
-	// squares/second
-	//game->map_tmp->rotSpeed = frameTime * 3.0; //the constant value is in
-	// radians/second
-
 
 }
 
@@ -384,34 +414,14 @@ int main()
 	map_tmp.moveSpeed = 0.8;
 	map_tmp.rotSpeed = 0.2;
 
-//	if (map_tmp.direction_x == 1 && map_tmp.direction_y == 0)
-//	{
-//		map_tmp.plane_y = -0.66;
-//		map_tmp.plane_x = 0.0;
-//	}
-//	if (map_tmp.direction_x == -1 && map_tmp.direction_y == 0)
-//	{
-//		map_tmp.plane_y = 0.66;
-//		map_tmp.plane_x = 0.0;
-//	}
-//	if (map_tmp.direction_x == 0 && map_tmp.direction_y == -1)
-//	{
-//		map_tmp.plane_y = 0.00;
-//		map_tmp.plane_x = -0.66;
-//	}
-//	if (map_tmp.direction_x == 0 && map_tmp.direction_y == 1)
-//	{
-//		map_tmp.plane_y = 0.00;
-//		map_tmp.plane_x = 0.66;
-//	}
-
-
 	map_tmp.plane_y = 0.0;
 	map_tmp.plane_x = 0.0;
 	if (map_tmp.direction_y == 0)
 		map_tmp.plane_y += 0.66 * map_tmp.direction_x * -1;
 	if (map_tmp.direction_x == 0)
 		map_tmp.plane_x += 0.66 * map_tmp.direction_y;
+
+
 
 	map_tmp.player_pos_x += 0.00000001;
 	map_tmp.player_pos_y += 0.00000001;
@@ -423,13 +433,15 @@ int main()
 		for(int y = 0; y < TEXTURE_HEIGHT; y++)
 		{
 			int xorcolor = (x * 256 / TEXTURE_WIDTH) ^ (y * 256 / TEXTURE_HEIGHT);
-			//int xcolor = x * 256 / texWidth;
-			//int ycolor = y * 256 / TEXTURE_HEIGHT;
 			int xycolor = y * 128 / TEXTURE_HEIGHT + x * 128 / TEXTURE_WIDTH;
-			map_tmp.texture1[TEXTURE_WIDTH * y + x] = 65536 * 254 * (x != y && x != TEXTURE_WIDTH - y); //flat red texture with black cross
-			map_tmp.texture2[TEXTURE_WIDTH * y + x] = xycolor + 256 * xycolor+ 65536 * xycolor; //sloped greyscale
-			map_tmp.texture3[TEXTURE_WIDTH * y + x] = 256 * xycolor + 65536 *xycolor; //sloped yellow gradient
-			map_tmp.texture4[TEXTURE_WIDTH * y + x] = xorcolor + 256 * xorcolor + 65536 * xorcolor; //xor greyscale
+			map_tmp.textures[0][TEXTURE_WIDTH * y + x] = 65536 * 254 * (x != y && x
+					!= TEXTURE_WIDTH - y); //flat red texture with black cross
+			map_tmp.textures[1][TEXTURE_WIDTH * y + x] = xycolor + 256 *
+					xycolor+ 65536 * xycolor; //sloped greyscale
+			map_tmp.textures[2][TEXTURE_WIDTH * y + x] = 256 * xycolor +
+					65536 *xycolor; //sloped yellow gradient
+			map_tmp.textures[3][TEXTURE_WIDTH * y + x] = xorcolor + 256 *
+					xorcolor + 65536 * xorcolor; //xor greyscale
 		}
 
 

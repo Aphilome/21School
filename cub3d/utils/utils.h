@@ -25,14 +25,13 @@ typedef enum e_bool
 	true = 1
 }	t_bool;
 
-typedef enum e_ColorRGB // DEL
+typedef enum e_cardinal_directions
 {
-	RGB_Red,
-	RGB_Green,
-	RGB_Blue,
-	RGB_White,
-	RGB_Yellow
-} ColorRGB;
+	cd_west = 0,
+	cd_north = 1,
+	cd_east = 2,
+	cd_south = 3
+}	t_cardinal_directions;
 
 typedef struct s_mlx
 {
@@ -86,10 +85,7 @@ typedef struct s_map_tmp
 	double moveSpeed;
 	double rotSpeed;
 
-	unsigned int texture1[TEXTURE_SIZE];
-	unsigned int texture2[TEXTURE_SIZE];
-	unsigned int texture3[TEXTURE_SIZE];
-	unsigned int texture4[TEXTURE_SIZE];
+	unsigned int textures[4][TEXTURE_SIZE];
 
 }	t_map_tmp;
 
