@@ -94,9 +94,6 @@ typedef struct s_game
 
 	double moveSpeed;
 	double rotSpeed;
-
-	double time;
-	double oldTime;
 }	t_game;
 
 typedef enum e_key_code

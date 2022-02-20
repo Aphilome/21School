@@ -125,7 +125,7 @@ void	put_pixel(char *mlx_addr, int line_length, int bytes_per_pixel, int x,
 
 void	redraw(t_game *game)
 {
-	game->time = get_timestamp_ms();
+	double oldTime = get_timestamp_ms();
 
 	int w = screenWidth;
 	int h = screenHeight;
@@ -313,9 +313,7 @@ void	redraw(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->mlx->window, game->mlx->image, 0, 0);
 
 	//timing for input and FPS counter
-	game->oldTime = game->time;
-	game->time = get_timestamp_ms();
-	double frameTime = (game->time - game->oldTime);
+	double frameTime = (get_timestamp_ms() - oldTime);
 	//frameTime is the time this frame has taken, in seconds
 	printf("FPS: %i\n", (int)(1.0 / (frameTime / 1000.0))); //FPS counter
 
