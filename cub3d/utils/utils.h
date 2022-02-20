@@ -6,6 +6,8 @@
 #include "../list/list.h"
 
 #define PROJECT_NAME		"Raycaster"
+#define MOVE_SPEED		0.8
+#define ROTATION_SPEED	0.2
 #define TEXTURE_WIDTH	64
 #define TEXTURE_HEIGHT	64
 #define TEXTURE_SIZE		TEXTURE_WIDTH * TEXTURE_HEIGHT
@@ -63,36 +65,38 @@ typedef struct s_map
 	int map_width;
 	int map_height;
 
+	double player_start_pos_x;
+	double player_start_pos_y;
 
+	double player_start_direction_x;
+	double player_start_direction_y;
+
+	unsigned int textures[4][TEXTURE_SIZE];
 
 	t_map_cell **map;
 }	t_map;
 
-typedef struct s_map_tmp
+
+
+typedef struct s_game
 {
+	t_map		*map;
+	t_mlx		*mlx;
+
 	double player_pos_x;
 	double player_pos_y;
 
-	double direction_x;
-	double direction_y;
+	double  player_direction_x;
+	double  player_direction_y;
 
 	double plane_x;
 	double plane_y;
 
-	double time;
-	double oldTime;
-
 	double moveSpeed;
 	double rotSpeed;
 
-	unsigned int textures[4][TEXTURE_SIZE];
-
-}	t_map_tmp;
-
-typedef struct s_game
-{
-	t_map_tmp *map_tmp;
-	t_mlx		*mlx;
+	double time;
+	double oldTime;
 }	t_game;
 
 typedef enum e_key_code

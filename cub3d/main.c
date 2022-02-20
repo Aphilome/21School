@@ -69,7 +69,7 @@ int worldMap[mapWidth][mapHeight]=
 				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
 		};
 
-unsigned int buffer[screenHeight][screenWidth];
+//unsigned int buffer[screenHeight][screenWidth];
 
 double	get_timestamp_ms(void)
 {
@@ -94,38 +94,38 @@ void	put_pixel(char *mlx_addr, int line_length, int bytes_per_pixel, int x,
 }
 
 
-void verLine(int x, int drawStart, int drawEnd, int side, char
-*mlx_addr, int line_length, int bytes_per_pixel)
-{
-	for (int y = 0; y < screenHeight; y++)
-	{
-		if (y >= drawStart && y < drawEnd)
-		{
-			int c;
-			if (side == 0)
-				c = 0x0000ff00; // green
-			else if (side == 1)
-				c = 0x00ff0000; // red
-			else if (side == 2)
-				c = 0x000000ff;	// blue
-			else if (side == 3)
-				c = 0x00ffff00;	// yellow
-			else
-				c = 0x00ffffff; // white
-
-			put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, c);
-		}
-		else
-		{
-			put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, 0);
-		}
-	}
-}
+//void verLine(int x, int drawStart, int drawEnd, int side, char
+//*mlx_addr, int line_length, int bytes_per_pixel)
+//{
+//	for (int y = 0; y < screenHeight; y++)
+//	{
+//		if (y >= drawStart && y < drawEnd)
+//		{
+//			int c;
+//			if (side == 0)
+//				c = 0x0000ff00; // green
+//			else if (side == 1)
+//				c = 0x00ff0000; // red
+//			else if (side == 2)
+//				c = 0x000000ff;	// blue
+//			else if (side == 3)
+//				c = 0x00ffff00;	// yellow
+//			else
+//				c = 0x00ffffff; // white
+//
+//			put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, c);
+//		}
+//		else
+//		{
+//			put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, 0);
+//		}
+//	}
+//}
 
 
 void	redraw(t_game *game)
 {
-	game->map_tmp->time = get_timestamp_ms();
+	game->time = get_timestamp_ms();
 
 	int w = screenWidth;
 	int h = screenHeight;
@@ -134,13 +134,13 @@ void	redraw(t_game *game)
 		//calculate ray position and direction
 		double cameraX =
 				2 * x / (double) w - 1; //x-coordinate in camera space
-		double rayDirX = game->map_tmp->direction_x + game->map_tmp->plane_x *
+		double rayDirX = game->player_direction_x + game->plane_x *
 				cameraX;
-		double rayDirY = game->map_tmp->direction_y + game->map_tmp->plane_y * cameraX;
+		double rayDirY = game->player_direction_y + game->plane_y * cameraX;
 
 		//which box of the map we're in
-		int mapX = (int)(game->map_tmp->player_pos_x);
-		int mapY = (int)(game->map_tmp->player_pos_y);
+		int mapX = (int)(game->player_pos_x);
+		int mapY = (int)(game->player_pos_y);
 
 
 		//length of ray from current position to next x or y-side
@@ -162,22 +162,22 @@ void	redraw(t_game *game)
 		if(rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (game->map_tmp->player_pos_x - mapX) * deltaDistX;
+			sideDistX = (game->player_pos_x - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - game->map_tmp->player_pos_x) * deltaDistX;
+			sideDistX = (mapX + 1.0 - game->player_pos_x) * deltaDistX;
 		}
 		if(rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (game->map_tmp->player_pos_y - mapY) * deltaDistY;
+			sideDistY = (game->player_pos_y - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - game->map_tmp->player_pos_y) * deltaDistY;
+			sideDistY = (mapY + 1.0 - game->player_pos_y) * deltaDistY;
 		}
 
 		//perform DDA
@@ -235,11 +235,10 @@ void	redraw(t_game *game)
 		int drawEnd = lineHeight / 2 + h / 2 + pitch;
 		if(drawEnd >= h) drawEnd = h - 1;
 
-
 		t_cardinal_directions cd = side;
 
-		if (game->map_tmp->player_pos_y >= mapY &&
-			game->map_tmp->player_pos_x >= mapX)
+		if (game->player_pos_y >= mapY &&
+			game->player_pos_x >= mapX)
 		{
 			/*
 			 * 0 3
@@ -252,21 +251,21 @@ void	redraw(t_game *game)
 
 			cd = -(side - 3);
 		}
-		if (game->map_tmp->player_pos_y <= mapY&& game->map_tmp->player_pos_x >= mapX)
+		if (game->player_pos_y <= mapY&& game->player_pos_x >= mapX)
 		{
 			if (side == 0)
 				cd = 3;
 			else
 				cd = 0;
 		}
-		if (game->map_tmp->player_pos_y <= mapY&& game->map_tmp->player_pos_x <= mapX)
+		if (game->player_pos_y <= mapY&& game->player_pos_x <= mapX)
 		{
 			if (side == 0)
 				cd = 1;
 			else
 				cd = 0;
 		}
-		if (game->map_tmp->player_pos_y >= mapY && game->map_tmp->player_pos_x <= mapX)
+		if (game->player_pos_y >= mapY && game->player_pos_x <= mapX)
 		{
 			if (side == 0)
 				cd = 1;
@@ -274,11 +273,10 @@ void	redraw(t_game *game)
 				cd = 2;
 		}
 
-
 		//calculate value of wallX
 		double wallX; //where exactly the wall was hit
-		if(side == 0) wallX = game->map_tmp->player_pos_y + perpWallDist * rayDirY;
-		else          wallX = game->map_tmp->player_pos_x + perpWallDist *
+		if(side == 0) wallX = game->player_pos_y + perpWallDist * rayDirY;
+		else          wallX = game->player_pos_x + perpWallDist *
 				rayDirX;
 		wallX -= floor((wallX));
 
@@ -297,14 +295,12 @@ void	redraw(t_game *game)
 		{
 			if (y >= drawStart && y < drawEnd)
 			{
-
 				// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 				int texY = (int)texPos & (TEXTURE_HEIGHT - 1);
 				texPos += step;
-				unsigned int color = game->map_tmp->textures[cd][TEXTURE_HEIGHT* texY + texX];
+				unsigned int color = game->map->textures[cd][TEXTURE_HEIGHT* texY + texX];
 				//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
 				if(side == 1) color = (color >> 1) & 8355711;
-
 
 				put_pixel(game->mlx->mlx_addr, game->mlx->line_length, game->mlx->bytes_per_pixel, x, y, color);
 			}
@@ -314,25 +310,20 @@ void	redraw(t_game *game)
 			}
 		}
 	}
-
 	mlx_put_image_to_window(game->mlx, game->mlx->window, game->mlx->image, 0, 0);
 
 	//timing for input and FPS counter
-	game->map_tmp->oldTime = game->map_tmp->time;
-	game->map_tmp->time = get_timestamp_ms();
-	double frameTime = (game->map_tmp->time - game->map_tmp->oldTime) /
-	 1000.0;
+	game->oldTime = game->time;
+	game->time = get_timestamp_ms();
+	double frameTime = (game->time - game->oldTime);
 	//frameTime is the time this frame has taken, in seconds
-	printf("= frameTime: %.2f ms\n", frameTime); //frameTime counter
-	printf("= fps: %f.2\n", 1.0 / (frameTime / 1000)); //FPS counter
+	printf("FPS: %i\n", (int)(1.0 / (frameTime / 1000.0))); //FPS counter
 
 }
 
 int	key_handler(int keycode, void *param)
 {
 	t_game *game;
-
-	(void)keycode;
 	game = (t_game *)param;
 
 	if (keycode == key_esc)
@@ -341,117 +332,94 @@ int	key_handler(int keycode, void *param)
 	//move forward if no wall in front of you
 	if(keycode == key_arrow_up)
 	{
+
 		if(worldMap
-			[(int)(game->map_tmp->player_pos_x + game->map_tmp->direction_x *
-			game->map_tmp->moveSpeed)]
-			[(int)(game->map_tmp->player_pos_y)] == false)
-			game->map_tmp->player_pos_x += game->map_tmp->direction_x * game->map_tmp->moveSpeed;
-		if(worldMap[(int)(game->map_tmp->player_pos_x)][(int)(game->map_tmp
-			->player_pos_y +
-				game->map_tmp->direction_y * game->map_tmp->moveSpeed)] == false)
-			game->map_tmp->player_pos_y += game->map_tmp->direction_y * game->map_tmp->moveSpeed;
+			[(int)(game->player_pos_x + game->player_direction_x * game->moveSpeed)]
+			[(int)(game->player_pos_y)] == false)
+			game->player_pos_x += game->player_direction_x * game->moveSpeed;
+		if(worldMap[(int)(game->player_pos_x)][(int)(game->player_pos_y +
+				game->player_direction_y * game->moveSpeed)] == false)
+			game->player_pos_y += game->player_direction_y * game->moveSpeed;
 	}
 	//move backwards if no wall behind you
 	if(keycode == key_arrow_down)
 	{
-		if(worldMap[(int)(game->map_tmp->player_pos_x - game->map_tmp->direction_x
-		* game->map_tmp->moveSpeed)][(int)
-		(game->map_tmp->player_pos_y)] == false) game->map_tmp->player_pos_x
-		-= game->map_tmp->direction_x
-				* game->map_tmp->moveSpeed;
-		if(worldMap[(int)(game->map_tmp->player_pos_x)][(int)(game->map_tmp
-			->player_pos_y - game->map_tmp->direction_y * game->map_tmp->moveSpeed)] == false)
-			game->map_tmp->player_pos_y
-			-= game->map_tmp->direction_y * game->map_tmp->moveSpeed;
+		if(worldMap[(int)(game->player_pos_x - game->player_direction_x
+		* game->moveSpeed)][(int)
+		(game->player_pos_y)] == false) game->player_pos_x
+		-= game->player_direction_x
+				* game->moveSpeed;
+		if(worldMap[(int)(game->player_pos_x)][(int)(game->player_pos_y - game->player_direction_y * game->moveSpeed)] == false)
+			game->player_pos_y
+			-= game->player_direction_y * game->moveSpeed;
 	}
 	//rotate to the right
 	if(keycode == key_arrow_right)
 	{
 		//both camera direction and camera plane must be rotated
-		double oldDirX = game->map_tmp->direction_x;
-		game->map_tmp->direction_x = game->map_tmp->direction_x * cos(-
-				game->map_tmp->rotSpeed) - game->map_tmp->direction_y * sin(-game->map_tmp->rotSpeed);
-		game->map_tmp->direction_y = oldDirX * sin(-game->map_tmp->rotSpeed) + game->map_tmp->direction_y * cos
-				(-game->map_tmp->rotSpeed);
-		double oldPlaneX = game->map_tmp->plane_x;
-		game->map_tmp->plane_x = game->map_tmp->plane_x * cos(-game->map_tmp->rotSpeed) - game->map_tmp->plane_y * sin(-game->map_tmp->rotSpeed);
-		game->map_tmp->plane_y = oldPlaneX * sin(-game->map_tmp->rotSpeed) +
-				game->map_tmp->plane_y * cos(-game->map_tmp->rotSpeed);
+		double oldDirX = game->player_direction_x;
+		game->player_direction_x = game->player_direction_x * cos(-
+				game->rotSpeed) - game->player_direction_y * sin(-game->rotSpeed);
+		game->player_direction_y = oldDirX * sin(-game->rotSpeed) + game->player_direction_y * cos
+				(-game->rotSpeed);
+		double oldPlaneX = game->plane_x;
+		game->plane_x = game->plane_x * cos(-game->rotSpeed) - game->plane_y * sin(-game->rotSpeed);
+		game->plane_y = oldPlaneX * sin(-game->rotSpeed) +
+				game->plane_y * cos(-game->rotSpeed);
 	}
 	//rotate to the left
 	if(keycode == key_arrow_left)
 	{
 		//both camera direction and camera plane must be rotated
-		double oldDirX = game->map_tmp->direction_x;
-		game->map_tmp->direction_x = game->map_tmp->direction_x * cos(game->map_tmp->rotSpeed) - game->map_tmp->direction_y * sin(game->map_tmp->rotSpeed);
-		game->map_tmp->direction_y = oldDirX * sin(game->map_tmp->rotSpeed) + game->map_tmp->direction_y * cos(game->map_tmp->rotSpeed);
-		double oldPlaneX = game->map_tmp->plane_x;
-		game->map_tmp->plane_x = game->map_tmp->plane_x * cos(game->map_tmp->rotSpeed) - game->map_tmp->plane_y * sin(game->map_tmp->rotSpeed);
-		game->map_tmp->plane_y = oldPlaneX * sin(game->map_tmp->rotSpeed) + game->map_tmp->plane_y * cos(game->map_tmp->rotSpeed);
+		double oldDirX = game->player_direction_x;
+		game->player_direction_x = game->player_direction_x * cos(game->rotSpeed) - game->player_direction_y * sin(game->rotSpeed);
+		game->player_direction_y = oldDirX * sin(game->rotSpeed) + game->player_direction_y * cos(game->rotSpeed);
+		double oldPlaneX = game->plane_x;
+		game->plane_x = game->plane_x * cos(game->rotSpeed) - game->plane_y * sin(game->rotSpeed);
+		game->plane_y = oldPlaneX * sin(game->rotSpeed) + game->plane_y * cos(game->rotSpeed);
 	}
-
-
 
 	redraw(game);
 
-
-
 	return (0);
+}
+
+
+t_game *game_init(t_mlx *mlx, t_map *map)
+{
+	t_game *game;
+
+	game = malloc(sizeof(t_game));
+	if (game == NULL)
+		error_exit(ERROR_MALLOC);
+	game->mlx = mlx;
+	game->map = map;
+	game->player_pos_x = map->player_start_pos_x;
+	game->player_pos_y = map->player_start_pos_y;
+	game->player_direction_x = map->player_start_direction_x;
+	game->player_direction_y = map->player_start_direction_y;
+	game->plane_y = 0.0;
+	game->plane_x = 0.0;
+	if (game->player_direction_y == 0)
+		game->plane_y += 0.66 * game->player_direction_x * -1;
+	if (game->player_direction_x == 0)
+		game->plane_x += 0.66 * game->player_direction_y;
+
+	game->moveSpeed = MOVE_SPEED;
+	game->rotSpeed = ROTATION_SPEED;
+
+	return game;
 }
 
 int main()
 {
 	t_mlx *mlx = mlx_adapter_init(screenWidth, screenHeight);
+	t_map *map = map_parser("map_main.cub");
+	t_game *game = game_init(mlx, map);
 
-	t_map_tmp map_tmp;
+	redraw(game);
 
-	map_tmp.player_pos_x = 22;
-	map_tmp.player_pos_y = 15;
-
-	map_tmp.direction_x = 0.0;
-	map_tmp.direction_y = 1.0;
-
-	map_tmp.moveSpeed = 0.8;
-	map_tmp.rotSpeed = 0.2;
-
-	map_tmp.plane_y = 0.0;
-	map_tmp.plane_x = 0.0;
-	if (map_tmp.direction_y == 0)
-		map_tmp.plane_y += 0.66 * map_tmp.direction_x * -1;
-	if (map_tmp.direction_x == 0)
-		map_tmp.plane_x += 0.66 * map_tmp.direction_y;
-
-
-
-	map_tmp.player_pos_x += 0.00000001;
-	map_tmp.player_pos_y += 0.00000001;
-
-
-
-
-	for(int x = 0; x < TEXTURE_WIDTH; x++)
-		for(int y = 0; y < TEXTURE_HEIGHT; y++)
-		{
-			int xorcolor = (x * 256 / TEXTURE_WIDTH) ^ (y * 256 / TEXTURE_HEIGHT);
-			int xycolor = y * 128 / TEXTURE_HEIGHT + x * 128 / TEXTURE_WIDTH;
-			map_tmp.textures[0][TEXTURE_WIDTH * y + x] = 65536 * 254 * (x != y && x
-					!= TEXTURE_WIDTH - y); //flat red texture with black cross
-			map_tmp.textures[1][TEXTURE_WIDTH * y + x] = xycolor + 256 *
-					xycolor+ 65536 * xycolor; //sloped greyscale
-			map_tmp.textures[2][TEXTURE_WIDTH * y + x] = 256 * xycolor +
-					65536 *xycolor; //sloped yellow gradient
-			map_tmp.textures[3][TEXTURE_WIDTH * y + x] = xorcolor + 256 *
-					xorcolor + 65536 * xorcolor; //xor greyscale
-		}
-
-
-	t_game game;
-	game.mlx = mlx;
-	game.map_tmp = &map_tmp;
-
-	redraw(&game);
-
-	mlx_key_hook(mlx->window, key_handler, &game);
+	mlx_key_hook(mlx->window, key_handler, game);
 	mlx_loop(mlx);
 
 	return 0;
