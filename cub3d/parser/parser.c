@@ -123,21 +123,6 @@ void	parse_settings(t_map *map, char *str)
 		;
 }
 
-
-void	texture_filler_tmp(t_map	*map)
-{
-	for(int x = 0; x < TEXTURE_WIDTH; x++)
-		for(int y = 0; y < TEXTURE_HEIGHT; y++)
-		{
-			int xorcolor = (x * 256 / TEXTURE_WIDTH) ^ (y * 256 / TEXTURE_HEIGHT);
-			int xycolor = y * 128 / TEXTURE_HEIGHT + x * 128 / TEXTURE_WIDTH;
-			map->textures[0][TEXTURE_WIDTH * y + x] = 65536 * 254 * (x != y && x != TEXTURE_WIDTH - y); //flat red texture with black cross
-			map->textures[1][TEXTURE_WIDTH * y + x] = xycolor + 256 *xycolor+ 65536 * xycolor; //sloped greyscale
-			map->textures[2][TEXTURE_WIDTH * y + x] = 256 * xycolor +65536 *xycolor; //sloped yellow gradient
-			map->textures[3][TEXTURE_WIDTH * y + x] = xorcolor + 256 *xorcolor + 65536 * xorcolor; //xor greyscale
-		}
-}
-
 t_map	*map_parser(char *file_name)
 {
 	t_list	*head;
@@ -152,7 +137,6 @@ t_map	*map_parser(char *file_name)
 	map_start = init_settings(head, map);
 	map_init(map, map_start);
 
-	texture_filler_tmp(map);
 
 	print_map(map);
 	return (map);

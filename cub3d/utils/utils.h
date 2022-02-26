@@ -18,6 +18,9 @@
 #define ERROR_MAP_SIZE	"Map size"
 #define ERROR_ARGC		"Arguments count"
 #define ERROR_SETTINGS	"Settings parse error"
+#define ERROR_OPEN_FILE	"Open XMP file"
+#define ERROR_SIZE_FILE	"File need be 64x64 px"
+#define ERROR_PIXEL_FILE	"Pixel must: bits per pixel 32; size line 256; endian 0"
 #define ERROR_UNDEFINED	"Undefined settings error"
 #define ERROR_MLX		"MLX creating"
 
@@ -71,8 +74,6 @@ typedef struct s_map
 	double player_start_direction_x;
 	double player_start_direction_y;
 
-	unsigned int textures[4][TEXTURE_SIZE];
-
 	t_map_cell **map;
 }	t_map;
 
@@ -82,6 +83,7 @@ typedef struct s_game
 {
 	t_map		*map;
 	t_mlx		*mlx;
+	char		*textures[4];
 
 	double player_pos_x;
 	double player_pos_y;

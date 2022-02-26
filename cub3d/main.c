@@ -4,6 +4,7 @@
 #include "mlx_adapter/mlx_adapter.h"
 
 #include "parser/parser.h"
+#include "loader/game_loader.h"
 
 #include <math.h>
 #include <sys/time.h> // DEL
@@ -97,7 +98,7 @@ void	put_pixel(char *mlx_addr, int line_length, int bytes_per_pixel, int x,
 
 void	redraw(t_game *game)
 {
-	double oldTime = get_timestamp_ms();
+	//double oldTime = get_timestamp_ms();
 
 	int w = screenWidth;
 	int h = screenHeight;
@@ -270,9 +271,15 @@ void	redraw(t_game *game)
 				// Cast the texture coordinate to integer, and mask with (texHeight - 1) in case of overflow
 				int texY = (int)texPos & (TEXTURE_HEIGHT - 1);
 				texPos += step;
-				unsigned int color = game->map->textures[cd][TEXTURE_HEIGHT* texY + texX];
+				//unsigned int color = game->map->textures[cd][TEXTURE_HEIGHT*
+				//											  texY + texX];
 				//make color darker for y-sides: R, G and B byte each divided through two with a "shift" and an "and"
+
+				int color = (*(int*)(game->textures[cd]
+						 + (4 * TEXTURE_WIDTH * (int)texY)
+						 + (4 * (int)texX)));
 				if(side == 1) color = (color >> 1) & 8355711;
+
 
 				put_pixel(game->mlx->mlx_addr, game->mlx->line_length, game->mlx->bytes_per_pixel, x, y, color);
 			}
@@ -285,9 +292,9 @@ void	redraw(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->mlx->window, game->mlx->image, 0, 0);
 
 	//timing for input and FPS counter
-	double frameTime = (get_timestamp_ms() - oldTime);
+	//double frameTime = (get_timestamp_ms() - oldTime);
 	//frameTime is the time this frame has taken, in seconds
-	printf("FPS: %i\n", (int)(1.0 / (frameTime / 1000.0))); //FPS counter
+	//printf("FPS: %i\n", (int)(1.0 / (frameTime / 1000.0))); //FPS counter
 
 }
 
@@ -355,37 +362,11 @@ int	key_handler(int keycode, void *param)
 }
 
 
-t_game *game_init(t_mlx *mlx, t_map *map)
-{
-	t_game *game;
-
-	game = malloc(sizeof(t_game));
-	if (game == NULL)
-		error_exit(ERROR_MALLOC);
-	game->mlx = mlx;
-	game->map = map;
-	game->player_pos_x = map->player_start_pos_x;
-	game->player_pos_y = map->player_start_pos_y;
-	game->player_direction_x = map->player_start_direction_x;
-	game->player_direction_y = map->player_start_direction_y;
-	game->plane_y = 0.0;
-	game->plane_x = 0.0;
-	if (game->player_direction_y == 0)
-		game->plane_y += 0.66 * game->player_direction_x * -1;
-	if (game->player_direction_x == 0)
-		game->plane_x += 0.66 * game->player_direction_y;
-
-	game->moveSpeed = MOVE_SPEED;
-	game->rotSpeed = ROTATION_SPEED;
-
-	return game;
-}
-
 int main()
 {
 	t_mlx *mlx = mlx_adapter_init(screenWidth, screenHeight);
 	t_map *map = map_parser("map_main.cub");
-	t_game *game = game_init(mlx, map);
+	t_game *game = game_loader(mlx, map);
 
 	redraw(game);
 

@@ -15,6 +15,7 @@
 
 # include <sys/fcntl.h>
 # include "parser.h"
+#include "../minilibx_opengl/mlx.h"
 
 t_bool	undefined_settings(void);
 void	no_settings_setter(t_map *map, char *value);
@@ -23,6 +24,8 @@ void	we_settings_setter(t_map *map, char *value);
 void	ea_settings_setter(t_map *map, char *value);
 void	f_settings_setter(t_map *map, char *value);
 void	c_settings_setter(t_map *map, char *value);
+void set_texture(t_map *map, char *path, t_cardinal_directions cd);
+
 
 t_list	*read_all_file(char *file_name);
 
