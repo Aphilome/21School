@@ -1,5 +1,34 @@
 #include "parser_private.h"
 
+void	set_player_position(t_map *map, int row, int col, char cd)
+{
+	map->map[row][col] = cell_empty;
+	if (!(map->player_start_pos_x == -1 && map->player_start_pos_y == -1))
+		error_exit(ERROR_TWO_PLAYER);
+	map->player_start_pos_x = row + 1 / 1e10 + 0.5;
+	map->player_start_pos_y = col + 1 / 1e10 + 0.5;
+	if (cd == 'N')
+	{
+		map->player_start_direction_x = -1;
+		map->player_start_direction_y = 0;
+	}
+	else if (cd == 'S')
+	{
+		map->player_start_direction_x = 1;
+		map->player_start_direction_y = 0;
+	}
+	else if (cd == 'W')
+	{
+		map->player_start_direction_x = 0;
+		map->player_start_direction_y = -1;
+	}
+	else if (cd == 'E')
+	{
+		map->player_start_direction_x = 0;
+		map->player_start_direction_y = 1;
+	}
+}
+
 void	row_filler(t_map *map, int row, char *line)
 {
 	int i;
@@ -13,6 +42,8 @@ void	row_filler(t_map *map, int row, char *line)
 			map->map[row][i] = cell_empty;
 		else if (line[i] == '1')
 			map->map[row][i] = cell_wall;
+		else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+			set_player_position(map, row, i, line[i]);
 		i++;
 	}
 	while (i < map->map_width)

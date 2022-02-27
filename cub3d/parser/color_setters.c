@@ -29,7 +29,6 @@ void	color_parser(char *value, int color[3])
 	part = 0;
 	while (part < 3)
 	{
-		print_strl(value);
 		color[part] = ft_simple_atoi(value);
 		if (color[part] > 255)
 			error_exit(ERROR_SETTINGS);

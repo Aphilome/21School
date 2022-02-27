@@ -14,9 +14,7 @@
 
 void	no_settings_setter(t_map *map, char *value)
 {
-	//map->textures[cd_north] =
 	map->north_texture_path = value;
-	//set_texture(map, value, cd_north);
 }
 
 void	so_settings_setter(t_map *map, char *value)

@@ -23,6 +23,7 @@
 #define ERROR_PIXEL_FILE	"Pixel must: bits per pixel 32; size line 256; endian 0"
 #define ERROR_UNDEFINED	"Undefined settings error"
 #define ERROR_MLX		"MLX creating"
+#define ERROR_TWO_PLAYER	"Detected two player"
 
 typedef enum e_bool
 {
@@ -84,6 +85,9 @@ typedef struct s_game
 	t_map		*map;
 	t_mlx		*mlx;
 	char		*textures[4];
+
+	int floor_color;
+	int ceiling_color;
 
 	double player_pos_x;
 	double player_pos_y;

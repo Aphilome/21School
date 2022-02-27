@@ -6,7 +6,7 @@
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 22:40:33 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/28 22:40:34 by tbirdper         ###   ########.fr       */
+/*   Updated: 2022/02/27 14:43:59 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*ft_strjoin_sn(char const *res, char const *buf)
 		return (ft_strdup_sn(res));
 	base = malloc(ft_strlen_sn(res) + ft_strlen_sn(buf) + 1);
 	if (base == NULL)
-		error_exit(ERROR_MALLOC);;
+		error_exit(ERROR_MALLOC);
 	i_src = 0;
 	while (!(res[i_src] == 0 || res[i_src] == '\n'))
 		base[i_dst++] = res[i_src++];

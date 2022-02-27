@@ -48,7 +48,7 @@ void	print_color(int color[3])
 
 void	print_map(t_map *map)
 {
-	print_strl("#######################");
+	print_strl("**************************************");
 	if (map == NULL)
 		print_strl("map NULL");
 	if (map->north_texture_path == NULL)
@@ -72,8 +72,36 @@ void	print_map(t_map *map)
 	print_nbr(map->map_width);
 	print_strl(" (h x w)");
 
+	for(int i = 0; i < map->map_height; ++i)
+	{
+		for(int j = 0; j < map->map_width; ++j)
+		{
+			if (i == (int)map->player_start_pos_x && j ==
+															 (int)map->player_start_pos_y)
+				print_str("X");
+			else
+			{
+				switch (map->map[i][j])
+				{
+					case cell_space:
+						print_str(" ");
+						break;
+					case cell_empty:
+						print_str(".");
+						break;
+					case cell_wall:
+						print_str("#");
+						break;
+					default:
+						print_str("?");
+						break;
+				}
+			}
+		}
+		print_strl("");
+	}
 
-	print_strl("#######################");
+	print_strl("**************************************");
 }
 
 t_map	*get_empty_map(void)
@@ -96,18 +124,8 @@ t_map	*get_empty_map(void)
 	map->floor_color[2] = -1;
 	map->map_width = 0;
 	map->map_height = 0;
-
-
-	map->player_start_pos_x = 22; // TODO: HARDCODE
-	map->player_start_pos_y = 15;
-
-	map->player_start_pos_x += 1 / 1e10;
-	map->player_start_pos_y += 1 / 1e10;
-
-	map->player_start_direction_x = -1; // TODO: HARDCODE
-	map->player_start_direction_y = 0;
-
-
+	map->player_start_pos_x = -1;
+	map->player_start_pos_y = -1;
 	return (map);
 }
 

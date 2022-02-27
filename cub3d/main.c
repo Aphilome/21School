@@ -7,54 +7,9 @@
 #include "loader/game_loader.h"
 
 #include <math.h>
-#include <sys/time.h> // DEL
 
-#define mapWidth 24
-#define mapHeight 24
 #define screenWidth 640
 #define screenHeight 480
-
-int worldMap[mapWidth][mapHeight]=
-		{
-				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-				{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-		};
-
-//unsigned int buffer[screenHeight][screenWidth];
-
-double	get_timestamp_ms(void)
-{
-	struct timeval	now;
-	int				res;
-
-	res = gettimeofday(&now, NULL);
-	if (res != 0)
-		return (0);
-	return (double)(now.tv_sec * 1000 + now.tv_usec / 1000);
-}
-
 
 void	put_pixel(char *mlx_addr, int line_length, int bytes_per_pixel, int x,
 				  int y, int color)
@@ -66,40 +21,8 @@ void	put_pixel(char *mlx_addr, int line_length, int bytes_per_pixel, int x,
 	*dst = color;
 }
 
-
-//void verLine(int x, int drawStart, int drawEnd, int side, char
-//*mlx_addr, int line_length, int bytes_per_pixel)
-//{
-//	for (int y = 0; y < screenHeight; y++)
-//	{
-//		if (y >= drawStart && y < drawEnd)
-//		{
-//			int c;
-//			if (side == 0)
-//				c = 0x0000ff00; // green
-//			else if (side == 1)
-//				c = 0x00ff0000; // red
-//			else if (side == 2)
-//				c = 0x000000ff;	// blue
-//			else if (side == 3)
-//				c = 0x00ffff00;	// yellow
-//			else
-//				c = 0x00ffffff; // white
-//
-//			put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, c);
-//		}
-//		else
-//		{
-//			put_pixel(mlx_addr, line_length, bytes_per_pixel, x, y, 0);
-//		}
-//	}
-//}
-
-
 void	redraw(t_game *game)
 {
-	//double oldTime = get_timestamp_ms();
-
 	int w = screenWidth;
 	int h = screenHeight;
 	for(int x = 0; x < w; x++)
@@ -170,7 +93,7 @@ void	redraw(t_game *game)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if(worldMap[mapX][mapY] > 0) hit = 1;
+			if(game->map->map[mapX][mapY] == cell_wall) hit = 1;
 		}
 
 
@@ -191,7 +114,7 @@ void	redraw(t_game *game)
 				side = 1;
 			}
 			//Check if ray has hit a wall
-			if(worldMap[mapX][mapY] > 0) hit = 1;
+			if(game->map->map[mapX][mapY] == cell_wall) hit = 1;
 		}
 
 		if(side == 0) perpWallDist = (sideDistX - deltaDistX);
@@ -283,19 +206,17 @@ void	redraw(t_game *game)
 
 				put_pixel(game->mlx->mlx_addr, game->mlx->line_length, game->mlx->bytes_per_pixel, x, y, color);
 			}
-			else
+			else if (y < drawStart)
 			{
-				put_pixel(game->mlx->mlx_addr, game->mlx->line_length, game->mlx->bytes_per_pixel, x, y, 0);
+				put_pixel(game->mlx->mlx_addr, game->mlx->line_length,
+						  game->mlx->bytes_per_pixel, x, y, game->ceiling_color);
 			}
+			else
+				put_pixel(game->mlx->mlx_addr, game->mlx->line_length,
+						  game->mlx->bytes_per_pixel, x, y, game->floor_color);
 		}
 	}
 	mlx_put_image_to_window(game->mlx, game->mlx->window, game->mlx->image, 0, 0);
-
-	//timing for input and FPS counter
-	//double frameTime = (get_timestamp_ms() - oldTime);
-	//frameTime is the time this frame has taken, in seconds
-	//printf("FPS: %i\n", (int)(1.0 / (frameTime / 1000.0))); //FPS counter
-
 }
 
 int	key_handler(int keycode, void *param)
@@ -310,23 +231,24 @@ int	key_handler(int keycode, void *param)
 	if(keycode == key_arrow_up)
 	{
 
-		if(worldMap
+		if(game->map->map
 			[(int)(game->player_pos_x + game->player_direction_x * game->moveSpeed)]
-			[(int)(game->player_pos_y)] == false)
+			[(int)(game->player_pos_y)] == cell_empty)
 			game->player_pos_x += game->player_direction_x * game->moveSpeed;
-		if(worldMap[(int)(game->player_pos_x)][(int)(game->player_pos_y +
-				game->player_direction_y * game->moveSpeed)] == false)
+		if(game->map->map[(int)(game->player_pos_x)][(int)(game->player_pos_y +
+				game->player_direction_y * game->moveSpeed)] == cell_empty)
 			game->player_pos_y += game->player_direction_y * game->moveSpeed;
 	}
 	//move backwards if no wall behind you
 	if(keycode == key_arrow_down)
 	{
-		if(worldMap[(int)(game->player_pos_x - game->player_direction_x
+		if(game->map->map[(int)(game->player_pos_x - game->player_direction_x
 		* game->moveSpeed)][(int)
-		(game->player_pos_y)] == false) game->player_pos_x
+		(game->player_pos_y)] == cell_empty) game->player_pos_x
 		-= game->player_direction_x
 				* game->moveSpeed;
-		if(worldMap[(int)(game->player_pos_x)][(int)(game->player_pos_y - game->player_direction_y * game->moveSpeed)] == false)
+		if(game->map->map[(int)(game->player_pos_x)][(int)(game->player_pos_y
+		- game->player_direction_y * game->moveSpeed)] == cell_empty)
 			game->player_pos_y
 			-= game->player_direction_y * game->moveSpeed;
 	}
