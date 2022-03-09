@@ -62,6 +62,6 @@ fclean:		clean
 re:			fclean all
 
 norm:		
-			norminette get_next_line list loader mlx_adapter textures utils parser main.c
+			norminette get_next_line list loader mlx_adapter textures utils parser raycasting_logic main.c
 
 .PHONY:	all clean fclean re
