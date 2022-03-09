@@ -118,8 +118,12 @@ typedef struct s_game
 
 typedef enum e_key_code
 {
+	key_a = 0,
+	key_s = 1,
+	key_d = 2,
 	key_scroll_down = 4,
 	key_scroll_up = 5,
+	key_w = 13,
 	key_esc = 53,
 	key_plus = 69,
 	key_minus = 78,
