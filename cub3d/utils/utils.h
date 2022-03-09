@@ -23,6 +23,8 @@
 # define TEXTURE_WIDTH		64
 # define TEXTURE_HEIGHT		64
 # define VALIDATOR_OFFSET	100000
+# define SCREEN_WIDTH 640
+# define SCREEN_HEIGHT 480
 
 # define ERROR_SYSTEM		"System"
 # define ERROR_MALLOC		"Memory allocation"
@@ -137,5 +139,7 @@ char	*ft_strdup(char *src);
 int		ft_simple_atoi(char *str);
 void	print_nbr(int n);
 void	print_nbrl(int n);
+int		ft_max(int a, int b);
+int		ft_min(int a, int b);
 
 #endif
