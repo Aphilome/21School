@@ -39,5 +39,6 @@ t_bool	settings_setter(char *str, t_map *map, char *key,
 			void (*setter)(t_map *, char *));
 
 void	map_init(t_map *map, t_list *head);
+void 	map_validator(t_map *map);
 
 #endif

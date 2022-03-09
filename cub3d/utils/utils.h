@@ -11,6 +11,7 @@
 #define TEXTURE_WIDTH	64
 #define TEXTURE_HEIGHT	64
 #define TEXTURE_SIZE		TEXTURE_WIDTH * TEXTURE_HEIGHT
+#define VALIDATOR_OFFSET	100000
 
 #define ERROR_SYSTEM		"System"
 #define ERROR_MALLOC		"Memory allocation"
@@ -24,6 +25,7 @@
 #define ERROR_UNDEFINED	"Undefined settings error"
 #define ERROR_MLX		"MLX creating"
 #define ERROR_TWO_PLAYER	"Detected two player"
+#define ERROR_NO_SET_MAP	"Some parameters not set"
 
 typedef enum e_bool
 {

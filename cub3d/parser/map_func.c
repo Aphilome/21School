@@ -74,6 +74,6 @@ void map_creator(t_map *map, t_list *head)
 void	map_init(t_map *map, t_list *head)
 {
 	map_creator(map, head);
-	// validator
+	map_validator(map);
 
 }

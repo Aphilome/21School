@@ -2,7 +2,7 @@ NAME = cub3d
 
 SRCS =	main.c \
 		mlx_adapter/mlx_adapter.c \
-		parser/parser.c parser/cardinal_direction_setters.c parser/file_reader.c parser/line_checkers.c parser/settings_func.c parser/color_setters.c parser/map_func.c \
+		parser/parser.c parser/cardinal_direction_setters.c parser/file_reader.c parser/line_checkers.c parser/settings_func.c parser/color_setters.c parser/map_func.c parser/validator.c \
 		loader/game_loader.c loader/textures_loader.c loader/color_loader.c\
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		list/list.c utils/utils.c
