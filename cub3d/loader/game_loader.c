@@ -25,8 +25,8 @@ t_game	*game_loader(t_mlx *mlx, t_map *map)
 	game->player_pos_y = map->player_start_pos_y;
 	game->player_direction_x = map->player_start_direction_x;
 	game->player_direction_y = map->player_start_direction_y;
-	game->moveSpeed = MOVE_SPEED;
-	game->rotSpeed = ROTATION_SPEED;
+	game->move_speed = MOVE_SPEED;
+	game->rot_speed = ROTATION_SPEED;
 	game->plane_y = 0.0;
 	game->plane_x = 0.0;
 	if (game->player_direction_y == 0)

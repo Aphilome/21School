@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_func.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 13:33:06 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/03/09 13:33:31 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser_private.h"
 
 void	set_player_position(t_map *map, int row, int col, char cd)
@@ -31,7 +43,7 @@ void	set_player_position(t_map *map, int row, int col, char cd)
 
 void	row_filler(t_map *map, int row, char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < map->map_width && line[i] != 0)
@@ -42,7 +54,8 @@ void	row_filler(t_map *map, int row, char *line)
 			map->map[row][i] = cell_empty;
 		else if (line[i] == '1')
 			map->map[row][i] = cell_wall;
-		else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+		else if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
+			|| line[i] == 'W')
 			set_player_position(map, row, i, line[i]);
 		i++;
 	}
@@ -50,7 +63,7 @@ void	row_filler(t_map *map, int row, char *line)
 		map->map[row][i++] = cell_space;
 }
 
-void map_creator(t_map *map, t_list *head)
+void	map_creator(t_map *map, t_list *head)
 {
 	int	i;
 
@@ -75,5 +88,4 @@ void	map_init(t_map *map, t_list *head)
 {
 	map_creator(map, head);
 	map_validator(map);
-
 }

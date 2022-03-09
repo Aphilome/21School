@@ -6,7 +6,7 @@
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/29 22:46:29 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/29 22:46:56 by tbirdper         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:32:52 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	color_parser(char *value, int color[3])
 		value = &(value[len + 1]);
 		part++;
 	}
-		//pause();
 }
 
 void	validator_color(char *value)

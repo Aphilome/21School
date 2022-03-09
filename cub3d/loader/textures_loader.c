@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures_loader.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 13:31:29 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/03/09 13:32:13 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "game_loader_private.h"
 
 char	*get_texture_ptr(void *tex_img)
@@ -29,8 +41,12 @@ char	*load_texture(t_mlx *mlx, char *filepath)
 
 void	textures_load(t_game *game)
 {
-	game->textures[cd_north] = load_texture(game->mlx, game->map->north_texture_path);
-	game->textures[cd_east] = load_texture(game->mlx, game->map->east_texture_path);
-	game->textures[cd_south] = load_texture(game->mlx, game->map->south_texture_path);
-	game->textures[cd_west] = load_texture(game->mlx, game->map->west_texture_path);
+	game->textures[cd_north]
+		= load_texture(game->mlx, game->map->north_texture_path);
+	game->textures[cd_east]
+		= load_texture(game->mlx, game->map->east_texture_path);
+	game->textures[cd_south]
+		= load_texture(game->mlx, game->map->south_texture_path);
+	game->textures[cd_west]
+		= load_texture(game->mlx, game->map->west_texture_path);
 }

@@ -32,6 +32,8 @@ t_list	*read_all_file(char *file_name)
 	line = NULL;
 	head = NULL;
 	fd = open(file_name, O_RDONLY);
+	if (fd == -1)
+		error_exit(ERROR_NO_FILE);
 	code = get_next_line(fd, &line);
 	while (code == code_readline || (code == code_eof && line != NULL))
 	{

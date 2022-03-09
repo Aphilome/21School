@@ -6,7 +6,7 @@
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 22:39:11 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/28 22:40:18 by tbirdper         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:34:17 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_bool	settings_setter(char *str, t_map *map, char *key,
 
 void	map_line_handler(t_list **head, t_map *map)
 {
-	int width;
+	int	width;
 
 	map->map_height++;
 	width = ft_strlen((*head)->content);

@@ -1,31 +1,43 @@
-#ifndef CUB3D_UTILS_H
-#define CUB3D_UTILS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 13:40:02 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/03/09 13:45:31 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "../list/list.h"
+#ifndef UTILS_H
+# define UTILS_H
 
-#define PROJECT_NAME		"Raycaster"
-#define MOVE_SPEED		0.8
-#define ROTATION_SPEED	0.2
-#define TEXTURE_WIDTH	64
-#define TEXTURE_HEIGHT	64
-#define TEXTURE_SIZE		TEXTURE_WIDTH * TEXTURE_HEIGHT
-#define VALIDATOR_OFFSET	100000
+# include <unistd.h>
+# include <stdlib.h>
+# include "../list/list.h"
 
-#define ERROR_SYSTEM		"System"
-#define ERROR_MALLOC		"Memory allocation"
-#define ERROR_MAP		"Map parsing"
-#define ERROR_MAP_SIZE	"Map size"
-#define ERROR_ARGC		"Arguments count"
-#define ERROR_SETTINGS	"Settings parse error"
-#define ERROR_OPEN_FILE	"Open XMP file"
-#define ERROR_SIZE_FILE	"File need be 64x64 px"
-#define ERROR_PIXEL_FILE	"Pixel must: bits per pixel 32; size line 256; endian 0"
-#define ERROR_UNDEFINED	"Undefined settings error"
-#define ERROR_MLX		"MLX creating"
-#define ERROR_TWO_PLAYER	"Detected two player"
-#define ERROR_NO_SET_MAP	"Some parameters not set"
+# define PROJECT_NAME		"Raycaster"
+# define MOVE_SPEED			0.8
+# define ROTATION_SPEED		0.2
+# define TEXTURE_WIDTH		64
+# define TEXTURE_HEIGHT		64
+# define VALIDATOR_OFFSET	100000
+
+# define ERROR_SYSTEM		"System"
+# define ERROR_MALLOC		"Memory allocation"
+# define ERROR_MAP			"Map parsing"
+# define ERROR_MAP_SIZE		"Map size"
+# define ERROR_ARGC			"Arguments count"
+# define ERROR_SETTINGS		"Settings parse error"
+# define ERROR_OPEN_FILE	"Open XMP file"
+# define ERROR_SIZE_FILE	"File need be 64x64 px"
+# define ERROR_PIXEL_FILE	"px must: bitsPerPixel 32; sizeLine 256; endian 0"
+# define ERROR_UNDEFINED	"Undefined settings error"
+# define ERROR_MLX			"MLX creating"
+# define ERROR_TWO_PLAYER	"Detected two player"
+# define ERROR_NO_SET_MAP	"Some parameters not set"
+# define ERROR_NO_FILE		"Not found file"
 
 typedef enum e_bool
 {
@@ -43,12 +55,12 @@ typedef enum e_cardinal_directions
 
 typedef struct s_mlx
 {
-	void *mlx;
-	void *window;
-	void *image;
-	int bytes_per_pixel;
-	int line_length;
-	char *mlx_addr;
+	void	*mlx;
+	void	*window;
+	void	*image;
+	int		bytes_per_pixel;
+	int		line_length;
+	char	*mlx_addr;
 }	t_mlx;
 
 typedef enum e_map_cell
@@ -56,52 +68,50 @@ typedef enum e_map_cell
 	cell_empty = 0,
 	cell_wall = 1,
 	cell_space = 100
-} t_map_cell;
+}	t_map_cell;
 
 typedef struct s_map
 {
-	char *north_texture_path;
-	char *south_texture_path;
-	char *west_texture_path;
-	char *east_texture_path;
+	char		*north_texture_path;
+	char		*south_texture_path;
+	char		*west_texture_path;
+	char		*east_texture_path;
 
-	int floor_color[3];
-	int ceiling_color[3];
+	int			floor_color[3];
+	int			ceiling_color[3];
 
-	int map_width;
-	int map_height;
+	int			map_width;
+	int			map_height;
 
-	double player_start_pos_x;
-	double player_start_pos_y;
+	double		player_start_pos_x;
+	double		player_start_pos_y;
 
-	double player_start_direction_x;
-	double player_start_direction_y;
+	double		player_start_direction_x;
+	double		player_start_direction_y;
 
-	t_map_cell **map;
+	t_map_cell	**map;
 }	t_map;
-
-
 
 typedef struct s_game
 {
-	t_map		*map;
-	t_mlx		*mlx;
-	char		*textures[4];
+	t_map	*map;
+	t_mlx	*mlx;
+	char	*textures[4];
 
-	int floor_color;
-	int ceiling_color;
+	int		floor_color;
+	int		ceiling_color;
 
-	double player_pos_x;
-	double player_pos_y;
+	double	player_pos_x;
+	double	player_pos_y;
 
-	double  player_direction_x;
-	double  player_direction_y;
+	double	player_direction_x;
+	double	player_direction_y;
 
-	double plane_x;
-	double plane_y;
+	double	plane_x;
+	double	plane_y;
 
-	double moveSpeed;
-	double rotSpeed;
+	double	move_speed;
+	double	rot_speed;
 }	t_game;
 
 typedef enum e_key_code

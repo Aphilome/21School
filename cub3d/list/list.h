@@ -6,7 +6,7 @@
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/28 22:40:47 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/28 22:41:01 by tbirdper         ###   ########.fr       */
+/*   Updated: 2022/03/09 13:30:43 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ int		ft_lstsize(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 
-void string_cleaner(void *str);
+void	string_cleaner(void *str);
 
 #endif

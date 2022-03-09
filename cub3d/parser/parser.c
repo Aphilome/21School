@@ -12,98 +12,6 @@
 
 #include "parser_private.h"
 
-void	print_file(t_list *head)
-{
-	print_strl("=======================");
-	while (head != NULL)
-	{
-		print_strl(head->content);
-		head = head->next;
-	}
-	print_strl("=======================");
-}
-
-void	print_c(int c)
-{
-	char	one = (c / 100) + '0';
-	char	two = ((c / 10) % 10) + '0';
-	char	three = (c % 10) + '0';
-
-	if (one != '0')
-		write(1, &one, 1);
-	if (!(two == '0' && one == '0'))
-		write(1, &two, 1);
-	write(1, &three, 1);
-}
-
-void	print_color(int color[3])
-{
-	print_c(color[0]);
-	print_str(",");
-	print_c(color[1]);
-	print_str(",");
-	print_c(color[2]);
-	print_strl("");
-}
-
-void	print_map(t_map *map)
-{
-	print_strl("**************************************");
-	if (map == NULL)
-		print_strl("map NULL");
-	if (map->north_texture_path == NULL)
-		print_strl("map north_texture_path NULL");
-	print_str("NO: ");
-	print_strl(map->north_texture_path);
-	print_str("SO: ");
-	print_strl(map->south_texture_path);
-	print_str("WE: ");
-	print_strl(map->west_texture_path);
-	print_str("EA: ");
-	print_strl(map->east_texture_path);
-	print_strl("");
-	print_str("C: ");
-	print_color(map->ceiling_color);
-	print_str("F: ");
-	print_color(map->floor_color);
-	print_strl("");
-	print_nbr(map->map_height);
-	print_str("x");
-	print_nbr(map->map_width);
-	print_strl(" (h x w)");
-
-	for(int i = 0; i < map->map_height; ++i)
-	{
-		for(int j = 0; j < map->map_width; ++j)
-		{
-			if (i == (int)map->player_start_pos_x && j ==
-															 (int)map->player_start_pos_y)
-				print_str("X");
-			else
-			{
-				switch (map->map[i][j])
-				{
-					case cell_space:
-						print_str(" ");
-						break;
-					case cell_empty:
-						print_str(".");
-						break;
-					case cell_wall:
-						print_str("#");
-						break;
-					default:
-						print_str("?");
-						break;
-				}
-			}
-		}
-		print_strl("");
-	}
-
-	print_strl("**************************************");
-}
-
 t_map	*get_empty_map(void)
 {
 	t_map	*map;
@@ -149,14 +57,10 @@ t_map	*map_parser(char *file_name)
 
 	map = get_empty_map();
 	head = read_all_file(file_name);
-	print_file(head);
 	if (ft_lstsize(head) < 9)
 		error_exit(ERROR_MAP);
 	map_start = init_settings(head, map);
 	map_init(map, map_start);
-
 	ft_lstclear(&head, string_cleaner);
-
-	print_map(map);
 	return (map);
 }

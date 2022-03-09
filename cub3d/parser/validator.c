@@ -1,28 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validator.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/03/09 13:34:26 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/03/09 13:34:52 by tbirdper         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "parser_private.h"
 
-void base_validator(t_map *map)
+void	base_validator(t_map *map)
 {
 	if (map->east_texture_path == NULL
-	|| map->north_texture_path == NULL
-	|| map->west_texture_path == NULL
-	|| map->south_texture_path == NULL)
+		|| map->north_texture_path == NULL
+		|| map->west_texture_path == NULL
+		|| map->south_texture_path == NULL)
 		error_exit(ERROR_NO_SET_MAP);
 	if (map->ceiling_color[0] == -1
-	|| map->ceiling_color[1] == -1
-	|| map->ceiling_color[2] == -1
-	|| map->floor_color[0] == -1
-	|| map->floor_color[1] == -1
-	|| map->floor_color[2] == -1)
+		|| map->ceiling_color[1] == -1
+		|| map->ceiling_color[2] == -1
+		|| map->floor_color[0] == -1
+		|| map->floor_color[1] == -1
+		|| map->floor_color[2] == -1)
 		error_exit(ERROR_NO_SET_MAP);
 	if (map->map_width == 0
-	|| map->map_height == 0
-	|| map->player_start_pos_x == -1
-	|| map->player_start_pos_y == -1
-	|| map->map == NULL )
+		|| map->map_height == 0
+		|| map->player_start_pos_x == -1
+		|| map->player_start_pos_y == -1
+		|| map->map == NULL )
 		error_exit(ERROR_NO_SET_MAP);
 }
 
-t_bool get_empty_cell_coord(t_map *map, int *out_i, int *out_j)
+t_bool	get_empty_cell_coord(t_map *map, int *out_i, int *out_j)
 {
 	*out_i = 0;
 	while (*out_i < map->map_height)
@@ -39,7 +51,7 @@ t_bool get_empty_cell_coord(t_map *map, int *out_i, int *out_j)
 	return (false);
 }
 
-void path_validator(t_map *map, int s_i, int s_j)
+void	path_validator(t_map *map, int s_i, int s_j)
 {
 	if (s_i < 0 || s_j < 0 || s_i >= map->map_height || s_j >= map->map_width
 		|| map->map[s_i][s_j] == cell_space)
@@ -54,10 +66,10 @@ void path_validator(t_map *map, int s_i, int s_j)
 	}
 }
 
-void path_normalizer(t_map *map)
+void	path_normalizer(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < map->map_height)
@@ -73,10 +85,10 @@ void path_normalizer(t_map *map)
 	}
 }
 
-void map_validator(t_map *map)
+void	map_validator(t_map *map)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	base_validator(map);
 	if (get_empty_cell_coord(map, &i, &j) == false)
