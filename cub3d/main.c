@@ -16,6 +16,12 @@
 #include "raycasting_logic/raycasting_logic.h"
 #include "key_handler/key_handler.h"
 
+int	close_app(void *p)
+{
+	(void)p;
+	exit(0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_mlx	*mlx;
@@ -29,6 +35,7 @@ int	main(int argc, char **argv)
 	game = game_loader(mlx, map);
 	redraw(game);
 	mlx_key_hook(mlx->window, key_handler, game);
+	mlx_hook(mlx->window, 17, 0, close_app, NULL);
 	mlx_loop(mlx);
 	return (0);
 }
