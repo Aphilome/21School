@@ -7,13 +7,14 @@ SRCS =	main.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		list/list.c list/string_cleaner.c \
 		raycasting_logic/raycasting_logic.c raycasting_logic/rc_funcs.c \
+		key_handler/key_handler.c \
 		utils/utils.c utils/strings.c utils/printers.c utils/numbers.c
 
 MLX	 = 	libmlx.a
 
 HDRS =	utils/utils.h parser/parser.h parser/parser_private.h get_next_line/get_next_line.h list/list.h \
 		mlx_adapter/mlx_adapter.h loader/game_loader.h loader/game_loader_private.h raycasting_logic/raycasting_logic.h \
-		raycasting_logic/raycasting_logic_private.h
+		raycasting_logic/raycasting_logic_private.h key_handler/key_handler.h
 
 OBJS = $(SRCS:.c=.o)
 
