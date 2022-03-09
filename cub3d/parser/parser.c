@@ -155,6 +155,7 @@ t_map	*map_parser(char *file_name)
 	map_start = init_settings(head, map);
 	map_init(map, map_start);
 
+	ft_lstclear(&head, string_cleaner);
 
 	print_map(map);
 	return (map);

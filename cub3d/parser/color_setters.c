@@ -36,6 +36,7 @@ void	color_parser(char *value, int color[3])
 		value = &(value[len + 1]);
 		part++;
 	}
+		//pause();
 }
 
 void	validator_color(char *value)

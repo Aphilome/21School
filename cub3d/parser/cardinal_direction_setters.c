@@ -14,22 +14,22 @@
 
 void	no_settings_setter(t_map *map, char *value)
 {
-	map->north_texture_path = value;
+	map->north_texture_path = ft_strdup(value);
 }
 
 void	so_settings_setter(t_map *map, char *value)
 {
-	map->south_texture_path = value;
+	map->south_texture_path = ft_strdup(value);
 }
 
 void	we_settings_setter(t_map *map, char *value)
 {
-	map->west_texture_path = value;
+	map->west_texture_path = ft_strdup(value);
 }
 
 void	ea_settings_setter(t_map *map, char *value)
 {
-	map->east_texture_path = value;
+	map->east_texture_path = ft_strdup(value);
 }
 
 t_bool	undefined_settings(void)

@@ -45,6 +45,7 @@ t_bool	settings_setter(char *str, t_map *map, char *key,
 	if (value != NULL)
 	{
 		setter(map, value);
+		free(value);
 		return (true);
 	}
 	return (false);
