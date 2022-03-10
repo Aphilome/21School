@@ -7,7 +7,17 @@ SRCS =	main.c \
 		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
 		list/list.c list/string_cleaner.c \
 		raycasting_logic/raycasting_logic.c raycasting_logic/rc_funcs.c \
-		key_handler/key_handler.c key_handler/moves.c key_handler/rotates.c \
+		key_handler/key_handler.c key_handler/moves.c key_handler/rotates.c key_handler/mause_handler.c \
+		utils/utils.c utils/strings.c utils/printers.c utils/numbers.c
+
+SRCSB = main_bonus.c \
+		mlx_adapter/mlx_adapter.c \
+		parser/parser.c parser/cardinal_direction_setters.c parser/file_reader.c parser/line_checkers.c parser/settings_func.c parser/color_setters.c parser/map_func.c parser/validator.c \
+		loader/game_loader.c loader/textures_loader.c loader/color_loader.c\
+		get_next_line/get_next_line.c get_next_line/get_next_line_utils.c \
+		list/list.c list/string_cleaner.c \
+		raycasting_logic/raycasting_logic.c raycasting_logic/rc_funcs.c \
+		key_handler/key_handler.c key_handler/moves.c key_handler/rotates.c key_handler/mause_handler.c \
 		utils/utils.c utils/strings.c utils/printers.c utils/numbers.c
 
 MLX	 = 	libmlx.a
@@ -17,6 +27,8 @@ HDRS =	utils/utils.h parser/parser.h parser/parser_private.h get_next_line/get_n
 		raycasting_logic/raycasting_logic_private.h key_handler/key_handler.h key_handler/key_handler_private.h
 
 OBJS = $(SRCS:.c=.o)
+
+OBJSB = $(SRCSB:.c=.o)
 
 FLAGS = -O3 -Wall -Wextra -Werror
 
@@ -38,9 +50,14 @@ MAGENTA	=	\033[0;35m
 all:		$(NAME)
 			@echo " "
 
-$(NAME):	$(MLX) $(OBJS) $(HDRS)
+$(NAME):	$(MLX) $(HDRS) $(OBJS)
 			@gcc $(FLAGS) $(MLX_FLAGS) $(OBJS) -o $(NAME)
 			@echo "$(BLUE)#$(WHITE)\c"
+
+bonus:		$(MLX) $(HDRS) $(OBJSB)
+			@gcc $(FLAGS) $(MLX_FLAGS) $(OBJSB) -o $(NAME)
+			@echo "$(BLUE)#$(WHITE)\c"
+			@echo " "
 
 $(MLX):
 			@echo "$(YELLOW)#$(WHITE)\c"
@@ -52,6 +69,7 @@ clean:
 			@$(MAKE) -C minilibx_opengl clean >/dev/null
 			@echo "$(MAGENTA)#$(WHITE)\c"
 			@rm -f $(OBJS)
+			@rm -f $(OBJSB)
 			@echo "$(MAGENTA)#$(WHITE)"
 
 fclean:		clean
@@ -63,6 +81,6 @@ fclean:		clean
 re:			fclean all
 
 norm:		
-			@norminette get_next_line key_handler list loader mlx_adapter parser raycasting_logic textures utils main.c
+			@norminette get_next_line key_handler list loader mlx_adapter parser raycasting_logic textures utils main.c main_bonus.c
 
 .PHONY:	all clean fclean re

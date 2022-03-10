@@ -18,8 +18,8 @@
 # include "../list/list.h"
 
 # define PROJECT_NAME		"Raycaster"
-# define MOVE_SPEED			0.8
-# define ROTATION_SPEED		0.2
+# define MOVE_SPEED			0.2
+# define ROTATION_SPEED		0.015
 # define TEXTURE_WIDTH		64
 # define TEXTURE_HEIGHT		64
 # define VALIDATOR_OFFSET	100000
@@ -102,6 +102,9 @@ typedef struct s_game
 
 	int		floor_color;
 	int		ceiling_color;
+
+	int		mouse_old_x;
+	int		mouse_old_y;
 
 	double	player_pos_x;
 	double	player_pos_y;

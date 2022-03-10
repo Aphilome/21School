@@ -1,22 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   key_handler.h                                      :+:      :+:    :+:   */
+/*   key_handler.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 22:03:48 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/03/09 22:03:58 by tbirdper         ###   ########.fr       */
+/*   Created: 2022/03/09 22:02:56 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/03/09 22:44:50 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KEY_HANDLER_H
-# define KEY_HANDLER_H
+#include "key_handler_private.h"
 
-# include <math.h>
-# include "../raycasting_logic/raycasting_logic.h"
+int	mouse_handler(int x, int y, void *param)
+{
+	t_game	*game;
 
-int	key_handler(int keycode, void *param);
-int	mouse_handler(int x, int y, void *param);
-
-#endif
+	(void)y;
+	game = (t_game *)param;
+	if (x == game->mouse_old_x)
+		return (0);
+	if (x > game->mouse_old_x)
+		rotate_right(game);
+	else
+		rotate_left(game);
+	game->mouse_old_x = x;
+	redraw(game);
+	return (0);
+}
