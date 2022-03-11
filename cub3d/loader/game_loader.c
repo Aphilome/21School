@@ -29,8 +29,6 @@ t_game	*game_loader(t_mlx *mlx, t_map *map)
 	game->rot_speed = ROTATION_SPEED;
 	game->plane_y = 0.0;
 	game->plane_x = 0.0;
-	game->mouse_old_x = 0;
-	game->mouse_old_y = 0;
 	if (game->player_direction_y == 0)
 		game->plane_y += 0.66 * game->player_direction_x * -1;
 	if (game->player_direction_x == 0)

@@ -10,3 +10,4 @@ cub3d
 cub3d
 libmlx.a
 *.o
+*.d

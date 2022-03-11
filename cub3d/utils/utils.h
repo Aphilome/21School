@@ -6,7 +6,7 @@
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 13:40:02 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/03/09 13:45:31 by tbirdper         ###   ########.fr       */
+/*   Updated: 2022/03/10 17:35:49 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define TEXTURE_WIDTH		64
 # define TEXTURE_HEIGHT		64
 # define VALIDATOR_OFFSET	100000
-# define SCREEN_WIDTH 640
-# define SCREEN_HEIGHT 480
+# define SCREEN_WIDTH		640
+# define SCREEN_HEIGHT		480
 
 # define ERROR_SYSTEM		"System"
 # define ERROR_MALLOC		"Memory allocation"
