@@ -5,6 +5,11 @@ void Utils::error_print(const std::string &msg)
 	std::cerr << "Error: " <<  msg << std::endl;
 }
 
+void Utils::error_print(int fd, const std::string &msg)
+{
+	std::cerr << "Error: [" << fd << "]: " << msg << std::endl;
+}
+
 void Utils::error_exit(const std::string &msg)
 {
 	error_print(msg);

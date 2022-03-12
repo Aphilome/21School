@@ -40,13 +40,12 @@ void Server::Run()
 	show_info();
 	while (true)
 	{
-		int state  = poll(&(poll_fds[0]), poll_fds.size(), 1000);
-		if (state == -1)
+		if (poll(&(poll_fds[0]), poll_fds.size(), 1000) == -1)
 		{
-			std::cerr << "Error poll" << std::endl;
+			Utils::error_print(ERROR_POLL);
+			usleep(POLL_SLEEP_TIME_MS);
 			continue;
 		}
-
 		if (poll_fds[0].revents == POLLIN)
 			new_client_handler();
 		else
@@ -68,9 +67,10 @@ void Server::new_client_handler()
 	int new_client_fd = accept(_server_fd, (struct sockaddr *)&address, &csin_len);
 	if (new_client_fd == -1)
 	{
-		std::cerr << "client fd creation error" << std::endl;
+		Utils::error_print(ERROR_CLIENT_NEW_SOCKET);
 		return;
 	}
+
 	std::cout << "[" << new_client_fd  << "]: new connection" << std::endl;
 	pollfd client_pfd = {};
 	client_pfd.fd = new_client_fd;
@@ -78,23 +78,18 @@ void Server::new_client_handler()
 	poll_fds.push_back(client_pfd);
 
 	std::string buffer = "Hello [" + std::to_string(new_client_fd) + "]!\r\n";
-	if (send(new_client_fd, buffer.c_str(), buffer.length(), 0) == -1)
-	{
-		std::cerr << "[" << new_client_fd << "]: " << "send hello error"
-				  << std::endl;
-		return;
-	}
+	send_msg_to_client(new_client_fd, buffer);
 }
 
-void Server::old_client_handler(int client_fd, short client_revents)
+void Server::old_client_handler(int client_fd, short client_event)
 {
-	if (client_revents == (POLLIN | POLLHUP))
+	if (client_event == (POLLIN | POLLHUP))
 	{
 		std::cout << "[" << client_fd << "]: close connection " << std::endl;
 		close(client_fd);
 		return;
 	}
-	if (client_revents == POLLIN)
+	if (client_event == POLLIN)
 	{
 		char buffer[MSG_BUFFER_SIZE + 1];
 		memset(buffer, 0, MSG_BUFFER_SIZE);
@@ -108,8 +103,8 @@ void Server::old_client_handler(int client_fd, short client_revents)
 		if (size == 0)
 		{
 			std::cout << "[" << client_fd << "]: empty msg. Need delete  "
-											 "connection "	<<
-			std::endl;
+											 "connection "
+											 <<	std::endl;
 			close(client_fd);
 			return;
 		}
@@ -117,6 +112,7 @@ void Server::old_client_handler(int client_fd, short client_revents)
 		std::cout << "[" << client_fd << "]: " << buffer;
 		std::string msg(buffer);
 
+		// PARSE MSG FROM CLIENT
 
 	}
 }
@@ -137,4 +133,10 @@ void Server::show_info() const
 			  << std::setw(18) << std::left << _server_password_hash
 			  << "*" << std::endl;
 	std::cout << "****************************************" << std::endl;
+}
+
+void Server::send_msg_to_client(int client_fd, const std::string& msg)
+{
+	if (send(client_fd, msg.c_str(), msg.length(), 0) == -1)
+		Utils::error_print(client_fd, ERROR_SEND_MSG);
 }

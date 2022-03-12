@@ -23,8 +23,9 @@ private:
 	std::vector<pollfd> poll_fds;
 
 	void new_client_handler();
-	void old_client_handler(int client_fd, short client_revents);
+	void old_client_handler(int client_fd, short client_event);
 	void show_info() const;
+	void send_msg_to_client(int client_fd, const std::string& msg);
 public:
 	Server(int port, unsigned long password_hash);
 	~Server();

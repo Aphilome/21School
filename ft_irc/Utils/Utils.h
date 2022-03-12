@@ -8,8 +8,12 @@
 #define ERROR_BIND_PORT			"Cant bind port"
 #define ERROR_PORT_LISTENING		"Set socket for listening"
 #define ERROR_SERVER_READY		"Server not inited"
+#define ERROR_POLL				"Poll scheduling. Go to sleep"
+#define ERROR_CLIENT_NEW_SOCKET	"Client socket creation"
+#define ERROR_SEND_MSG			"Send message to client"
 
-#define ERROR_EXIT_CODE		1
+#define ERROR_EXIT_CODE			1
+#define POLL_SLEEP_TIME_MS		10 * 1000
 
 #include <string>
 #include <iostream>
@@ -19,6 +23,7 @@ class Utils
 {
 public:
 	static void error_print(const std::string& msg);
+	static void error_print(int fd, const std::string& msg);
 	static void error_exit(const std::string& msg);
 
 	static int int_parse(const std::string& s, const std::string& error_msg);
