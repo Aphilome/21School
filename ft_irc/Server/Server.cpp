@@ -20,7 +20,7 @@ Server::Server(int port, unsigned long password_hash)
 	pollfd pfd = {};
 	pfd.fd = _server_fd;
 	pfd.events = POLLIN;
-	poll_fds.push_back(pfd);
+	_poll_fds.push_back(pfd);
 
 	_ready_to_start = true;
 
@@ -40,17 +40,17 @@ void Server::Run()
 	show_info();
 	while (true)
 	{
-		if (poll(&(poll_fds[0]), poll_fds.size(), 1000) == -1)
+		if (poll(&(_poll_fds[0]), _poll_fds.size(), 1000) == -1)
 		{
 			Utils::error_print(ERROR_POLL);
 			usleep(POLL_SLEEP_TIME_MS);
 			continue;
 		}
-		if (poll_fds[0].revents == POLLIN)
+		if (_poll_fds[0].revents == POLLIN)
 			new_client_handler();
 		else
 		{
-			for (std::vector<pollfd>::iterator it = poll_fds.begin(); it != poll_fds.end(); ++it)
+			for (std::vector<pollfd>::iterator it = _poll_fds.begin(); it != _poll_fds.end(); ++it)
 			{
 				if ((*it).fd == _server_fd)
 					continue;
@@ -75,7 +75,7 @@ void Server::new_client_handler()
 	pollfd client_pfd = {};
 	client_pfd.fd = new_client_fd;
 	client_pfd.events = POLLIN;
-	poll_fds.push_back(client_pfd);
+	_poll_fds.push_back(client_pfd);
 
 	std::string buffer = "Hello [" + std::to_string(new_client_fd) + "]!\r\n";
 	send_msg_to_client(new_client_fd, buffer);
@@ -113,7 +113,16 @@ void Server::old_client_handler(int client_fd, short client_event)
 		std::string msg(buffer);
 
 		// PARSE MSG FROM CLIENT
-
+		std::vector<std::string> args;
+		user_commands cmd = command_parser(msg, args);
+		std::cout << "cmd: " << cmd << std::endl;
+		std::cout << "args: ";
+		for (std::vector<std::string>::iterator it = args.begin();
+			it != args.end(); ++it)
+		{
+			std::cout << "|" << *it << "|";
+		}
+		std::cout << std::endl;
 	}
 }
 

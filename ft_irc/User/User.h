@@ -11,6 +11,7 @@ Oikarinen & Reed                                               [Page 14]
 */
 
 #include <string>
+#include <vector>
 
 enum user_state
 {
@@ -21,6 +22,7 @@ enum user_state
 
 enum user_commands
 {
+	cmd_none,
 	cmd_pass,
 	cmd_user,
 	cmd_nick
@@ -32,6 +34,7 @@ private:
 	std::string _nickname;
 	std::string _username;
 	user_state _state;
+	std::vector<std::string> _new_messages;
 public:
 	void	apply(user_commands cmd, std::string *args);
 	User();
