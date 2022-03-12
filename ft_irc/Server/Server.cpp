@@ -1,35 +1,21 @@
 #include "Server.h"
 
 Server::Server(int port, unsigned long password_hash)
-		: _ready_to_start(false), _server_port(port), _password_hash(password_hash)
+		: _ready_to_start(false), _server_port(port), _server_password_hash(password_hash)
 {
-	// Create a socket
 	_server_fd = socket(AF_INET, SOCK_STREAM, 0);
 	if (_server_fd == -1)
-	{
-		std::cerr << "Can't create a socket! Quitting" << std::endl;
-		return ;
-	}
-	std::cout << "Server fd: " << _server_fd << std::endl;
+		Utils::error_exit(ERROR_NEW_SOCKET);
 
-	// Bind the ip address and port to a socket
 	sockaddr_in hint = {};
 	hint.sin_family = AF_INET;
-	hint.sin_port = htons(port);
+	hint.sin_port = htons(_server_port);
 	inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr);
-
 	if (bind(_server_fd, (sockaddr*)&hint, sizeof(hint)) == -1)
-	{
-		std::cerr << "Can't bind" << std::endl;
-		return;
-	}
+		Utils::error_exit(ERROR_BIND_PORT);
 
-	// Tell Winsock the socket is for listening
 	if (listen(_server_fd, SOMAXCONN) == -1)
-	{
-		std::cerr << "Can't listen" << std::endl;
-		return;
-	}
+		Utils::error_exit(ERROR_PORT_LISTENING);
 
 	pollfd pfd = {};
 	pfd.fd = _server_fd;
@@ -38,7 +24,7 @@ Server::Server(int port, unsigned long password_hash)
 
 	_ready_to_start = true;
 
-	(void)_password_hash; // for clients will be used
+	(void)_server_password_hash; // for clients will be used
 }
 
 Server::~Server()
@@ -50,11 +36,8 @@ Server::~Server()
 void Server::Run()
 {
 	if (!_ready_to_start)
-	{
-		std::cerr << "Server not ready for start!" << std::endl;
-		return ;
-	}
-
+		Utils::error_exit(ERROR_SERVER_READY);
+	show_info();
 	while (true)
 	{
 		int state  = poll(&(poll_fds[0]), poll_fds.size(), 1000);
@@ -132,5 +115,26 @@ void Server::old_client_handler(int client_fd, short client_revents)
 		}
 		buffer[size] = 0;
 		std::cout << "[" << client_fd << "]: " << buffer;
+		std::string msg(buffer);
+
+
 	}
+}
+
+void Server::show_info() const
+{
+	std::cout << "************   Server run   ************" << std::endl;
+	std::cout << "*"
+			  << std::setw(20) << std::right << "fd: "
+			  << std::setw(18) << std::left << _server_fd
+			  << "*" << std::endl;
+	std::cout << "*"
+			  << std::setw(20) << std::right << "port: "
+			  << std::setw(18) << std::left << _server_port
+			  << "#" << std::endl;
+	std::cout << "*"
+			  << std::setw(20) << std::right << "psw hash: "
+			  << std::setw(18) << std::left << _server_password_hash
+			  << "*" << std::endl;
+	std::cout << "****************************************" << std::endl;
 }
