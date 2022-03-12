@@ -76,7 +76,8 @@ void Server::new_client_handler()
 	client_pfd.fd = new_client_fd;
 	client_pfd.events = POLLIN;
 	_poll_fds.push_back(client_pfd);
-
+	User *user = new User();
+	_users[new_client_fd] = user;
 	std::string buffer = "Hello [" + std::to_string(new_client_fd) + "]!\r\n";
 	send_msg_to_client(new_client_fd, buffer);
 }

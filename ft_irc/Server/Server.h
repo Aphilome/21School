@@ -22,7 +22,7 @@ private:
 	int						_server_fd;
 	unsigned long			_server_password_hash;
 	std::vector<pollfd>		_poll_fds;
-	std::map<int, User&>	_users;
+	std::map<int, User*>	_users;
 
 	void new_client_handler();
 	void old_client_handler(int client_fd, short client_event);
