@@ -1,8 +1,9 @@
 NAME		=	ircserv
 
-SRCS		= main.cpp
+SRCS		=	main.cpp \
+				Server/Server.cpp
 
-HDRS		=
+HDRS		=	Server/Server.h
 
 OBJS		=	$(SRCS:.cpp=.o)
 
