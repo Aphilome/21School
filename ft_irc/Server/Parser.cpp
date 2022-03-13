@@ -4,7 +4,10 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 {
 	if (msg.empty())
 		return cmd_none;
-	msg = msg.erase(msg.size() - 1, 1);
+	//msg = msg.erase(msg.size() - 1, 1);
+	Utils::replace(msg, "\r\n", "");
+	Utils::replace(msg, "\n", "");
+	Utils::replace(msg, "\r", "");
 	std::vector<std::string> s = Utils::split(msg, ' ');
 	if (s.empty())
 		return cmd_none;
