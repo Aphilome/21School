@@ -54,3 +54,23 @@ unsigned long Utils::to_hash(const std::string& s)
 	}
 	return hash;
 }
+
+std::vector<std::string> Utils::split(const std::string& s, char delimiter)
+{
+	std::vector<std::string> tokens;
+	std::string token;
+	std::istringstream tokenStream(s);
+
+	while (std::getline(tokenStream, token, delimiter))
+		tokens.push_back(token);
+	return tokens;
+}
+
+void Utils::replace(std::string& str, const std::string& from,
+					const std::string& to)
+{
+	size_t start_pos = str.find(from);
+	if(start_pos == std::string::npos)
+		return;
+	str.replace(start_pos, from.length(), to);
+}

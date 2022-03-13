@@ -3,4 +3,4 @@ project(ft_irc)
 
 set(CMAKE_CXX_STANDARD 98)
 
-add_executable(ft_irc main.cpp Server/Server.cpp Server/Server.h User/User.cpp User/User.h Server/Parser.cpp Utils/Utils.cpp Utils/Utils.h)
+add_executable(ft_irc main.cpp Server/Server.cpp Server/Server.h User/User.cpp User/User.h Server/Parser.cpp Utils/Utils.cpp Utils/Utils.h Utils/Replies.h)

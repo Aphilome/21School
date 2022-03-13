@@ -1,7 +1,7 @@
 #ifndef UTILS_H
 #define UTILS_H
 
-#define ERROR_ARGC				"Run: ./ircserv <port> <password>"
+#define ERROR_ARGC				"run: ./ircserv <port> <password>"
 #define ERROR_PORT_PARSE			"Port must be number"
 #define ERROR_PORT_RANGE			"Port must be in range from 0 to 65535"
 #define ERROR_NEW_SOCKET			"Creating a socket"
@@ -18,6 +18,15 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <vector>
+
+enum user_commands
+{
+	cmd_none,
+	cmd_pass,
+	cmd_user,
+	cmd_nick
+};
 
 class Utils
 {
@@ -31,6 +40,9 @@ public:
 							  const std::string& error_msg);
 
 	static unsigned long	to_hash(const std::string& s);
+	static std::vector<std::string> split(const std::string& s, char delimiter);
+	static void replace(std::string& str, const std::string& from,
+						const std::string& to);
 
 };
 

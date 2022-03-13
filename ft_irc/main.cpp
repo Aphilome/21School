@@ -13,7 +13,7 @@ int main(int argc, char **argv)
 	unsigned long password_hash = Utils::to_hash(argv[2]);
 
 	Server server(server_port, password_hash);
-	server.Run();
+	server.run();
 
 	return 0;
 }
