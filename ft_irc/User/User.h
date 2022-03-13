@@ -20,6 +20,8 @@ private:
 	int 						_client_fd;
 	std::string					_nickname;
 	std::string					_username;
+	std::string 				_target;
+	std::string 				_send_msg;
 	unsigned long				_user_password_hash;
 	user_state					_state;
 	std::vector<std::string>	_new_messages;
@@ -27,6 +29,7 @@ private:
 	void pass_handler(std::vector<std::string> &args);
 	void nick_handler(std::vector<std::string> &args);
 	void user_handler(std::vector<std::string> &args);
+	void privmsg_handler(std::vector<std::string> &args);
 	void send_hello_client();
 	void start_authorization();
 	std::string fill_placeholders(std::string s);
@@ -36,6 +39,8 @@ public:
 	void	apply(user_commands cmd, std::vector<std::string> &args);
 	bool 	is_need_close();
 	void 	set_need_close();
+	void 	get_new_message(const std::string& msg);
+	void 	send_messages_to_client();
 };
 
 #endif

@@ -37,6 +37,9 @@ void User::apply(user_commands cmd, std::vector<std::string> &args)
 		case cmd_nick:
 			nick_handler(args);
 			break;
+		case cmd_privmsg:
+			privmsg_handler(args);
+			break;
 	}
 
 
@@ -161,6 +164,7 @@ void User::start_authorization()
 	}
 	std::cout << "[" << _client_fd << "]: PASS accepted" << std::endl;
 	_state = user_state_authorized;
+	_server.registered_new_client(_nickname, _client_fd);
 	send_hello_client();
 }
 
@@ -176,6 +180,60 @@ std::string User::fill_placeholders(std::string s)
 	Utils::replace(msg, "<nick>", _nickname);
 	Utils::replace(msg, "<user>", _username);
 	Utils::replace(msg, "<server>", SERVER_NAME);
+	Utils::replace(msg, "<target>", _target);
+	Utils::replace(msg, "<msg>", _send_msg);
 
 	return msg;
+}
+
+void User::privmsg_handler(std::vector<std::string> &args)
+{
+	/*
+	 *
+           ERR_CANNOTSENDTOCHAN            ERR_NOTOPLEVEL ???
+           ERR_WILDTOPLEVEL ???                ERR_TOOMANYTARGETS ???
+	 * */
+
+	if (args.empty())
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NORECIPIENT));
+		return;
+	}
+	if (args.size() == 1)
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOTEXTTOSEND));
+		return;
+	}
+	std::string target = args.front();
+	if (!_server.is_nick_exist(target))
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOSUCHNICK));
+		return;
+	}
+	std::string msg;
+	if (args.size() >= 2)
+		msg = args[1];
+
+	_target = target;
+	_send_msg = msg;
+	//msg = ":aphilome!f@127.0.0.1 PRIVMSG tion :hi\r\n"; // TEST
+
+
+
+	_server.new_messege_for(args[0], fill_placeholders(MESSAGE));
+	_server.send_msg_to_client(_client_fd, fill_placeholders(RPL_AWAY));
+}
+
+void User::get_new_message(const std::string& msg)
+{
+	_new_messages.push_back(msg);
+}
+
+void User::send_messages_to_client()
+{
+	for (std::vector<std::string>::iterator it = _new_messages.begin(); it != _new_messages.end(); ++it)
+	{
+		_server.send_msg_to_client(_client_fd, *it + "\r\n");
+	}
+	_new_messages.clear();
 }

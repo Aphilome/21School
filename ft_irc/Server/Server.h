@@ -19,12 +19,13 @@ class User;
 class Server
 {
 private:
-	bool					_ready_to_start;
-	int						_server_port;
-	int						_server_fd;
-	unsigned long			_server_password_hash;
-	std::vector<pollfd>		_poll_fds;
-	std::map<int, User*>	_users;
+	bool							_ready_to_start;
+	int								_server_port;
+	int								_server_fd;
+	unsigned long					_server_password_hash;
+	std::vector<pollfd>				_poll_fds;
+	std::map<int, User*>			_users;
+	std::map<std::string, int>		_nick_to_fd;
 
 	void new_client_handler();
 	void old_client_handler(int client_fd, short client_event);
@@ -39,6 +40,9 @@ public:
 	void run();
 	bool check_password(unsigned long user_password_hash) const;
 	void send_msg_to_client(int client_fd, const std::string& msg);
+	void registered_new_client(const std::string& nick, int client_fd);
+	bool is_nick_exist(const std::string& nick);
+	void new_messege_for(const std::string& nick, const std::string& message);
 };
 
 

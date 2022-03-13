@@ -101,6 +101,7 @@ void Server::new_client_handler()
 
 void Server::old_client_handler(int client_fd, short client_event)
 {
+	_users[client_fd]->send_messages_to_client();
 	if (client_event == (POLLIN | POLLHUP))
 	{
 
@@ -190,4 +191,20 @@ void Server::close_client_connection(int client_fd)
 			it = _poll_fds.begin();
 		}
 	}
+}
+
+void Server::registered_new_client(const std::string& nick, int client_fd)
+{
+	_nick_to_fd[nick] = client_fd;
+}
+
+bool Server::is_nick_exist(const std::string& nick)
+{
+	return _nick_to_fd.find(nick) != _nick_to_fd.end();
+}
+
+void Server::new_messege_for(const std::string& nick, const std::string& message)
+{
+	int dst_fd = _nick_to_fd[nick];
+	_users[dst_fd]->get_new_message(message);
 }

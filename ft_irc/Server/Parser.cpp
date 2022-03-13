@@ -21,6 +21,8 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 		cmd = cmd_user;
 	else if (cmd_raw == "NICK")
 		cmd = cmd_nick;
+	else if (cmd_raw == "PRIVMSG")
+		cmd = cmd_privmsg;
 
 	if (cmd != cmd_none)
 		for (std::vector<std::string>::iterator it = s.begin() + 1; it != s
