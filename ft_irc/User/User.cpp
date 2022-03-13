@@ -190,7 +190,7 @@ void User::privmsg_handler(std::vector<std::string> &args)
 {
 	/*
 	 *
-           ERR_CANNOTSENDTOCHAN            ERR_NOTOPLEVEL ???
+           ERR_CANNOTSENDTOCHAN ???           ERR_NOTOPLEVEL ???
            ERR_WILDTOPLEVEL ???                ERR_TOOMANYTARGETS ???
 	 * */
 
@@ -212,7 +212,12 @@ void User::privmsg_handler(std::vector<std::string> &args)
 	}
 	std::string msg;
 	if (args.size() >= 2)
-		msg = args[1];
+	{
+		for (std::vector<std::string>::iterator it = args.begin() + 1; it != args.end(); ++it)
+			msg += *it + " ";
+		msg.pop_back();
+	}
+
 
 	_target = target;
 	_send_msg = msg;
