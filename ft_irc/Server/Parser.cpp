@@ -2,12 +2,24 @@
 
 user_commands	Server::command_parser(std::string msg, std::vector<std::string> &args_out)
 {
-	if (msg.empty())
-		return cmd_none;
-	//msg = msg.erase(msg.size() - 1, 1);
 	Utils::replace(msg, "\r\n", "");
 	Utils::replace(msg, "\n", "");
 	Utils::replace(msg, "\r", "");
+	if (msg.empty())
+		return cmd_none;
+
+	size_t start_pos = msg.find(':');
+	std::string last_arg;
+	if (start_pos != std::string::npos)
+	{
+		std::string left = msg.substr(0, start_pos);
+		std::string right = msg.substr(start_pos + 1);
+		msg = left;
+		last_arg = right;
+	}
+	if (msg.empty())
+		return cmd_none;
+
 	std::vector<std::string> s = Utils::split(msg, ' ');
 	if (s.empty())
 		return cmd_none;
@@ -25,12 +37,12 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 		cmd = cmd_privmsg;
 
 	if (cmd != cmd_none)
-		for (std::vector<std::string>::iterator it = s.begin() + 1; it != s
-		.end();
-			 ++it)
-		{
+	{
+		for (std::vector<std::string>::iterator it = s.begin() + 1; it != s.end(); ++it)
 			if (!it->empty())
 				args_out.push_back(*it);
-		}
+		if (!last_arg.empty())
+			args_out.push_back(last_arg);
+	}
 	return cmd;
 }

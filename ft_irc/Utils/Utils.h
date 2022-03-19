@@ -36,15 +36,16 @@ public:
 	static void error_print(int fd, const std::string& msg);
 	static void error_exit(const std::string& msg);
 
-	static int int_parse(const std::string& s, const std::string& error_msg);
-	static bool int_try_parse(const std::string& s, int &value,
-							  const std::string& error_msg);
+	static int	int_parse(const std::string& s, const std::string& error_msg);
+	static bool	int_try_parse(const std::string& s, int &value, const std::string& error_msg);
 
-	static unsigned long	to_hash(const std::string& s);
-	static std::vector<std::string> split(const std::string& s, char delimiter);
-	static void replace(std::string& str, const std::string& from,
-						const std::string& to);
+	static unsigned long			to_hash(const std::string& s);
+	static std::vector<std::string>	split(const std::string& s, char delimiter);
+	static void						replace(std::string& str, const std::string& from, const std::string& to);
 
+	static bool	is_letter(char c);
+	static bool	is_special(char c);
+	static bool	is_digit(char c);
 };
 
 #endif

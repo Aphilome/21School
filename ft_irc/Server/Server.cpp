@@ -13,6 +13,7 @@ Server::Server(int port, unsigned long password_hash)
 	inet_pton(AF_INET, "0.0.0.0", &hint.sin_addr);
 	if (bind(_server_fd, (sockaddr*)&hint, sizeof(hint)) == -1)
 		Utils::error_exit(ERROR_BIND_PORT);
+	_server_address = inet_ntoa(hint.sin_addr);
 
 	if (listen(_server_fd, SOMAXCONN) == -1)
 		Utils::error_exit(ERROR_PORT_LISTENING);
@@ -23,8 +24,6 @@ Server::Server(int port, unsigned long password_hash)
 	_poll_fds.push_back(pfd);
 
 	_ready_to_start = true;
-
-	(void)_server_password_hash; // for clients will be used
 }
 
 Server::~Server()
@@ -51,28 +50,17 @@ void Server::run()
 		else
 		{
 			std::vector<int> need_to_del;
-			for (std::vector<pollfd>::iterator it = _poll_fds.begin(); it != _poll_fds.end(); ++it)
+			for (std::vector<pollfd>::iterator it = _poll_fds.begin() + 1; it != _poll_fds.end(); ++it)
 			{
-				if ((*it).fd == _server_fd)
-					continue;
 				if (_users[(*it).fd]->is_need_close())
 				{
-					//close_client_connection((*it).fd);
-
 					need_to_del.push_back((*it).fd);
-
-					//(*it).revents = POLLIN | POLLHUP;
+					continue;
 				}
-				else
-					old_client_handler((*it).fd, (*it).revents);
-
+				old_client_handler((*it).fd, (*it).revents);
 			}
-
-			for (std::vector<int>::iterator it = need_to_del.begin(); it !=
-					need_to_del.end(); ++it)
-			{
+			for (std::vector<int>::iterator it = need_to_del.begin(); it != need_to_del.end(); ++it)
 				close_client_connection((*it));
-			}
 		}
 	}
 }
@@ -95,8 +83,6 @@ void Server::new_client_handler()
 	_poll_fds.push_back(client_pfd);
 	User *user = new User(*this, new_client_fd);
 	_users[new_client_fd] = user;
-	//std::string buffer = "Hello [" + std::to_string(new_client_fd) + "]!\r\n";
-	//send_msg_to_client(new_client_fd, buffer);
 }
 
 void Server::old_client_handler(int client_fd, short client_event)
@@ -104,9 +90,7 @@ void Server::old_client_handler(int client_fd, short client_event)
 	_users[client_fd]->send_messages_to_client();
 	if (client_event == (POLLIN | POLLHUP))
 	{
-
 		_users[client_fd]->set_need_close();
-		//close_client_connection(client_fd);
 		return;
 	}
 	if (client_event == POLLIN)
@@ -116,23 +100,19 @@ void Server::old_client_handler(int client_fd, short client_event)
 		ssize_t size = recv(client_fd, &buffer, MSG_BUFFER_SIZE, 0);
 		if (size == -1)
 		{
-			std::cerr << "[" << client_fd << "]: break receive msg" <<
-				std::endl;
+			std::cerr << "[" << client_fd << "]: break receive msg" << std::endl;
 			return;
 		}
 		if (size == 0)
 		{
-			std::cout << "[" << client_fd << "]: empty msg. Need delete  "
-											 "connection "
-											 <<	std::endl;
-			close(client_fd);
+			std::cout << "[" << client_fd << "]: empty msg. Need delete connection " <<	std::endl;
+			_users[client_fd]->set_need_close();
 			return;
 		}
 		buffer[size] = 0;
 		std::cout << "[" << client_fd << "]: " << buffer;
 		std::string s_buffer(buffer);
 
-		// PARSE MSG FROM CLIENT
 		std::vector<std::string> messages = Utils::split(s_buffer, '\n');
 		for (std::vector<std::string>::iterator it = messages.begin(); it != messages.end(); ++it)
 		{
@@ -152,6 +132,10 @@ void Server::show_info() const
 			  << std::setw(18) << std::left << _server_fd
 			  << "*" << std::endl;
 	std::cout << "*"
+			  << std::setw(20) << std::right << "address: "
+			  << std::setw(18) << std::left << _server_address
+			  << "*" << std::endl;
+	std::cout << "*"
 			  << std::setw(20) << std::right << "port: "
 			  << std::setw(18) << std::left << _server_port
 			  << "#" << std::endl;
@@ -164,8 +148,11 @@ void Server::show_info() const
 
 void Server::send_msg_to_client(int client_fd, const std::string& msg)
 {
-	std::cout << "-> [" << client_fd << "]: " << msg << std::endl;
-	if (send(client_fd, msg.c_str(), msg.length(), 0) == -1)
+	std::string message(msg);
+
+	Utils::replace(message, "<host>", _server_address);
+	std::cout << "-> [" << client_fd << "]: " << message << std::endl;
+	if (send(client_fd, message.c_str(), message.length(), 0) == -1)
 		Utils::error_print(client_fd, ERROR_SEND_MSG);
 }
 
@@ -178,10 +165,8 @@ void Server::close_client_connection(int client_fd)
 {
 	std::cout << "[" << client_fd << "]: close connection " << std::endl;
 	close(client_fd);
-	//close(client_fd);
 	delete _users[client_fd];
 	_users.erase(client_fd);
-
 
 	for (std::vector<pollfd>::iterator it = _poll_fds.begin(); it != _poll_fds.end(); ++it)
 	{

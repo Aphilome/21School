@@ -33,6 +33,7 @@ private:
 	void send_hello_client();
 	void start_authorization();
 	std::string fill_placeholders(std::string s);
+	bool is_valid_nick(std::string nick);
 public:
 	User(Server &server, int client_fd);
 	~User();

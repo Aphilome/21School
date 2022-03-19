@@ -74,3 +74,18 @@ void Utils::replace(std::string& str, const std::string& from,
 		return;
 	str.replace(start_pos, from.length(), to);
 }
+
+bool Utils::is_letter(char c)
+{
+	return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+}
+
+bool Utils::is_special(char c)
+{
+	return (c >= 0x5b && c <= 0x60) || (c >= 0x7b && c <= 0x7d);
+}
+
+bool Utils::is_digit(char c)
+{
+	return (c >= '0' && c <= '9');
+}

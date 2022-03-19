@@ -20,6 +20,7 @@ class Server
 {
 private:
 	bool							_ready_to_start;
+	std::string 					_server_address;
 	int								_server_port;
 	int								_server_fd;
 	unsigned long					_server_password_hash;

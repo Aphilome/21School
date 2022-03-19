@@ -16,14 +16,6 @@ User::~User()
 
 void User::apply(user_commands cmd, std::vector<std::string> &args)
 {
-//	std::cout << "args: ";
-//	for (std::vector<std::string>::iterator it = args.begin();
-//		it != args.end(); ++it)
-//	{
-//		std::cout << "|" << *it << ":" << (*it).size() << "|";
-//	}
-//	std::cout << std::endl;
-
 	switch (cmd)
 	{
 		case cmd_none:
@@ -41,8 +33,6 @@ void User::apply(user_commands cmd, std::vector<std::string> &args)
 			privmsg_handler(args);
 			break;
 	}
-
-
 }
 
 void User::pass_handler(std::vector<std::string> &args)
@@ -58,9 +48,6 @@ void User::pass_handler(std::vector<std::string> &args)
 		return;
 	}
 	std::string user_password = args.front();
-	std::cout << "USER PSW: " << user_password.size() << " |" << user_password << std::endl;
-	if (user_password.front() == ':')
-		user_password = user_password.erase(0, 1);
 	_user_password_hash = Utils::to_hash(user_password);
 }
 
@@ -71,19 +58,19 @@ void User::nick_handler(std::vector<std::string> &args)
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NONICKNAMEGIVEN));
 		return;
 	}
-	if (false) // check nick is in use with other user
+	_nickname = args.front();
+	if (_server.is_nick_exist(_nickname))
 	{
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NICKNAMEINUSE));
 		return;
 	}
-	if (false) // check nick is valid (without forbidden characters)
+	if (!is_valid_nick(_nickname))
 	{
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_ERRONEUSNICKNAME));
 		return;
 	}
-	_nickname = args.front();
-	std::cout << "[" << _client_fd << "]: NICK set <" << _nickname << ">"
-			  << std::endl;
+
+	std::cout << "[" << _client_fd << "]: NICK set <" << _nickname << ">" << std::endl;
 	if (!_username.empty())
 		start_authorization();
 }
@@ -101,8 +88,7 @@ void User::user_handler(std::vector<std::string> &args)
 		return;
 	}
 	_username = args.front();
-	std::cout << "[" << _client_fd << "]: USER set <" << _username << ">"
-		<< std::endl;
+	std::cout << "[" << _client_fd << "]: USER set <" << _username << ">" << std::endl;
 
 	if (!_nickname.empty())
 		start_authorization();
@@ -189,7 +175,6 @@ std::string User::fill_placeholders(std::string s)
 void User::privmsg_handler(std::vector<std::string> &args)
 {
 	/*
-	 *
            ERR_CANNOTSENDTOCHAN ???           ERR_NOTOPLEVEL ???
            ERR_WILDTOPLEVEL ???                ERR_TOOMANYTARGETS ???
 	 * */
@@ -210,23 +195,10 @@ void User::privmsg_handler(std::vector<std::string> &args)
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOSUCHNICK));
 		return;
 	}
-	std::string msg;
-	if (args.size() >= 2)
-	{
-		for (std::vector<std::string>::iterator it = args.begin() + 1; it != args.end(); ++it)
-			msg += *it + " ";
-		msg.pop_back();
-	}
-
-
 	_target = target;
-	_send_msg = msg;
-	//msg = ":aphilome!f@127.0.0.1 PRIVMSG tion :hi\r\n"; // TEST
-
-
-
+	_send_msg = args[1];
 	_server.new_messege_for(args[0], fill_placeholders(MESSAGE));
-	_server.send_msg_to_client(_client_fd, fill_placeholders(RPL_AWAY));
+	//_server.send_msg_to_client(_client_fd, fill_placeholders(RPL_AWAY));
 }
 
 void User::get_new_message(const std::string& msg)
@@ -237,8 +209,22 @@ void User::get_new_message(const std::string& msg)
 void User::send_messages_to_client()
 {
 	for (std::vector<std::string>::iterator it = _new_messages.begin(); it != _new_messages.end(); ++it)
-	{
 		_server.send_msg_to_client(_client_fd, *it + "\r\n");
-	}
 	_new_messages.clear();
+}
+
+bool User::is_valid_nick(std::string nick)
+{
+	if (nick.empty())
+		return false;
+	if (!(Utils::is_letter(nick[0]) || Utils::is_special(nick[0])))
+		return false;
+	for (size_t i = 0; i < nick.size(); ++i)
+		if (!(Utils::is_letter(nick[i])
+			|| Utils::is_special(nick[i])
+			|| Utils::is_digit(nick[i])
+			|| nick[i] == '-'))
+			return false;
+
+	return true;
 }

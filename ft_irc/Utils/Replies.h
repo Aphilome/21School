@@ -1,7 +1,7 @@
 #ifndef REPLIES_H
 #define REPLIES_H
 
-#define MESSAGE					":<nick>!<user>@127.0.0.1 PRIVMSG <target> :<msg>\r\n"
+#define MESSAGE					":<nick>!<user>@<host> PRIVMSG <target> :<msg>\r\n"
 #define SERVER_NAME				"anonimus"
 #define RPL_WELCOME				":<server> 001 <nick> :Welcome to the Internet Relay Network <nick>!<user>@<host>\r\n"
 #define RPL_AWAY					":<server> 301 <nick> :<away message>\r\n"
