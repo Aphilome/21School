@@ -2,7 +2,7 @@ NAME		=	ircserv
 
 SRCS		=	main.cpp \
 				Server/Server.cpp Server/Parser.cpp \
-				User/User.cpp \
+				User/User.cpp User/CommandHandlers.cpp \
 				Utils/Utils.cpp
 
 HDRS		=	Server/Server.h Utils/Utils.h User/User.h

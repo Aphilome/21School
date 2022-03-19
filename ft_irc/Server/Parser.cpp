@@ -35,6 +35,8 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 		cmd = cmd_nick;
 	else if (cmd_raw == "PRIVMSG")
 		cmd = cmd_privmsg;
+	else if (cmd_raw == "ISON")
+		cmd = cmd_ison;
 
 	if (cmd != cmd_none)
 	{

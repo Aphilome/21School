@@ -26,7 +26,8 @@ enum user_commands
 	cmd_pass,
 	cmd_user,
 	cmd_nick,
-	cmd_privmsg
+	cmd_privmsg,
+	cmd_ison
 };
 
 class Utils

@@ -32,66 +32,10 @@ void User::apply(user_commands cmd, std::vector<std::string> &args)
 		case cmd_privmsg:
 			privmsg_handler(args);
 			break;
+		case cmd_ison:
+			ison_handler(args);
+			break;
 	}
-}
-
-void User::pass_handler(std::vector<std::string> &args)
-{
-	if (_state != user_state_new)
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_ALREADYREGISTRED));
-		return;
-	}
-	if (args.empty())
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
-		return;
-	}
-	std::string user_password = args.front();
-	_user_password_hash = Utils::to_hash(user_password);
-}
-
-void User::nick_handler(std::vector<std::string> &args)
-{
-	if (args.empty())
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NONICKNAMEGIVEN));
-		return;
-	}
-	_nickname = args.front();
-	if (_server.is_nick_exist(_nickname))
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NICKNAMEINUSE));
-		return;
-	}
-	if (!is_valid_nick(_nickname))
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_ERRONEUSNICKNAME));
-		return;
-	}
-
-	std::cout << "[" << _client_fd << "]: NICK set <" << _nickname << ">" << std::endl;
-	if (!_username.empty())
-		start_authorization();
-}
-
-void User::user_handler(std::vector<std::string> &args)
-{
-//	if (_state != user_state_password_accept)
-//	{
-//		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_ALREADYREGISTRED));
-//		return;
-//	}
-	if (args.empty())
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
-		return;
-	}
-	_username = args.front();
-	std::cout << "[" << _client_fd << "]: USER set <" << _username << ">" << std::endl;
-
-	if (!_nickname.empty())
-		start_authorization();
 }
 
 void User::send_hello_client()
@@ -168,37 +112,9 @@ std::string User::fill_placeholders(std::string s)
 	Utils::replace(msg, "<server>", SERVER_NAME);
 	Utils::replace(msg, "<target>", _target);
 	Utils::replace(msg, "<msg>", _send_msg);
+	Utils::replace(msg, "<online_nicks>", _online_nicks);
 
 	return msg;
-}
-
-void User::privmsg_handler(std::vector<std::string> &args)
-{
-	/*
-           ERR_CANNOTSENDTOCHAN ???           ERR_NOTOPLEVEL ???
-           ERR_WILDTOPLEVEL ???                ERR_TOOMANYTARGETS ???
-	 * */
-
-	if (args.empty())
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NORECIPIENT));
-		return;
-	}
-	if (args.size() == 1)
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOTEXTTOSEND));
-		return;
-	}
-	std::string target = args.front();
-	if (!_server.is_nick_exist(target))
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOSUCHNICK));
-		return;
-	}
-	_target = target;
-	_send_msg = args[1];
-	_server.new_messege_for(args[0], fill_placeholders(MESSAGE));
-	//_server.send_msg_to_client(_client_fd, fill_placeholders(RPL_AWAY));
 }
 
 void User::get_new_message(const std::string& msg)
@@ -228,3 +144,4 @@ bool User::is_valid_nick(std::string nick)
 
 	return true;
 }
+

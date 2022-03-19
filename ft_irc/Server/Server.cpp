@@ -165,6 +165,7 @@ void Server::close_client_connection(int client_fd)
 {
 	std::cout << "[" << client_fd << "]: close connection " << std::endl;
 	close(client_fd);
+	_nick_to_fd.erase(_users[client_fd]->get_nickname());
 	delete _users[client_fd];
 	_users.erase(client_fd);
 

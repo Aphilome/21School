@@ -5,6 +5,7 @@
 #define SERVER_NAME				"anonimus"
 #define RPL_WELCOME				":<server> 001 <nick> :Welcome to the Internet Relay Network <nick>!<user>@<host>\r\n"
 #define RPL_AWAY					":<server> 301 <nick> :<away message>\r\n"
+#define RPL_ISON					":<server> 303 * :<online_nicks>\r\n"
 #define RPL_MOTD_1				":<server> 372 * :                .-'\"\"\"''---.___\r\n"
 #define RPL_MOTD_2				":<server> 372 * :              .'               \"'-.___\r\n"
 #define RPL_MOTD_3				":<server> 372 * :            _'              _'-\"'\"\"\"  \"\"\"-\r\n"
