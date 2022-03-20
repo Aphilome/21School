@@ -59,8 +59,25 @@ void Server::run()
 				}
 				old_client_handler((*it).fd, (*it).revents);
 			}
-			for (std::vector<int>::iterator it = need_to_del.begin(); it != need_to_del.end(); ++it)
-				close_client_connection((*it));
+			if (!need_to_del.empty())
+			{
+				for (std::vector<int>::iterator it = need_to_del.begin(); it != need_to_del.end(); ++it)
+					close_client_connection((*it));
+			}
+			if (!_channels.empty())
+			{
+				for (std::map<std::string, Channel *>::iterator it = _channels.begin(); it != _channels.end(); ++it)
+				{
+					if ((*it).second->is_empty_channel())
+					{
+						delete (*it).second;
+						_channels.erase(it);
+						if (_channels.empty())
+							break;
+						it = _channels.begin();
+					}
+				}
+			}
 		}
 	}
 }
@@ -151,6 +168,8 @@ void Server::send_msg_to_client(int client_fd, const std::string& msg)
 	std::string message(msg);
 
 	Utils::replace(message, "<host>", _server_address);
+	Utils::replace(message, "<server>", SERVER_NAME);
+
 	std::cout << "-> [" << client_fd << "]: " << message << std::endl;
 	if (send(client_fd, message.c_str(), message.length(), 0) == -1)
 		Utils::error_print(client_fd, ERROR_SEND_MSG);
@@ -166,6 +185,7 @@ void Server::close_client_connection(int client_fd)
 	std::cout << "[" << client_fd << "]: close connection " << std::endl;
 	close(client_fd);
 	_nick_to_fd.erase(_users[client_fd]->get_nickname());
+	_users[client_fd]->leave_all_channels();
 	delete _users[client_fd];
 	_users.erase(client_fd);
 
@@ -193,4 +213,25 @@ void Server::new_messege_for(const std::string& nick, const std::string& message
 {
 	int dst_fd = _nick_to_fd[nick];
 	_users[dst_fd]->get_new_message(message);
+}
+
+Channel	*Server::join_to_channel(const std::string& channel, int client_fd)
+{
+	std::map<std::string, Channel *>::iterator it;
+	Channel *channel_ptr;
+
+	it = _channels.find(channel);
+	if (it == _channels.end())
+	{
+		channel_ptr = new Channel(*this, channel, _users[client_fd]);
+		std::cout << "New channel: " << channel_ptr->get_topic() << std::endl;
+		_channels[channel] = channel_ptr;
+	}
+	else
+	{
+		channel_ptr = (*it).second;
+		channel_ptr->add_new_user(_users[client_fd]);
+	}
+
+	return channel_ptr;
 }

@@ -109,7 +109,7 @@ void User::set_need_close()
 	_state = user_state_need_close;
 }
 
-std::string User::fill_placeholders(std::string s)
+std::string User::fill_placeholders(const std::string& s, const std::string& comment)
 {
 	std::string msg(s);
 
@@ -119,6 +119,7 @@ std::string User::fill_placeholders(std::string s)
 	Utils::replace(msg, "<target>", _target);
 	Utils::replace(msg, "<msg>", _send_msg);
 	Utils::replace(msg, "<online_nicks>", _online_nicks);
+	Utils::replace(msg, "<comment>", comment);
 
 	return msg;
 }
@@ -154,4 +155,13 @@ bool User::is_valid_nick(std::string nick)
 std::string User::get_nickname()
 {
 	return _nickname;
+}
+
+void User::leave_all_channels()
+{
+	if (_channels.empty())
+		return;
+	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); ++it)
+		(*it)->leave_user(this);
+	_channels.clear();
 }

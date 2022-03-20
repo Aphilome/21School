@@ -2,10 +2,15 @@
 #define REPLIES_H
 
 #define MESSAGE					":<nick>!<user>@<host> PRIVMSG <target> :<msg>\r\n"
+#define JOIN						":<nick>!<user>@<host> JOIN :<comment>\r\n"
+
 #define SERVER_NAME				"anonimus"
 #define RPL_WELCOME				":<server> 001 <nick> :Welcome to the Internet Relay Network <nick>!<user>@<host>\r\n"
 #define RPL_AWAY					":<server> 301 * <target> :<msg>\r\n"
 #define RPL_ISON					":<server> 303 * :<online_nicks>\r\n"
+#define RPL_TOPIC				":<server> 332 * <channel> :<topic>\r\n"
+#define RPL_NAMREPLY				":<server> 353 * <channel> : <comment>\r\n"
+#define RPL_ENDOFNAMES			":<server> 366 * <channel> :End of /NAMES list\r\n"
 #define RPL_MOTD_1				":<server> 372 * :                .-'\"\"\"''---.___\r\n"
 #define RPL_MOTD_2				":<server> 372 * :              .'               \"'-.___\r\n"
 #define RPL_MOTD_3				":<server> 372 * :            _'              _'-\"'\"\"\"  \"\"\"-\r\n"
@@ -53,7 +58,8 @@
 #define ERR_NEEDMOREPARAMS		":<server> 461 <nick> :Not enough parameters\r\n"
 #define ERR_ALREADYREGISTRED		":<server> 462 <nick> :Unauthorized command (already registered)\r\n"
 #define ERR_PASSWDMISMATCH		":<server> 464 <nick> :Password incorrect\r\n"
-
+#define ERR_BADCHANNELKEY		":<server> 475 * <channel> :Cannot join channel (+k)\r\n"
+#define ERR_BADCHANMASK			":<server> 476 * :<comment>\r\n"
 
 
 #define RPL_MOTD_X				":<server> 372 * :\

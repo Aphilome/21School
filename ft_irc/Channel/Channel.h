@@ -3,11 +3,30 @@
 
 #include "../User/User.h"
 
+class Server;
+class User;
+
+#define DEFAULT_TOPIC	"ʕ•́ᴥ•̀ʔ"
+
 class Channel
 {
 private:
-	std::vector<User> _users;
+	Server				&_server;
+	std::vector<User*>	_users;
+	std::string 		_topic;
+	std::string 		_name;
+	User 				*_admin;
 
+public:
+	Channel(Server &server, std::string name, User* admin);
+	~Channel();
+
+	std::string	get_topic();
+	std::string	get_name();
+	void 		leave_user(User *user);
+	bool 		is_empty_channel();
+	std::string get_user_nicks();
+	void		add_new_user(User *user);
 };
 
 #endif

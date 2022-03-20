@@ -10,7 +10,10 @@ int main(int argc, char **argv)
 	if (server_port < 0 || server_port > 65535)
 		Utils::error_exit(ERROR_PORT_RANGE);
 
-	unsigned long password_hash = Utils::to_hash(argv[2]);
+	std::string psw(argv[2]);
+	unsigned long password_hash = 0;
+	if (!psw.empty())
+		password_hash = Utils::to_hash(psw);
 
 	Server server(server_port, password_hash);
 	server.run();

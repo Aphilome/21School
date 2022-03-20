@@ -116,20 +116,62 @@ void User::notice_handler(std::vector<std::string> &args)
 
 void User::join_handler(std::vector<std::string> &args)
 {
-	// кроме \r, \n, \g, SPACE, \0, ,.
-	// Имя канала – строка (начинающаяся с символа & или #) длинной до 200 символов.
 	//  ERR_BANNEDFROMCHAN ???
 	//        ERR_INVITEONLYCHAN???           ERR_BADCHANNELKEY ???
 	//        ERR_CHANNELISFULL ???           ERR_BADCHANMASK ???
 	//                   ERR_TOOMANYCHANNELS???
-	//        RPL_TOPIC
+	//
 
 	if (args.empty())
 	{
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
 		return;
 	}
-	// ERR_NOSUCHCHANNEL
+	std::string channel = args[0];
+	if (channel.empty() || channel[0] != '#' || channel.size() >= 200)
+	{
+		std::string msg = ERR_BADCHANNELKEY;
+		Utils::replace(msg, "<channel>", channel);
+		_server.send_msg_to_client(_client_fd, msg);
+		return;
+	}
+	if (channel == "0")
+	{
+		leave_all_channels();
+		return;
+	}
 
-	//RPL_TOPIC
+	if (channel.find('\r') != std::string::npos
+		|| channel.find('\n') != std::string::npos
+		|| channel.find(29) != std::string::npos
+		|| channel.find(' ') != std::string::npos
+		|| channel.find('\0') != std::string::npos
+		|| channel.find(',') != std::string::npos)
+	{
+		std::string msg = ERR_BADCHANNELKEY;
+		Utils::replace(msg, "<channel>", channel);
+		_server.send_msg_to_client(_client_fd, msg);
+		return;
+	}
+
+	Channel *new_channel = _server.join_to_channel(channel, _client_fd);
+	_channels.push_back(new_channel);
+
+	std::string msg = fill_placeholders(JOIN, channel);
+	_server.send_msg_to_client(_client_fd, msg);
+
+	msg = RPL_TOPIC;
+	Utils::replace(msg, "<channel>", channel);
+	Utils::replace(msg, "<topic>", new_channel->get_topic());
+	std::cout << "Join [" << _client_fd << "] to channel " << new_channel->get_name() << std::endl;
+	_server.send_msg_to_client(_client_fd, msg);
+
+	msg = RPL_NAMREPLY;
+	Utils::replace(msg, "<channel>", channel);
+	Utils::replace(msg, "<comment>", new_channel->get_user_nicks());
+	_server.send_msg_to_client(_client_fd, msg);
+
+	msg = RPL_ENDOFNAMES;
+	Utils::replace(msg, "<channel>", channel);
+	_server.send_msg_to_client(_client_fd, msg);
 }
