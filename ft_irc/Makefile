@@ -3,9 +3,10 @@ NAME		=	ircserv
 SRCS		=	main.cpp \
 				Server/Server.cpp Server/Parser.cpp \
 				User/User.cpp User/CommandHandlers.cpp \
-				Utils/Utils.cpp
+				Utils/Utils.cpp \
+				Channel/Channel.cpp
 
-HDRS		=	Server/Server.h Utils/Utils.h User/User.h
+HDRS		=	Server/Server.h Utils/Utils.h User/User.h Channel/Channel.h
 
 OBJS		=	$(SRCS:.cpp=.o)
 

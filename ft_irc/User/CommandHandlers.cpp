@@ -113,3 +113,23 @@ void User::notice_handler(std::vector<std::string> &args)
 	_send_msg = args[1];
 	_server.new_messege_for(args[0], fill_placeholders(MESSAGE));
 }
+
+void User::join_handler(std::vector<std::string> &args)
+{
+	// кроме \r, \n, \g, SPACE, \0, ,.
+	// Имя канала – строка (начинающаяся с символа & или #) длинной до 200 символов.
+	//  ERR_BANNEDFROMCHAN ???
+	//        ERR_INVITEONLYCHAN???           ERR_BADCHANNELKEY ???
+	//        ERR_CHANNELISFULL ???           ERR_BADCHANMASK ???
+	//                   ERR_TOOMANYCHANNELS???
+	//        RPL_TOPIC
+
+	if (args.empty())
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
+		return;
+	}
+	// ERR_NOSUCHCHANNEL
+
+	//RPL_TOPIC
+}

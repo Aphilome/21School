@@ -39,6 +39,8 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 		cmd = cmd_ison;
 	else if (cmd_raw == "NOTICE")
 		cmd = cmd_notice;
+	else if (cmd_raw == "JOIN")
+		cmd = cmd_join;
 
 	if (cmd != cmd_none)
 	{

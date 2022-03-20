@@ -38,6 +38,9 @@ void User::apply(user_commands cmd, std::vector<std::string> &args)
 		case cmd_notice:
 			notice_handler(args);
 			break;
+		case cmd_join:
+			join_handler(args);
+			break;
 	}
 }
 
