@@ -22,13 +22,19 @@ Channel::~Channel()
 
 void Channel::leave_user(User *user)
 {
-	_users.erase(std::find(_users.begin(), _users.end(), user));
-	if (user == _admin)
+	if (_users.empty())
+		return;
+	std::vector<User*>::iterator it = std::find(_users.begin(), _users.end(), user);
+	if (it != _users.end())
 	{
-		if (!_users.empty())
-			_admin = _users.front();
-		else
-			_admin = nullptr;
+		_users.erase(it);
+		if (user == _admin)
+		{
+			if (!_users.empty())
+				_admin = _users.front();
+			else
+				_admin = nullptr;
+		}
 	}
 }
 
@@ -58,3 +64,19 @@ void Channel::add_new_user(User *user)
 		return;
 	_users.push_back(user);
 }
+
+void Channel::new_channel_member_come()
+{
+	for (std::vector<User *>::iterator it = _users.begin(); it != _users.end(); ++it)
+	{
+		std::string msg = RPL_NAMREPLY;
+		Utils::replace(msg, "<channel>", _name);
+		Utils::replace(msg, "<comment>", get_user_nicks());
+		_server.send_msg_to_client((*it)->get_client_fd(), msg);
+
+		msg = RPL_ENDOFNAMES;
+		Utils::replace(msg, "<channel>", _name);
+		_server.send_msg_to_client((*it)->get_client_fd(), msg);
+	}
+}
+

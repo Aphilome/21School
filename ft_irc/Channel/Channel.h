@@ -27,6 +27,7 @@ public:
 	bool 		is_empty_channel();
 	std::string get_user_nicks();
 	void		add_new_user(User *user);
+	void		new_channel_member_come();
 };
 
 #endif

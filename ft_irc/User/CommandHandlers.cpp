@@ -166,12 +166,5 @@ void User::join_handler(std::vector<std::string> &args)
 	std::cout << "Join [" << _client_fd << "] to channel " << new_channel->get_name() << std::endl;
 	_server.send_msg_to_client(_client_fd, msg);
 
-	msg = RPL_NAMREPLY;
-	Utils::replace(msg, "<channel>", channel);
-	Utils::replace(msg, "<comment>", new_channel->get_user_nicks());
-	_server.send_msg_to_client(_client_fd, msg);
-
-	msg = RPL_ENDOFNAMES;
-	Utils::replace(msg, "<channel>", channel);
-	_server.send_msg_to_client(_client_fd, msg);
+	new_channel->new_channel_member_come();
 }

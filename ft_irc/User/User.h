@@ -53,6 +53,7 @@ public:
 	void 		send_messages_to_client();
 	std::string	get_nickname();
 	void 		leave_all_channels();
+	int 		get_client_fd();
 };
 
 #endif

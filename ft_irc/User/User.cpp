@@ -165,3 +165,8 @@ void User::leave_all_channels()
 		(*it)->leave_user(this);
 	_channels.clear();
 }
+
+int User::get_client_fd()
+{
+	return _client_fd;
+}
