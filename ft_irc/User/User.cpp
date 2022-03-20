@@ -35,6 +35,9 @@ void User::apply(user_commands cmd, std::vector<std::string> &args)
 		case cmd_ison:
 			ison_handler(args);
 			break;
+		case cmd_notice:
+			notice_handler(args);
+			break;
 	}
 }
 
@@ -145,3 +148,7 @@ bool User::is_valid_nick(std::string nick)
 	return true;
 }
 
+std::string User::get_nickname()
+{
+	return _nickname;
+}

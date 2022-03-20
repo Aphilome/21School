@@ -32,6 +32,7 @@ private:
 	void user_handler(std::vector<std::string> &args);
 	void privmsg_handler(std::vector<std::string> &args);
 	void ison_handler(std::vector<std::string> &args);
+	void notice_handler(std::vector<std::string> &args);
 
 	void send_hello_client();
 	void start_authorization();

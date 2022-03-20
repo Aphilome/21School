@@ -37,6 +37,8 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 		cmd = cmd_privmsg;
 	else if (cmd_raw == "ISON")
 		cmd = cmd_ison;
+	else if (cmd_raw == "NOTICE")
+		cmd = cmd_notice;
 
 	if (cmd != cmd_none)
 	{

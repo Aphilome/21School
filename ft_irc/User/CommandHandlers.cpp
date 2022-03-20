@@ -61,31 +61,8 @@ void User::user_handler(std::vector<std::string> &args)
 
 void User::privmsg_handler(std::vector<std::string> &args)
 {
-	/*
-           ERR_CANNOTSENDTOCHAN ???           ERR_NOTOPLEVEL ???
-           ERR_WILDTOPLEVEL ???                ERR_TOOMANYTARGETS ???
-	 * */
-
-	if (args.empty())
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NORECIPIENT));
-		return;
-	}
-	if (args.size() == 1)
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOTEXTTOSEND));
-		return;
-	}
-	std::string target = args.front();
-	if (!_server.is_nick_exist(target))
-	{
-		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOSUCHNICK));
-		return;
-	}
-	_target = target;
-	_send_msg = args[1];
-	_server.new_messege_for(args[0], fill_placeholders(MESSAGE));
-	//_server.send_msg_to_client(_client_fd, fill_placeholders(RPL_AWAY));
+	notice_handler(args);
+	_server.send_msg_to_client(_client_fd, fill_placeholders(RPL_AWAY));
 }
 
 void User::ison_handler(std::vector<std::string> &args)
@@ -108,7 +85,31 @@ void User::ison_handler(std::vector<std::string> &args)
 	_server.send_msg_to_client(_client_fd, msg);
 }
 
-std::string User::get_nickname()
+void User::notice_handler(std::vector<std::string> &args)
 {
-	return _nickname;
+	/*
+           ERR_CANNOTSENDTOCHAN ???           ERR_NOTOPLEVEL ???
+           ERR_WILDTOPLEVEL ???                ERR_TOOMANYTARGETS ???
+	 * */
+
+	if (args.empty())
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NORECIPIENT));
+		return;
+	}
+	if (args.size() == 1)
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOTEXTTOSEND));
+		return;
+	}
+	std::string target = args.front();
+	if (!_server.is_nick_exist(target))
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOSUCHNICK));
+		return;
+	}
+
+	_target = target;
+	_send_msg = args[1];
+	_server.new_messege_for(args[0], fill_placeholders(MESSAGE));
 }
