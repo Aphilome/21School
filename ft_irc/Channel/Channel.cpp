@@ -80,3 +80,31 @@ void Channel::new_channel_member_come()
 	}
 }
 
+void Channel::push_new_message(const std::string& message)
+{
+	_new_messages.push_back(message);
+}
+
+void Channel::send_messages_to_members()
+{
+	if (_new_messages.empty())
+		return;
+	if (_users.empty())
+	{
+		_new_messages.clear();
+		return;
+	}
+	for (std::vector<std::string>::iterator itm = _new_messages.begin(); itm != _new_messages.end(); ++itm)
+	{
+		size_t pos = (*itm).find('!');
+		std::string sender = (*itm).substr(1, pos - 1);
+		for (std::vector<User*>::iterator itu = _users.begin(); itu != _users.end(); ++itu)
+		{
+			if ((*itu)->get_nickname() == sender)
+				continue;
+			_server.send_msg_to_client((*itu)->get_client_fd(), *itm + "\r\n");
+		}
+	}
+	_new_messages.clear();
+}
+

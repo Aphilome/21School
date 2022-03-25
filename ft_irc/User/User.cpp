@@ -124,7 +124,7 @@ std::string User::fill_placeholders(const std::string& s, const std::string& com
 	return msg;
 }
 
-void User::get_new_message(const std::string& msg)
+void User::push_new_message(const std::string& msg)
 {
 	_new_messages.push_back(msg);
 }

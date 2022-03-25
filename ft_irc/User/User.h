@@ -49,7 +49,7 @@ public:
 	void		apply(user_commands cmd, std::vector<std::string> &args);
 	bool 		is_need_close();
 	void 		set_need_close();
-	void 		get_new_message(const std::string& msg);
+	void 		push_new_message(const std::string& msg);
 	void 		send_messages_to_client();
 	std::string	get_nickname();
 	void 		leave_all_channels();

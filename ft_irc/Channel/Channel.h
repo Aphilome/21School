@@ -11,11 +11,12 @@ class User;
 class Channel
 {
 private:
-	Server				&_server;
-	std::vector<User*>	_users;
-	std::string 		_topic;
-	std::string 		_name;
-	User 				*_admin;
+	Server						&_server;
+	std::vector<User*>			_users;
+	std::string 				_topic;
+	std::string 				_name;
+	User 						*_admin;
+	std::vector<std::string>	_new_messages;
 
 public:
 	Channel(Server &server, std::string name, User* admin);
@@ -28,6 +29,8 @@ public:
 	std::string get_user_nicks();
 	void		add_new_user(User *user);
 	void		new_channel_member_come();
+	void		push_new_message(const std::string& message);
+	void 		send_messages_to_members();
 };
 
 #endif
