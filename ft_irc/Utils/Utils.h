@@ -11,6 +11,7 @@
 #define ERROR_POLL				"Poll scheduling. Go to sleep"
 #define ERROR_CLIENT_NEW_SOCKET	"Client socket creation"
 #define ERROR_SEND_MSG			"Send message to client"
+#define ERROR_SOCK_OPT			"Setsockopt(SO_REUSEADDR) failed"
 
 #define ERROR_EXIT_CODE			1
 #define POLL_SLEEP_TIME_MS		10 * 1000

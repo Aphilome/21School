@@ -7,6 +7,10 @@ Server::Server(int port, unsigned long password_hash)
 	if (_server_fd == -1)
 		Utils::error_exit(ERROR_NEW_SOCKET);
 
+	int enable = 1;
+	if (setsockopt(_server_fd, SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(int)) < 0)
+		Utils::error_exit(ERROR_SOCK_OPT);
+
 	sockaddr_in hint = {};
 	hint.sin_family = AF_INET;
 	hint.sin_port = htons(_server_port);
