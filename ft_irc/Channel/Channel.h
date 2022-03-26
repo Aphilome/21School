@@ -24,15 +24,16 @@ public:
 
 	std::string	get_topic();
 	std::string	get_name();
+	std::string get_user_nicks();
+	std::string	get_admin_nick();
 	void 		leave_user(User *user);
 	bool 		is_empty_channel();
-	std::string get_user_nicks();
 	void		add_new_user(User *user);
 	void		new_channel_member_come();
 	void		push_new_message(const std::string& message);
 	void 		send_messages_to_members();
-	std::string	get_admin_nick();
 	bool 		kick_user(const std::string& nick);
+	void		set_topic(const std::string& new_topic);
 	std::string get_info();
 };
 

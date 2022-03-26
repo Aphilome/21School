@@ -33,7 +33,6 @@ Server::Server(int port, unsigned long password_hash)
 Server::~Server()
 {
 	close(_server_fd);
-	(void)_server_port; // NEED free port
 }
 
 void Server::run()

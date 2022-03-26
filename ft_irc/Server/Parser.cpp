@@ -45,6 +45,8 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 		cmd = cmd_kick;
 	else if (cmd_raw == "BOT")
 		cmd = cmd_bot;
+	else if (cmd_raw == "TOPIC")
+		cmd = cmd_topic;
 
 	if (cmd != cmd_none)
 	{

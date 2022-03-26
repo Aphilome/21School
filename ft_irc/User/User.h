@@ -38,6 +38,7 @@ private:
 	void join_handler(std::vector<std::string> &args);
 	void kick_handler(std::vector<std::string> &args);
 	void bot_handler(std::vector<std::string> &args);
+	void topic_handler(std::vector<std::string> &args);
 
 	void send_hello_client();
 	void start_authorization();

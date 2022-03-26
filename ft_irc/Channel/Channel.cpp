@@ -146,3 +146,8 @@ std::string Channel::get_info()
 	return msg;
 }
 
+void Channel::set_topic(const std::string& new_topic)
+{
+	_topic = new_topic;
+}
+

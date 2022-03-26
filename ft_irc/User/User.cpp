@@ -47,6 +47,9 @@ void User::apply(user_commands cmd, std::vector<std::string> &args)
 		case cmd_bot:
 			bot_handler(args);
 			break;
+		case cmd_topic:
+			topic_handler(args);
+			break;
 	}
 }
 

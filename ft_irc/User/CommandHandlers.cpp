@@ -262,3 +262,44 @@ void User::bot_handler(std::vector<std::string> &args)
 	}
 	_server.bot_apply(_client_fd, args);
 }
+
+void User::topic_handler(std::vector<std::string> &args)
+{
+	if (_state != user_state_authorized)
+		return;
+	if (args.empty())
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
+		return;
+	}
+	std::string channel_name(args[0]);
+	if (!_server.is_channel_exist(channel_name))
+	{
+		std::string msg = ERR_NOSUCHCHANNEL;
+		Utils::replace(msg, "<channel>", channel_name);
+		_server.send_msg_to_client(_client_fd, fill_placeholders(msg));
+		return;
+	}
+	Channel *channel = get_channel(channel_name);
+	if (channel == nullptr)
+	{
+		std::string msg = ERR_NOTONCHANNEL;
+		Utils::replace(msg, "<channel>", channel_name);
+		_server.send_msg_to_client(_client_fd, fill_placeholders(msg));
+		return;
+	}
+	if (channel->get_admin_nick() != _nickname)
+	{
+		std::string msg = ERR_CHANOPRIVSNEEDED;
+		Utils::replace(msg, "<channel>", channel_name);
+		_server.send_msg_to_client(_client_fd, fill_placeholders(msg));
+		return;
+	}
+	if (args.size() > 1)
+		channel->set_topic(args[1]);
+	std::string msg = RPL_TOPIC;
+	Utils::replace(msg, "<channel>", channel_name);
+	Utils::replace(msg, "<topic>", channel->get_topic());
+
+	_server.send_msg_to_client(_client_fd, msg);
+}
