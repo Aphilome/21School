@@ -108,3 +108,27 @@ void Channel::send_messages_to_members()
 	_new_messages.clear();
 }
 
+std::string Channel::get_admin_nick()
+{
+	return _admin->get_nickname();
+}
+
+bool Channel::kick_user(const std::string& nick)
+{
+	std::vector<User*>::iterator kick_user = _users.end();
+	for (std::vector<User*>::iterator it = _users.begin(); it != _users.end(); ++it)
+	{
+		if ((*it)->get_nickname() == nick)
+		{
+			kick_user = it;
+			break;
+		}
+	}
+	if (kick_user != _users.end())
+	{
+		_users.erase(kick_user);
+		return true;
+	}
+	return false;
+}
+

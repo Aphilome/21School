@@ -29,7 +29,8 @@ enum user_commands
 	cmd_privmsg,
 	cmd_ison,
 	cmd_notice,
-	cmd_join
+	cmd_join,
+	cmd_kick
 };
 
 class Utils

@@ -41,6 +41,9 @@ void User::apply(user_commands cmd, std::vector<std::string> &args)
 		case cmd_join:
 			join_handler(args);
 			break;
+			case cmd_kick:
+			kick_handler(args);
+			break;
 	}
 }
 
@@ -169,4 +172,14 @@ void User::leave_all_channels()
 int User::get_client_fd()
 {
 	return _client_fd;
+}
+
+Channel *User::get_channel(const std::string& channel_name)
+{
+	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); ++it)
+	{
+		if ((*it)->get_name() == channel_name)
+			return (*it);
+	}
+	return nullptr;
 }

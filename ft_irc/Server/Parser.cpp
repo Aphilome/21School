@@ -41,6 +41,8 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 		cmd = cmd_notice;
 	else if (cmd_raw == "JOIN")
 		cmd = cmd_join;
+	else if (cmd_raw == "KICK")
+		cmd = cmd_kick;
 
 	if (cmd != cmd_none)
 	{

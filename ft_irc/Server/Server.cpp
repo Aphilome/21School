@@ -249,3 +249,8 @@ bool Server::is_channel_exist(const std::string &name)
 {
 	return _channels.find(name) != _channels.end();
 }
+
+int Server::get_user_fd(const std::string& nick)
+{
+	return _nick_to_fd[nick];
+}

@@ -31,6 +31,8 @@ public:
 	void		new_channel_member_come();
 	void		push_new_message(const std::string& message);
 	void 		send_messages_to_members();
+	std::string	get_admin_nick();
+	bool 		kick_user(const std::string& nick);
 };
 
 #endif

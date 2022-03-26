@@ -49,18 +49,20 @@
 #define RPL_MOTDSTART			":<server> 375 <nick> :MOTD start\r\n"
 #define RPL_ENDOFMOTD			":<server> 376 <nick> :MOTD end\r\n"
 #define ERR_NOSUCHNICK			":<server> 401 <nick> :No such nick/channel\r\n"
+#define ERR_NOSUCHCHANNEL		":<server> 403 <channel> :No such channel\r\n"
 #define ERR_NORECIPIENT			":<server> 411 <nick> :No recipient given\r\n"
 #define ERR_NOTEXTTOSEND			":<server> 412 <nick> :No text to send\r\n"
 #define ERR_NONICKNAMEGIVEN		":<server> 431 <nick> :No nickname given\r\n"
 #define ERR_ERRONEUSNICKNAME		":<server> 432 :Erroneous nickname\r\n"
 #define ERR_NICKNAMEINUSE		":<server> 433 <nick> :Nickname is already in use\r\n"
 #define ERR_UNAVAILRESOURCE		":<server> 437 <nick> Nick/channel is temporarily unavailable\r\n"
+#define ERR_NOTONCHANNEL			":<server> 442 <channel> :You're not on that channel\r\n"
 #define ERR_NEEDMOREPARAMS		":<server> 461 <nick> :Not enough parameters\r\n"
 #define ERR_ALREADYREGISTRED		":<server> 462 <nick> :Unauthorized command (already registered)\r\n"
 #define ERR_PASSWDMISMATCH		":<server> 464 <nick> :Password incorrect\r\n"
 #define ERR_BADCHANNELKEY		":<server> 475 * <channel> :Cannot join channel (+k)\r\n"
 #define ERR_BADCHANMASK			":<server> 476 * :<comment>\r\n"
-
+#define ERR_CHANOPRIVSNEEDED		":<server> 482 <channel> :You're not channel operator\r\n"
 
 #define RPL_MOTD_X				":<server> 372 * :\
                 .-'\"\"\"''---.___\n\

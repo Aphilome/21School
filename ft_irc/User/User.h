@@ -36,11 +36,13 @@ private:
 	void ison_handler(std::vector<std::string> &args);
 	void notice_handler(std::vector<std::string> &args);
 	void join_handler(std::vector<std::string> &args);
+	void kick_handler(std::vector<std::string> &args);
 
 	void send_hello_client();
 	void start_authorization();
 	std::string fill_placeholders(const std::string& s, const std::string& comment = "");
 	bool is_valid_nick(std::string nick);
+	Channel	*get_channel(const std::string& channel_name);
 
 public:
 	User(Server &server, int client_fd);

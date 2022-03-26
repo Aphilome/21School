@@ -194,3 +194,49 @@ void User::join_handler(std::vector<std::string> &args)
 
 	new_channel->new_channel_member_come();
 }
+
+void User::kick_handler(std::vector<std::string> &args)
+{
+	if (args.size() < 2)
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
+		return;
+	}
+	std::string channel_name(args[0]);
+	if (!_server.is_channel_exist(channel_name))
+	{
+		std::string msg = ERR_NOSUCHCHANNEL;
+		Utils::replace(msg, "<channel>", channel_name);
+		_server.send_msg_to_client(_client_fd, fill_placeholders(msg));
+		return;
+	}
+	Channel *channel = get_channel(channel_name);
+	if (channel == nullptr)
+	{
+		std::string msg = ERR_NOTONCHANNEL;
+		Utils::replace(msg, "<channel>", channel_name);
+		_server.send_msg_to_client(_client_fd, fill_placeholders(msg));
+		return;
+	}
+	if (channel->get_admin_nick() != _nickname)
+	{
+		std::string msg = ERR_CHANOPRIVSNEEDED;
+		Utils::replace(msg, "<channel>", channel_name);
+		_server.send_msg_to_client(_client_fd, fill_placeholders(msg));
+		return;
+	}
+	std::string target(args[1]);
+	if (!_server.is_nick_exist(target))
+		return;
+	if (channel->kick_user(target))
+	{
+		std::string msg = MESSAGE;
+		int target_fd = _server.get_user_fd(target);
+		_target = target;
+		if (args.size() > 2)
+			_send_msg = args[2];
+		else
+			_send_msg = "You was kicked from " + channel_name;
+		_server.send_msg_to_client(target_fd, fill_placeholders(msg));
+	}
+}
