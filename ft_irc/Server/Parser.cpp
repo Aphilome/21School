@@ -43,6 +43,8 @@ user_commands	Server::command_parser(std::string msg, std::vector<std::string> &
 		cmd = cmd_join;
 	else if (cmd_raw == "KICK")
 		cmd = cmd_kick;
+	else if (cmd_raw == "BOT")
+		cmd = cmd_bot;
 
 	if (cmd != cmd_none)
 	{

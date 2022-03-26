@@ -33,6 +33,7 @@ public:
 	void 		send_messages_to_members();
 	std::string	get_admin_nick();
 	bool 		kick_user(const std::string& nick);
+	std::string get_info();
 };
 
 #endif

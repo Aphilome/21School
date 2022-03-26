@@ -36,20 +36,25 @@ private:
 	void			show_info() const;
 	user_commands	command_parser(std::string msg, std::vector<std::string> &args_out);
 	void			close_client_connection(int client_fd);
+	std::string		get_channels_info();
+	std::string 	get_users_info();
 
 public:
 	Server(int port, unsigned long password_hash);
 	~Server();
 
-	void	run();
-	bool	check_password(unsigned long user_password_hash) const;
-	void	send_msg_to_client(int client_fd, const std::string& msg);
-	void	registered_new_client(const std::string& nick, int client_fd);
-	bool	is_nick_exist(const std::string& nick);
-	bool	is_channel_exist(const std::string& name);
-	void	new_message_for(const std::string& nick, const std::string& message);
-	Channel	*join_to_channel(const std::string& channel, int client_fd);
-	int 	get_user_fd(const std::string& nick);
+	void		run();
+	bool		check_password(unsigned long user_password_hash) const;
+	void		send_msg_to_client(int client_fd, const std::string& msg);
+	void		registered_new_client(const std::string& nick, int client_fd);
+	bool		is_nick_exist(const std::string& nick);
+	void		new_message_for(const std::string& nick, const std::string& message);
+	int 		get_user_fd(const std::string& nick);
+
+	bool		is_channel_exist(const std::string& name);
+	Channel		*join_to_channel(const std::string& channel, int client_fd);
+
+	void 		bot_apply(int client_fd, std::vector<std::string> &args);
 };
 
 

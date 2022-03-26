@@ -66,6 +66,8 @@ void User::privmsg_handler(std::vector<std::string> &args)
            ERR_WILDTOPLEVEL ???                ERR_TOOMANYTARGETS ???
 	 * */
 
+	if (_state != user_state_authorized)
+		return;
 	if (args.empty())
 	{
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NORECIPIENT));
@@ -78,7 +80,7 @@ void User::privmsg_handler(std::vector<std::string> &args)
 	}
 	std::string target = args.front();
 	bool is_user = _server.is_nick_exist(target);
-	bool is_channel = _server.is_channel_exist(target);
+	bool is_channel = _server.is_channel_exist(target) && in_channel(target);
 	if (!is_user && !is_channel)
 	{
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NOSUCHNICK));
@@ -93,6 +95,8 @@ void User::privmsg_handler(std::vector<std::string> &args)
 
 void User::ison_handler(std::vector<std::string> &args)
 {
+	if (_state != user_state_authorized)
+		return;
 	if (args.empty())
 	{
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
@@ -117,7 +121,8 @@ void User::notice_handler(std::vector<std::string> &args)
            ERR_CANNOTSENDTOCHAN ???           ERR_NOTOPLEVEL ???
            ERR_WILDTOPLEVEL ???                ERR_TOOMANYTARGETS ???
 	 * */
-
+	if (_state != user_state_authorized)
+		return;
 	if (args.empty())
 	{
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NORECIPIENT));
@@ -142,6 +147,8 @@ void User::notice_handler(std::vector<std::string> &args)
 
 void User::join_handler(std::vector<std::string> &args)
 {
+	if (_state != user_state_authorized)
+		return;
 	//  ERR_BANNEDFROMCHAN ???
 	//        ERR_INVITEONLYCHAN???           ERR_BADCHANNELKEY ???
 	//        ERR_CHANNELISFULL ???           ERR_BADCHANMASK ???
@@ -197,6 +204,8 @@ void User::join_handler(std::vector<std::string> &args)
 
 void User::kick_handler(std::vector<std::string> &args)
 {
+	if (_state != user_state_authorized)
+		return;
 	if (args.size() < 2)
 	{
 		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
@@ -228,6 +237,7 @@ void User::kick_handler(std::vector<std::string> &args)
 	std::string target(args[1]);
 	if (!_server.is_nick_exist(target))
 		return;
+
 	if (channel->kick_user(target))
 	{
 		std::string msg = MESSAGE;
@@ -239,4 +249,16 @@ void User::kick_handler(std::vector<std::string> &args)
 			_send_msg = "You was kicked from " + channel_name;
 		_server.send_msg_to_client(target_fd, fill_placeholders(msg));
 	}
+}
+
+void User::bot_handler(std::vector<std::string> &args)
+{
+	if (_state != user_state_authorized)
+		return;
+	if (args.empty())
+	{
+		_server.send_msg_to_client(_client_fd, fill_placeholders(ERR_NEEDMOREPARAMS));
+		return;
+	}
+	_server.bot_apply(_client_fd, args);
 }

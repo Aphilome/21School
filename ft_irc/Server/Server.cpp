@@ -254,3 +254,33 @@ int Server::get_user_fd(const std::string& nick)
 {
 	return _nick_to_fd[nick];
 }
+
+std::string Server::get_channels_info()
+{
+	std::string msg = "Channels [" + std::to_string(_channels.size()) +"]:\n";
+	for (std::map<std::string, Channel*>::iterator it = _channels.begin(); it != _channels.end(); ++it)
+		msg += (*it).second->get_info() + "\n";
+	return msg;
+}
+
+std::string Server::get_users_info()
+{
+	std::string msg = "Users [" + std::to_string(_users.size()) +"]:\n";
+	for (std::map<int, User*>::iterator it = _users.begin(); it != _users.end(); ++it)
+		msg += (*it).second->get_info() + "\n";
+	return msg;
+}
+
+
+void Server::bot_apply(int client_fd, std::vector<std::string> &args)
+{
+	std::string msg =  "Not recognized command\n";
+
+	if (args[0] == "channel")
+		msg = get_channels_info();
+	else if (args[0] == "user")
+		msg = get_users_info();
+
+	send_msg_to_client(client_fd, msg + "\r\n");
+}
+

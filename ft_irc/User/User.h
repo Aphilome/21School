@@ -37,6 +37,7 @@ private:
 	void notice_handler(std::vector<std::string> &args);
 	void join_handler(std::vector<std::string> &args);
 	void kick_handler(std::vector<std::string> &args);
+	void bot_handler(std::vector<std::string> &args);
 
 	void send_hello_client();
 	void start_authorization();
@@ -55,7 +56,10 @@ public:
 	void 		send_messages_to_client();
 	std::string	get_nickname();
 	void 		leave_all_channels();
+	void 		leave_channel(const std::string& channel_name);
 	int 		get_client_fd();
+	std::string get_info();
+	bool 		in_channel(const std::string& channel_name);
 };
 
 #endif

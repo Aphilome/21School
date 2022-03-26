@@ -41,8 +41,11 @@ void User::apply(user_commands cmd, std::vector<std::string> &args)
 		case cmd_join:
 			join_handler(args);
 			break;
-			case cmd_kick:
+		case cmd_kick:
 			kick_handler(args);
+			break;
+		case cmd_bot:
+			bot_handler(args);
 			break;
 	}
 }
@@ -169,6 +172,23 @@ void User::leave_all_channels()
 	_channels.clear();
 }
 
+void User::leave_channel(const std::string& channel_name)
+{
+	if (_channels.empty())
+		return;
+
+	std::vector<Channel*>::iterator leave_it = _channels.end();
+	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); ++it)
+		if ((*it)->get_name() == channel_name)
+			leave_it = it;
+	if (leave_it != _channels.end())
+	{
+		(*leave_it)->leave_user(this);
+		_channels.erase(leave_it);
+	}
+}
+
+
 int User::get_client_fd()
 {
 	return _client_fd;
@@ -182,4 +202,20 @@ Channel *User::get_channel(const std::string& channel_name)
 			return (*it);
 	}
 	return nullptr;
+}
+
+std::string User::get_info()
+{
+	std::string msg = _nickname + " [" + std::to_string(_client_fd) + "]\n";
+	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); ++it)
+		msg += "\t" + (*it)->get_name() + "\n";
+	return msg;
+}
+
+bool User::in_channel(const std::string& channel_name)
+{
+	for (std::vector<Channel*>::iterator it = _channels.begin(); it != _channels.end(); ++it)
+		if ((*it)->get_name() == channel_name)
+			return true;
+	return false;
 }

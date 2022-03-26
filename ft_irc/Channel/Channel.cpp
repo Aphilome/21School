@@ -126,9 +126,23 @@ bool Channel::kick_user(const std::string& nick)
 	}
 	if (kick_user != _users.end())
 	{
-		_users.erase(kick_user);
+		(*kick_user)->leave_channel(_name);
+		//_users.erase(kick_user);
 		return true;
 	}
 	return false;
+}
+
+std::string Channel::get_info()
+{
+	std::string msg = _name + "[" + std::to_string(_users.size()) +"]:\n";
+	for (std::vector<User*>::iterator it = _users.begin(); it != _users.end(); ++it)
+	{
+		msg += "\t" + (*it)->get_nickname();
+		if ((*it) == _admin)
+			msg += " ✓";
+		msg += "\n";
+	}
+	return msg;
 }
 

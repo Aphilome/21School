@@ -30,7 +30,8 @@ enum user_commands
 	cmd_ison,
 	cmd_notice,
 	cmd_join,
-	cmd_kick
+	cmd_kick,
+	cmd_bot
 };
 
 class Utils
