@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   game_loader_private.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 22:39:02 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/28 22:39:03 by tbirdper         ###   ########.fr       */
+/*   Created: 2022/02/27 14:33:28 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/02/27 14:33:34 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef GAME_LOADER_PRIVATE_H
+# define GAME_LOADER_PRIVATE_H
 
-# include "../utils/utils.h"
-# include "../get_next_line/get_next_line.h"
-# include "../list/list.h"
+# include "game_loader.h"
+# include "../minilibx_opengl/mlx.h"
 
-char	**map_parser_tmp(char *file_name);
-
-t_map	*map_parser(char *file_name);
+void	textures_load(t_game *game);
+void	colors_load(t_game *game);
 
 #endif

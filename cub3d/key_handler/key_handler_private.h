@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   key_handler_private.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 22:39:02 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/28 22:39:03 by tbirdper         ###   ########.fr       */
+/*   Created: 2022/03/09 22:44:32 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/03/09 22:44:46 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef KEY_HANDLER_PRIVATE_H
+# define KEY_HANDLER_PRIVATE_H
 
-# include "../utils/utils.h"
-# include "../get_next_line/get_next_line.h"
-# include "../list/list.h"
+# include "key_handler.h"
 
-char	**map_parser_tmp(char *file_name);
-
-t_map	*map_parser(char *file_name);
+void	forward(t_game *game);
+void	backwards(t_game *game);
+void	left(t_game *game);
+void	right(t_game *game);
+void	rotate_right(t_game *game);
+void	rotate_left(t_game *game);
 
 #endif

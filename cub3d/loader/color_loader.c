@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   color_loader.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 22:39:02 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/28 22:39:03 by tbirdper         ###   ########.fr       */
+/*   Created: 2022/03/09 13:31:14 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/03/09 13:31:15 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "game_loader_private.h"
 
-# include "../utils/utils.h"
-# include "../get_next_line/get_next_line.h"
-# include "../list/list.h"
+int	get_color(int color_mas[3])
+{
+	int	color;
 
-char	**map_parser_tmp(char *file_name);
+	color = (color_mas[0] << 16) + (color_mas[1] << 8) + (color_mas[2]);
+	return (color);
+}
 
-t_map	*map_parser(char *file_name);
-
-#endif
+void	colors_load(t_game *game)
+{
+	game->ceiling_color = get_color(game->map->ceiling_color);
+	game->floor_color = get_color(game->map->floor_color);
+}

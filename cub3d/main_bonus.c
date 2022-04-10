@@ -35,6 +35,7 @@ int	main(int argc, char **argv)
 	game = game_loader(mlx, map);
 	redraw(game);
 	mlx_hook(mlx->window, 2, 1L << 0, key_handler, game);
+	mlx_hook(mlx->window, 6, 1L << 0, mouse_handler, game);
 	mlx_hook(mlx->window, 17, 0, close_app, NULL);
 	mlx_loop(mlx);
 	return (0);

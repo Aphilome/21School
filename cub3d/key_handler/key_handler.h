@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   key_handler.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 22:39:02 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/28 22:39:03 by tbirdper         ###   ########.fr       */
+/*   Created: 2022/03/09 22:03:48 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/03/09 22:03:58 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef KEY_HANDLER_H
+# define KEY_HANDLER_H
 
-# include "../utils/utils.h"
-# include "../get_next_line/get_next_line.h"
-# include "../list/list.h"
+# include <math.h>
+# include "../raycasting_logic/raycasting_logic.h"
 
-char	**map_parser_tmp(char *file_name);
-
-t_map	*map_parser(char *file_name);
+int	key_handler(int keycode, void *param);
+int	mouse_handler(int x, int y, void *param);
 
 #endif

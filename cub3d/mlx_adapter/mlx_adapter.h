@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   mlx_adapter.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbirdper <tbirdper@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/28 22:39:02 by tbirdper          #+#    #+#             */
-/*   Updated: 2022/01/28 22:39:03 by tbirdper         ###   ########.fr       */
+/*   Created: 2022/02/19 12:14:37 by tbirdper          #+#    #+#             */
+/*   Updated: 2022/02/19 12:14:38 by tbirdper         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#ifndef MLX_ADAPTER_H
+# define MLX_ADAPTER_H
 
+# include "../minilibx_opengl/mlx.h"
 # include "../utils/utils.h"
-# include "../get_next_line/get_next_line.h"
-# include "../list/list.h"
 
-char	**map_parser_tmp(char *file_name);
-
-t_map	*map_parser(char *file_name);
+t_mlx	*mlx_adapter_init(int screenWidth, int screenHeight);
 
 #endif
