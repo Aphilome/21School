@@ -1,2 +1,14 @@
+# OS / IDE
 .DS_Store
+.idea/
+.vscode/
+
+# Build output
+*.o
+*.a
+*.out
+*.dSYM/
+
+# School materials (subjects, checklists) are not published
 *.pdf
+*.docx
